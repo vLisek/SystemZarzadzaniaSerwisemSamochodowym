@@ -64,7 +64,7 @@ public class LoginPageController {
         ft.play();
 
         // Wyświetlanie wersji aplikacji.
-        versionLabel.setText("v1.0.0 BETA");
+        versionLabel.setText("v1.1.0 BETA");
 
         // Wyświetlanie aktualnej daty.
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
