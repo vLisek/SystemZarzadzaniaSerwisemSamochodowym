@@ -1,5 +1,6 @@
 package project.app;
 
+// Lista import'ów:
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -29,6 +30,7 @@ public class Main extends Application {
             alert.setTitle("Potwierdzenie");
             alert.setHeaderText(null);
             alert.setContentText("Czy na pewno chcesz zamknąć aplikację?");
+
 
             Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
             alertStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/black_logo2048x2048.png"))));

@@ -1,5 +1,6 @@
 package project.app;
 
+// Lista import'ów:
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
