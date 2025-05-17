@@ -3,8 +3,10 @@ package project.app;
 // Lista import'ów:
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -14,6 +16,9 @@ import java.time.format.DateTimeFormatter;
 import javafx.scene.control.Label;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
+import project.app.utils.Constants;
+import project.app.utils.DatabaseConnector;
+import project.app.utils.ExitHandler;
 
 @SuppressWarnings("ALL")
 public class LoginPageController {
@@ -54,6 +59,16 @@ public class LoginPageController {
     @FXML
     private Label dateLabel;
 
+    // Przycisk do zamykania.
+    @FXML
+    private Button exitButton;
+
+    @FXML
+    public void handleExit() {
+        ExitHandler.handleExit((Stage) exitButton.getScene().getWindow());
+    }
+
+
     // Inicjalizacja aplikacji.
     @FXML
     public void initialize() {
@@ -62,6 +77,8 @@ public class LoginPageController {
         ft.setFromValue(0);
         ft.setToValue(1);
         ft.play();
+
+        versionLabel.setText(Constants.APP_VERSION);
 
         // Wyświetlanie aktualnej daty.
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -85,11 +102,6 @@ public class LoginPageController {
             visiblePasswordField.setVisible(isSelected);
             visiblePasswordField.setManaged(isSelected);
         });
-    }
-
-    // Wyświetla wersję aplikacji na ekranie logowania.
-    public void setVersion(String version) {
-        versionLabel.setText(version);
     }
 
     // Uchwyt do bazy danych.
@@ -122,11 +134,12 @@ public class LoginPageController {
 
             var resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Sukces");
-                alert.setHeaderText(null);
-                alert.setContentText("Zalogowano pomyślnie!");
-                alert.showAndWait();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
+                Parent mainRoot = loader.load();
+
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                stage.setScene(new Scene(mainRoot));
+                stage.show();
             }
             else {
                 errorMessage.setText("Niepoprawny login lub hasło.");
@@ -136,28 +149,6 @@ public class LoginPageController {
         } catch (Exception e) {
             e.printStackTrace();
             errorMessage.setText("Błąd połączenia z bazą.");
-        }
-    }
-
-    // Uchwyt do zamykania programu.
-    @FXML
-    public void handleExit() {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Potwierdzenie");
-        alert.setHeaderText(null);
-        alert.setContentText("Czy na pewno chcesz zamknąć program?");
-
-        Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-        alertStage.getIcons().add(new Image(getClass().getResourceAsStream("/images/black_logo2048x2048.png")));
-
-        ButtonType confirmButton = new ButtonType("Tak", ButtonBar.ButtonData.YES);
-        ButtonType cancelButton = new ButtonType("Nie", ButtonBar.ButtonData.CANCEL_CLOSE);
-
-        alert.getButtonTypes().setAll(confirmButton, cancelButton);
-
-        var result = alert.showAndWait();
-        if (result.isPresent() && result.get() == confirmButton) {
-            System.exit(0);
         }
     }
 }
