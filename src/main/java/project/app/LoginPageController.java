@@ -63,9 +63,6 @@ public class LoginPageController {
         ft.setToValue(1);
         ft.play();
 
-        // Wyświetlanie wersji aplikacji.
-        versionLabel.setText("v1.1.0 BETA");
-
         // Wyświetlanie aktualnej daty.
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
         String actualDate = LocalDate.now().format(formatter);
@@ -88,6 +85,11 @@ public class LoginPageController {
             visiblePasswordField.setVisible(isSelected);
             visiblePasswordField.setManaged(isSelected);
         });
+    }
+
+    // Wyświetla wersję aplikacji na ekranie logowania.
+    public void setVersion(String version) {
+        versionLabel.setText(version);
     }
 
     // Uchwyt do bazy danych.
