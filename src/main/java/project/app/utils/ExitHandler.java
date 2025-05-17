@@ -10,7 +10,7 @@ import java.util.Objects;
 
 public class ExitHandler {
 
-    public static void handleExit(Stage stage) {
+    public static void handleExit(Stage ignoredStage) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Potwierdzenie");
         alert.setHeaderText(null);
