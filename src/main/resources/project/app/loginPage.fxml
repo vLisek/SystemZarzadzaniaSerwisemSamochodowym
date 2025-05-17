@@ -12,63 +12,69 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="648.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.LoginPageController"><children>
-      <ImageView fitHeight="648.0" fitWidth="1152.0" pickOnBounds="true" smooth="false">
-         <image>
-            <Image url="@../../images/background.png" />
-         </image>
-      </ImageView>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="470.0" prefWidth="320.0" spacing="10.0" styleClass="loginPane" stylesheets="@../../values/mainWindow.css">
-         <children>
-            <VBox alignment="TOP_CENTER" prefHeight="164.0" prefWidth="316.0">
-               <children>
-                  <ImageView fitHeight="126.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../images/color_logo2048x2048.png" />
-                     </image>
-                  </ImageView>
-                  <Label alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="316.0" styleClass="informationLabel" stylesheets="@../../values/mainWindow.css" text="System Zarządzania" />
-                  <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="321.0" styleClass="informationLabel" stylesheets="@../../values/mainWindow.css" text="Serwisem Samochodowym" />
-               </children>
-            </VBox>
-            <VBox prefHeight="154.0" prefWidth="316.0" spacing="8.0">
-               <children>
-                  <Label alignment="CENTER" prefHeight="17.0" prefWidth="299.0" styleClass="loginLabel" stylesheets="@../../values/mainWindow.css" text="Logowanie" />
-                  <TextField fx:id="usernameField" prefHeight="35.0" promptText="Użytkownik..." styleClass="textField" stylesheets="@../../values/mainWindow.css" />
-                  <StackPane>
-                     <PasswordField fx:id="passwordField" prefHeight="35.0" promptText="Hasło..." styleClass="passwordField" stylesheets="@../../values/mainWindow.css" />
-                     <TextField fx:id="visiblePasswordField" managed="false" prefHeight="35.0" promptText="Hasło..." styleClass="passwordField" stylesheets="@../../values/mainWindow.css" visible="false" />
-                  </StackPane>
-                  <CheckBox fx:id="showPasswordCheckbox" mnemonicParsing="false" styleClass="checkbox" stylesheets="@../../values/mainWindow.css" text="Pokaż hasło" />
-               </children>
-               <padding>
-                  <Insets left="20.0" right="20.0" />
-               </padding>
-            </VBox>
-            <Label fx:id="errorMessage" alignment="CENTER" prefHeight="17.0" prefWidth="316.0" styleClass="errorMessageLabel" stylesheets="@../../values/mainWindow.css" />
-            <VBox alignment="BOTTOM_CENTER" prefHeight="99.0" prefWidth="316.0" spacing="8.0">
-               <children>
-                  <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLogin" prefHeight="35.0" prefWidth="276.0" styleClass="loginButton" stylesheets="@../../values/mainWindow.css" text="ZALOGUJ SIĘ" />
-                  <Button mnemonicParsing="false" onAction="#handleExit" prefHeight="35.0" prefWidth="363.0" styleClass="loginButton" stylesheets="@../../values/mainWindow.css" text="WYJŚCIE" />
-               </children>
-               <padding>
-                  <Insets bottom="20.0" left="20.0" right="20.0" />
-               </padding>
-            </VBox>
-         </children>
+<StackPane fx:id="loginPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+           prefHeight="648.0" prefWidth="1152.0" xmlns="http://javafx.com/javafx/23.0.1"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.LoginPageController">
+   <ImageView fitHeight="648.0" fitWidth="1152.0" pickOnBounds="true" smooth="false">
+      <Image url="@../../images/background.png"/>
+   </ImageView>
+   <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+         prefHeight="470.0" prefWidth="320.0" spacing="10.0" styleClass="loginPane"
+         stylesheets="@../../values/mainWindow.css">
+      <VBox alignment="TOP_CENTER" prefHeight="164.0" prefWidth="316.0">
+         <ImageView fitHeight="126.0" fitWidth="130.0" pickOnBounds="true" preserveRatio="true">
+            <Image url="@../../images/color_logo2048x2048.png"/>
+         </ImageView>
+         <Label alignment="BOTTOM_CENTER" prefHeight="18.0" prefWidth="316.0" styleClass="informationLabel"
+                stylesheets="@../../values/mainWindow.css" text="System Zarządzania"/>
+         <Label alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="17.0" prefWidth="321.0"
+                styleClass="informationLabel" stylesheets="@../../values/mainWindow.css"
+                text="Serwisem Samochodowym"/>
       </VBox>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="1152.0" stylesheets="@../../values/mainWindow.css" StackPane.alignment="BOTTOM_CENTER">
-         <children>
-            <Label fx:id="versionLabel" prefHeight="25.0" prefWidth="576.0" styleClass="versionLabel" stylesheets="@../../values/mainWindow.css" text="version" textFill="WHITE">
-               <padding>
-                  <Insets left="8.0" />
-               </padding>
-            </Label>
-            <Label fx:id="dateLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="576.0" styleClass="dateLabel" stylesheets="@../../values/mainWindow.css" text="date" textFill="WHITE">
-               <padding>
-                  <Insets right="8.0" />
-               </padding></Label>
-         </children>
-      </HBox>
-   </children>
+      <VBox prefHeight="154.0" prefWidth="316.0" spacing="8.0">
+         <padding>
+            <Insets left="20.0" right="20.0"/>
+         </padding>
+         <Label alignment="CENTER" prefHeight="17.0" prefWidth="299.0" styleClass="loginLabel"
+                stylesheets="@../../values/mainWindow.css" text="Logowanie"/>
+         <TextField fx:id="usernameField" prefHeight="35.0" promptText="Użytkownik..." styleClass="textField"
+                    stylesheets="@../../values/mainWindow.css"/>
+         <StackPane>
+            <PasswordField fx:id="passwordField" prefHeight="35.0" promptText="Hasło..."
+                           styleClass="passwordField" stylesheets="@../../values/mainWindow.css"/>
+            <TextField fx:id="visiblePasswordField" managed="false" prefHeight="35.0" promptText="Hasło..."
+                       styleClass="passwordField" stylesheets="@../../values/mainWindow.css" visible="false"/>
+         </StackPane>
+         <CheckBox fx:id="showPasswordCheckbox" mnemonicParsing="false" styleClass="checkbox"
+                   stylesheets="@../../values/mainWindow.css" text="Pokaż hasło"/>
+      </VBox>
+      <Label fx:id="errorMessage" alignment="CENTER" prefHeight="17.0" prefWidth="316.0"
+             styleClass="errorMessageLabel" stylesheets="@../../values/mainWindow.css"/>
+      <VBox alignment="BOTTOM_CENTER" prefHeight="99.0" prefWidth="316.0" spacing="8.0">
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0"/>
+         </padding>
+         <Button fx:id="loginButton" mnemonicParsing="false" onAction="#handleLogin" prefHeight="35.0"
+                 prefWidth="276.0" styleClass="loginButton" stylesheets="@../../values/mainWindow.css"
+                 text="ZALOGUJ SIĘ"/>
+         <Button mnemonicParsing="false" onAction="#handleExit" prefHeight="35.0" prefWidth="363.0"
+                 styleClass="loginButton" stylesheets="@../../values/mainWindow.css" text="WYJŚCIE"/>
+      </VBox>
+   </VBox>
+   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+         prefHeight="25.0" prefWidth="1152.0" stylesheets="@../../values/mainWindow.css"
+         StackPane.alignment="BOTTOM_CENTER">
+      <Label fx:id="versionLabel" prefHeight="25.0" prefWidth="576.0" styleClass="versionLabel"
+             stylesheets="@../../values/mainWindow.css" text="version" textFill="WHITE">
+         <padding>
+            <Insets left="8.0"/>
+         </padding>
+      </Label>
+      <Label fx:id="dateLabel" alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="25.0" prefWidth="576.0"
+             styleClass="dateLabel" stylesheets="@../../values/mainWindow.css" text="date" textFill="WHITE">
+         <padding>
+            <Insets right="8.0"/>
+         </padding>
+      </Label>
+   </HBox>
 </StackPane>
