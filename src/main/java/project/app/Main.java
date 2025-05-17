@@ -7,6 +7,8 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import project.app.utils.ExitHandler;
+
 import java.util.Objects;
 
 public class Main extends Application {
@@ -15,10 +17,6 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("loginPage.fxml"));
         Parent root = loader.load();
-        LoginPageController controller = loader.getController();
-
-        // Wprowadzanie wersji.
-        controller.setVersion("v1.1.2 BETA");
 
         primaryStage.setTitle("REPAIRO");
         primaryStage.setResizable(false);
@@ -28,7 +26,7 @@ public class Main extends Application {
 
         primaryStage.setOnCloseRequest(event -> {
             event.consume();
-            controller.handleExit();
+            ExitHandler.handleExit(primaryStage);
         });
     }
 
