@@ -14,4 +14,6 @@ module project.app {
 
     opens project.app to javafx.fxml;
     exports project.app;
+    exports project.app.utils;
+    opens project.app.utils to javafx.fxml;
 }
