@@ -1,19 +1,16 @@
 package project.app;
 
 import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.event.ActionEvent;
+import project.app.utils.LogoutHandler;
 
 import java.io.IOException;
 
-@SuppressWarnings("CallToPrintStackTrace")
 public class MainPageController {
 
     @FXML
@@ -28,20 +25,17 @@ public class MainPageController {
         ft.setFromValue(0);
         ft.setToValue(1);
         ft.play();
+
+
     }
 
-    @FXML
-    private void handleLogout(ActionEvent ignoredEvent) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/app/LoginPage.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) logoutButton.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Logowanie");
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void handleLogout(ActionEvent actionEvent) {
+        logoutButton.setOnAction(event -> {
+            try {
+                LogoutHandler.handleLogout((Stage) logoutButton.getScene().getWindow());
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
     }
 }
