@@ -29,46 +29,18 @@
 }
 
 .textField, .passwordField {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.textPasswordFieldHBox {
     -fx-background-color: white;
     -fx-border-color: #666666;
     -fx-border-width: 2;
     -fx-border-radius: 4;
     -fx-background-radius: 4;
-}
-
-.textField:hover, .passwordField:hover {
-    -fx-border-color: rgb(119, 103, 199);
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0, 0, 4);
-}
-
-.textField:focused, .passwordField:focused {
-    -fx-border-color: rgb(119, 103, 199);
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0, 0, 4);
-}
-
-.box {
-    -fx-background-color: white;
-    -fx-border-color: rgb(102, 102, 102);
-    -fx-border-width: 2;
-    -fx-border-radius: 4;
-    -fx-background-radius: 4;
-    -fx-min-width: 20px;
-    -fx-min-height: 20px;
-}
-
-.checkbox:hover .box {
-    -fx-border-color: rgb(119, 103, 199);
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0, 0, 4);
-}
-
-.checkbox:selected .box {
-    -fx-background-color: white;
-    -fx-border-color: rgb(119, 103, 199);
-}
-
-.checkbox:selected .mark {
-    -fx-background-color: rgb(119, 103, 199);
 }
 
 .errorMessageLabel {
@@ -87,4 +59,9 @@
     -fx-text-fill: rgb(102, 102, 102);
     -fx-font-weight: bold;
     -fx-font-size: 13px;
+}
+
+.imageButton {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
 }

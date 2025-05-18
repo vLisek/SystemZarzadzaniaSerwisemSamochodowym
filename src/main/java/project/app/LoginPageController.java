@@ -7,6 +7,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -39,9 +41,17 @@ public class LoginPageController {
     @FXML
     private TextField visiblePasswordField;
 
-    // CheckBox do wyświetlania hasła.
+    // Button do wyświetlania hasła.
     @FXML
-    private CheckBox showPasswordCheckbox;
+    private Button togglePasswordButton;
+
+    @FXML
+    private ImageView toggleIcon;
+
+    private boolean isPasswordVisible = false;
+
+    private Image eyeOpenIcon;
+    private Image eyeClosedIcon;
 
     // Przycisk od logowania.
     @FXML
@@ -93,15 +103,44 @@ public class LoginPageController {
             }
         });
 
-        // Obsługa CheckBoxa do pokazywania hasła.
+        visiblePasswordField.setVisible(false);
+        passwordField.setVisible(true);
+
+        // Zarządzanie widocznością = zarządzanie układem
+        visiblePasswordField.managedProperty().bind(visiblePasswordField.visibleProperty());
+        passwordField.managedProperty().bind(passwordField.visibleProperty());
+
         visiblePasswordField.textProperty().bindBidirectional(passwordField.textProperty());
 
-        showPasswordCheckbox.selectedProperty().addListener((obs, wasSelected, isSelected) -> {
-            passwordField.setVisible(!isSelected);
-            passwordField.setManaged(!isSelected);
-            visiblePasswordField.setVisible(isSelected);
-            visiblePasswordField.setManaged(isSelected);
-        });
+        eyeOpenIcon = new Image(getClass().getResource("/images/eye_open_icon.png").toExternalForm());
+        eyeClosedIcon = new Image(getClass().getResource("/images/eye_closed_icon.png").toExternalForm());
+
+        toggleIcon.setImage(eyeClosedIcon);
+
+        toggleIcon.setFitWidth(20);
+        toggleIcon.setFitHeight(20);
+        toggleIcon.setPreserveRatio(true);
+
+        togglePasswordButton.setTooltip(new Tooltip("Pokaż/Ukryj hasło"));
+    }
+
+    @FXML
+    private void handleTogglePassword() {
+        isPasswordVisible = !isPasswordVisible;
+
+        passwordField.setVisible(!isPasswordVisible);
+        visiblePasswordField.setVisible(isPasswordVisible);
+
+        toggleIcon.setImage(isPasswordVisible ? eyeOpenIcon : eyeClosedIcon);
+
+        if (isPasswordVisible) {
+            visiblePasswordField.requestFocus();
+            visiblePasswordField.positionCaret(visiblePasswordField.getText().length());
+        }
+        else {
+            passwordField.requestFocus();
+            passwordField.positionCaret(passwordField.getText().length());
+        }
     }
 
     // Uchwyt do bazy danych.
