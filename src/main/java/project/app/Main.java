@@ -20,7 +20,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("REPAIRO");
         primaryStage.setResizable(false);
-        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/black_logo2048x2048.png"))));
+        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/black_logo.png"))));
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 

@@ -17,7 +17,7 @@ public class ExitHandler {
         alert.setContentText("Czy na pewno chcesz zamknąć program?");
 
         Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-        alertStage.getIcons().add(new Image(Objects.requireNonNull(ExitHandler.class.getResourceAsStream("/images/black_logo2048x2048.png"))));
+        alertStage.getIcons().add(new Image(Objects.requireNonNull(ExitHandler.class.getResourceAsStream("/images/black_logo.png"))));
 
         ButtonType confirmButton = new ButtonType("Tak", ButtonBar.ButtonData.YES);
         ButtonType cancelButton = new ButtonType("Nie", ButtonBar.ButtonData.CANCEL_CLOSE);
