@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](///compare/v1.2.0...v1.3.0) (2025-05-18)
+
+
+### Features
+
+* Aktualizacja głównej strony 0876f3c
+* Dodano potwierdzenie wylogowania ec41aad
+* Dodano potwierdzenie wylogowania f6cc8c7
+
+
+### Bug Fixes
+
+* Małe poprawki względem poprzedniej wersji 4017fac
+* Małe poprawki względem poprzedniej wersji eef1b46
+* Małe poprawki względem poprzedniej wersji 206949f
+* Naprawiono import eventu 8925257
+
 ## [1.2.0](///compare/v1.1.2...v1.2.0) (2025-05-17)
 
 
