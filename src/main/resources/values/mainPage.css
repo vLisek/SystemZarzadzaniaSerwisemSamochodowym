@@ -1,0 +1,30 @@
+.actionButton {
+    -fx-background-color: rgb(119,103,199);
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-font-family: "Inter";
+    -fx-cursor: hand;
+    }
+
+.actionButton:hover {
+    -fx-background-color: rgb(99, 79, 180);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 6, 0, 0, 4);
+}
+
+.actionHBox {
+    -fx-background-color: rgba(255, 255, 255, 0.9);
+    -fx-background-radius: 8px;
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-border-color: rgb(119,103,199);
+    -fx-border-radius: 5px;
+}
+
+.statusLabel {
+    -fx-font-family: "Inter";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: rgb(102, 102, 102);
+}
