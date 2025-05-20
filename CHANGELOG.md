@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.5.1](///compare/v1.5.0...v1.5.1) (2025-05-20)
+
+
+### Bug Fixes
+
+* Poprawiono wyświetlanie wersji b523280
+
 ## [1.5.0](///compare/v1.4.0...v1.5.0) (2025-05-20)
 
 
