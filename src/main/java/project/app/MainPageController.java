@@ -26,8 +26,7 @@ public class MainPageController {
 
     @FXML
     private void handleLogout() {
-        ConfirmationHandler.show("Potwierdzenie", "Czy napewno chcesz się wylogować?", () -> {
-            PageManagerUtils.showPageInSameWindow("/project/app/loginPage.fxml", logoutButton, "Ekran logowania");
-        });
+        ConfirmationHandler.show("Potwierdzenie", "Czy na pewno chcesz się wylogować?",
+                () -> PageManagerUtils.showPageInSameWindow("/project/app/loginPage.fxml", logoutButton, "Ekran logowania"));
     }
 }
