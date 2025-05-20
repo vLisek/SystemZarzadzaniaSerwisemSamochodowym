@@ -103,6 +103,8 @@ public class LoginPageController {
             }
         });
 
+        loginButton.setDefaultButton(true);
+
         visiblePasswordField.setVisible(false);
         passwordField.setVisible(true);
 
