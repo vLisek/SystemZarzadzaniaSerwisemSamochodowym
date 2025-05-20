@@ -12,17 +12,21 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
+
 import javafx.scene.control.Label;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
+import project.app.utils.ConfirmationHandler;
 import project.app.utils.Constants;
 import project.app.utils.DatabaseConnector;
-import project.app.utils.ExitHandler;
 
-@SuppressWarnings("ALL")
 public class LoginPageController {
 
     // Główny element logowania.
@@ -69,9 +73,14 @@ public class LoginPageController {
     @FXML
     private Button exitButton;
 
+    private void clearErrorAfterDelay() {
+        new Timeline(new KeyFrame(Duration.seconds(3), _ -> errorMessage.setText(""))).play();
+    }
+
     @FXML
     public void handleExit() {
-        ExitHandler.handleExit((Stage) exitButton.getScene().getWindow());
+        Stage currentStage = (Stage) exitButton.getScene().getWindow();
+        ConfirmationHandler.show("Potwierdzenie wyjścia", "Czy napewno chcesz zamknąć aplikację?", currentStage::close);
     }
 
     // Inicjalizacja aplikacji.
@@ -83,7 +92,7 @@ public class LoginPageController {
         ft.setToValue(1);
         ft.play();
 
-        versionLabel.setText(Constants.APP_VERSION);
+        versionLabel.setText(Constants.appVersion);
 
         // Wyświetlanie aktualnej daty.
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -111,8 +120,8 @@ public class LoginPageController {
         visiblePasswordField.textProperty().bindBidirectional(passwordField.textProperty());
 
         // Załaduj ikony
-        eyeOpenIcon = new Image(getClass().getResource("/images/eye_open_icon.png").toExternalForm());
-        eyeClosedIcon = new Image(getClass().getResource("/images/eye_closed_icon.png").toExternalForm());
+        eyeOpenIcon = new Image(Objects.requireNonNull(getClass().getResource("/images/eye_open_icon.png")).toExternalForm());
+        eyeClosedIcon = new Image(Objects.requireNonNull(getClass().getResource("/images/eye_closed_icon.png")).toExternalForm());
 
         // Obiekt ImageView, który dynamicznie zmienia ikonę
         eyeIcon = new ImageView(eyeClosedIcon);
@@ -122,11 +131,7 @@ public class LoginPageController {
 
         togglePasswordButton.setGraphic(eyeIcon);
 
-        // Styl tekstowy pomocniczy (opcjonalny)
-        togglePasswordButton.setTooltip(new Tooltip("Pokaż/Ukryj hasło"));
-
-        // Obsługa zmiany stanu (ikonka + pole)
-        togglePasswordButton.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+        togglePasswordButton.selectedProperty().addListener((_, _, isNowSelected) -> {
             // Zmień pole
             passwordField.setVisible(!isNowSelected);
             visiblePasswordField.setVisible(isNowSelected);
@@ -152,22 +157,20 @@ public class LoginPageController {
         String password = passwordField.getText();
 
         // Wyświetlenie odpowiedniej informacji na temat wprowadzonych danych.
-        if (username.isEmpty() && password.isEmpty()) {
-            errorMessage.setText("Proszę wypełnić wszystkie pola!");
-            new Timeline(new KeyFrame(Duration.seconds(3), evt -> errorMessage.setText(""))).play();
+        if (username.isEmpty() || password.isEmpty()) {
+            if (username.isEmpty() && password.isEmpty()) {
+                errorMessage.setText("Proszę wypełnić wszystkie pola!");
+            }
+            else if (username.isEmpty()) {
+                errorMessage.setText("Proszę wprowadzić login!");
+            }
+            else {
+                errorMessage.setText("Proszę wprowadzić hasło!");
+            }
+            clearErrorAfterDelay();
             return;
         }
-        else if (username.isEmpty()) {
-            errorMessage.setText("Proszę wprowadzić login!");
-            new Timeline(new KeyFrame(Duration.seconds(3), evt -> errorMessage.setText(""))).play();
-            return;
-        }
-        else if (password.isEmpty()) {
-            errorMessage.setText("Proszę wprowadzić hasło!");
-            new Timeline(new KeyFrame(Duration.seconds(3), evt -> errorMessage.setText(""))).play();
-            return;
-        }
-        try (Connection connection = DatabaseConnector.connect()) {
+        try (Connection connection = DatabaseConnector.getConnection()) {
             String loginSQL = "SELECT * FROM loginy WHERE login = ? AND haslo = ?";
             var statement = connection.prepareStatement(loginSQL);
             statement.setString(1, username);
@@ -175,20 +178,18 @@ public class LoginPageController {
 
             var resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("MainPage.fxml"));
-                Parent mainRoot = loader.load();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/app/mainPage.fxml"));
+                Parent root = loader.load();
 
                 Stage stage = (Stage) loginButton.getScene().getWindow();
-                stage.setScene(new Scene(mainRoot));
+                stage.setScene(new Scene(root));
                 stage.show();
             }
             else {
                 errorMessage.setText("Niepoprawny login lub hasło.");
-                new Timeline(new KeyFrame(Duration.seconds(3), evt -> errorMessage.setText(""))).play();
-                return;
+                clearErrorAfterDelay();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException | IOException e) {
             errorMessage.setText("Błąd połączenia z bazą.");
         }
     }

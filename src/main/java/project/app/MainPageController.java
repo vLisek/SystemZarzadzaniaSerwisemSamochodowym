@@ -1,15 +1,12 @@
 package project.app;
 
 import javafx.animation.FadeTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
 import javafx.util.Duration;
-import project.app.utils.LogoutHandler;
-
-import java.io.IOException;
+import project.app.utils.ConfirmationHandler;
+import project.app.utils.PageManagerUtils;
 
 public class MainPageController {
 
@@ -25,17 +22,12 @@ public class MainPageController {
         ft.setFromValue(0);
         ft.setToValue(1);
         ft.play();
-
-
     }
 
-    public void handleLogout(ActionEvent actionEvent) {
-        logoutButton.setOnAction(event -> {
-            try {
-                LogoutHandler.handleLogout((Stage) logoutButton.getScene().getWindow());
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+    @FXML
+    private void handleLogout() {
+        ConfirmationHandler.show("Potwierdzenie", "Czy napewno chcesz się wylogować?", () -> {
+            PageManagerUtils.showPageInSameWindow("/project/app/loginPage.fxml", logoutButton, "Ekran logowania");
         });
     }
 }

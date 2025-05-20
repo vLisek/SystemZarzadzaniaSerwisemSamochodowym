@@ -28,49 +28,43 @@
                 </HBox.margin>
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../images/car_icon.png" />
-                  </image></ImageView>
+                        <Image url="@../../images/car_icon.png" />
+                    </ImageView>
                 </graphic>
             </Button>
             <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="153.0" styleClass="actionButton" stylesheets="@../../values/mainPage.css" text="Klienci">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../images/user_icon.png" />
-                  </image></ImageView>
+                        <Image url="@../../images/user_icon.png" />
+                    </ImageView>
                 </graphic>
             </Button>
             <Button layoutX="514.0" layoutY="20.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="153.0" styleClass="actionButton" stylesheets="@../../values/mainPage.css" text="Zlecenia">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../images/list_icon.png" />
-                  </image></ImageView>
+                        <Image url="@../../images/list_icon.png" />
+                    </ImageView>
                 </graphic>
             </Button>
             <Button layoutX="592.0" layoutY="20.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="153.0" styleClass="actionButton" stylesheets="@../../values/mainPage.css" text="Części">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../images/wrench_icon.png" />
-                  </image></ImageView>
+                        <Image url="@../../images/wrench_icon.png" />
+                    </ImageView>
                 </graphic>
             </Button>
             <Button layoutX="618.0" layoutY="20.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="153.0" styleClass="actionButton" stylesheets="@../../values/mainPage.css" text="Kalendarz">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../images/calendar_icon.png" />
-                  </image></ImageView>
+                        <Image url="@../../images/calendar_icon.png" />
+                    </ImageView>
                 </graphic>
             </Button>
             <Button layoutX="644.0" layoutY="20.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="153.0" styleClass="actionButton" stylesheets="@../../values/mainPage.css" text="Pracownicy">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../images/employee_icon.png" />
-                  </image></ImageView>
+                        <Image url="@../../images/employee_icon.png" />
+                    </ImageView>
                 </graphic>
             </Button>
             <Button layoutX="670.0" layoutY="20.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="153.0" styleClass="actionButton" stylesheets="@../../values/mainPage.css" text="Faktury">
@@ -79,9 +73,8 @@
                 </HBox.margin>
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../images/document_icon.png" />
-                  </image></ImageView>
+                        <Image url="@../../images/document_icon.png" />
+                    </ImageView>
                 </graphic>
             </Button>
         </HBox>
@@ -110,17 +103,15 @@
             <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="30.0" prefWidth="153.0" styleClass="actionButton" stylesheets="@../../values/mainPage.css" text="O aplikacji">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../images/information_icon.png" />
-                  </image></ImageView>
+                        <Image url="@../../images/information_icon.png" />
+                    </ImageView>
                 </graphic>
             </Button>
             <Button fx:id="logoutButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleLogout" prefHeight="30.0" prefWidth="153.0" styleClass="actionButton" stylesheets="@../../values/mainPage.css" text="Wyloguj">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
-                  <image>
-                     <Image url="@../../images/lock_icon.png" />
-                  </image></ImageView>
+                        <Image url="@../../images/lock_icon.png" />
+                    </ImageView>
                 </graphic>
                 <HBox.margin>
                     <Insets right="10.0" />

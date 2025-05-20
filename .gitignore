@@ -36,3 +36,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### Plik konfiguracyjny do bazy danych ###
+src/main/resources/config.properties

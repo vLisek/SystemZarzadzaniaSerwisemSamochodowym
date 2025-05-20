@@ -1,38 +1,34 @@
 package project.app.utils;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
+
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.util.Objects;
+import java.util.Optional;
 
-public class LogoutHandler {
+public class ConfirmationHandler {
+    private static final String ICON_PATH = "/images/black_logo.png";
 
-    public static void handleLogout(Stage ownerStage) throws IOException {
+    public static void show(String title, String message, Runnable onConfirm) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Potwierdzenie");
+        alert.setTitle(title);
         alert.setHeaderText(null);
-        alert.setContentText("Czy na pewno chcesz się wylogować?");
+        alert.setContentText(message);
 
         Stage alertStage = (Stage) alert.getDialogPane().getScene().getWindow();
-        alertStage.getIcons().add(new Image(Objects.requireNonNull(LogoutHandler.class.getResourceAsStream("/images/black_logo.png"))));
+        alertStage.getIcons().add(new Image(Objects.requireNonNull(ConfirmationHandler.class.getResourceAsStream(ICON_PATH))));
 
         ButtonType confirmButton = new ButtonType("Tak", ButtonBar.ButtonData.YES);
         ButtonType cancelButton = new ButtonType("Nie", ButtonBar.ButtonData.CANCEL_CLOSE);
-
         alert.getButtonTypes().setAll(confirmButton, cancelButton);
 
-        var result = alert.showAndWait();
+        Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == confirmButton) {
-                FXMLLoader loader = new FXMLLoader(LogoutHandler.class.getResource("/project/app/LoginPage.fxml"));
-                Parent root = loader.load();
-                ownerStage.setScene(new Scene(root));
+            onConfirm.run();
         }
     }
 }

@@ -28,3 +28,10 @@
     -fx-font-size: 14px;
     -fx-text-fill: rgb(102, 102, 102);
 }
+
+.actionLabel {
+    -fx-font-family: "Inter";
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-text-fill: rgba(102, 102, 102, 0.3);
+}
