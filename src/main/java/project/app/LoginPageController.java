@@ -43,15 +43,11 @@ public class LoginPageController {
 
     // Button do wyświetlania hasła.
     @FXML
-    private Button togglePasswordButton;
-
-    @FXML
-    private ImageView toggleIcon;
-
-    private boolean isPasswordVisible = false;
+    private ToggleButton togglePasswordButton;
 
     private Image eyeOpenIcon;
     private Image eyeClosedIcon;
+    private ImageView eyeIcon;
 
     // Przycisk od logowania.
     @FXML
@@ -77,7 +73,6 @@ public class LoginPageController {
     public void handleExit() {
         ExitHandler.handleExit((Stage) exitButton.getScene().getWindow());
     }
-
 
     // Inicjalizacja aplikacji.
     @FXML
@@ -108,41 +103,46 @@ public class LoginPageController {
         visiblePasswordField.setVisible(false);
         passwordField.setVisible(true);
 
-        // Zarządzanie widocznością = zarządzanie układem
+        // Synchronizacja widoczności i zarządzania layoutem
         visiblePasswordField.managedProperty().bind(visiblePasswordField.visibleProperty());
         passwordField.managedProperty().bind(passwordField.visibleProperty());
 
+        // Wspólna wartość tekstu między polami
         visiblePasswordField.textProperty().bindBidirectional(passwordField.textProperty());
 
+        // Załaduj ikony
         eyeOpenIcon = new Image(getClass().getResource("/images/eye_open_icon.png").toExternalForm());
         eyeClosedIcon = new Image(getClass().getResource("/images/eye_closed_icon.png").toExternalForm());
 
-        toggleIcon.setImage(eyeClosedIcon);
+        // Obiekt ImageView, który dynamicznie zmienia ikonę
+        eyeIcon = new ImageView(eyeClosedIcon);
+        eyeIcon.setFitWidth(20);
+        eyeIcon.setFitHeight(20);
+        eyeIcon.setPreserveRatio(true);
 
-        toggleIcon.setFitWidth(20);
-        toggleIcon.setFitHeight(20);
-        toggleIcon.setPreserveRatio(true);
+        togglePasswordButton.setGraphic(eyeIcon);
 
+        // Styl tekstowy pomocniczy (opcjonalny)
         togglePasswordButton.setTooltip(new Tooltip("Pokaż/Ukryj hasło"));
-    }
 
-    @FXML
-    private void handleTogglePassword() {
-        isPasswordVisible = !isPasswordVisible;
+        // Obsługa zmiany stanu (ikonka + pole)
+        togglePasswordButton.selectedProperty().addListener((obs, wasSelected, isNowSelected) -> {
+            // Zmień pole
+            passwordField.setVisible(!isNowSelected);
+            visiblePasswordField.setVisible(isNowSelected);
 
-        passwordField.setVisible(!isPasswordVisible);
-        visiblePasswordField.setVisible(isPasswordVisible);
+            // Zmień ikonę
+            eyeIcon.setImage(isNowSelected ? eyeOpenIcon : eyeClosedIcon);
 
-        toggleIcon.setImage(isPasswordVisible ? eyeOpenIcon : eyeClosedIcon);
-
-        if (isPasswordVisible) {
-            visiblePasswordField.requestFocus();
-            visiblePasswordField.positionCaret(visiblePasswordField.getText().length());
-        }
-        else {
-            passwordField.requestFocus();
-            passwordField.positionCaret(passwordField.getText().length());
-        }
+            // Zmień fokus i kursor
+            if (isNowSelected) {
+                visiblePasswordField.requestFocus();
+                visiblePasswordField.positionCaret(visiblePasswordField.getText().length());
+            } else {
+                passwordField.requestFocus();
+                passwordField.positionCaret(passwordField.getText().length());
+            }
+        });
     }
 
     // Uchwyt do bazy danych.
