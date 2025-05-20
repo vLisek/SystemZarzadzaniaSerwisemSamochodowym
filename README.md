@@ -1,0 +1,1 @@
+skopiuj config-template.properties jako config.properties i uzupelnij danymi do polaczenia z baza danych.
