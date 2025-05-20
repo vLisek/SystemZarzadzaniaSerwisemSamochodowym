@@ -11,9 +11,12 @@ module project.app {
     requires eu.hansolo.tilesfx;
     requires java.sql;
     requires java.desktop;
+    requires org.hibernate.orm.core;
 
     opens project.app to javafx.fxml;
     exports project.app;
     exports project.app.utils;
     opens project.app.utils to javafx.fxml;
+    exports project.app.controllers;
+    opens project.app.controllers to javafx.fxml;
 }

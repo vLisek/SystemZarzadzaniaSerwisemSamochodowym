@@ -1,4 +1,4 @@
-package project.app;
+package project.app.controllers;
 
 // Lista import'ów:
 import javafx.animation.FadeTransition;
