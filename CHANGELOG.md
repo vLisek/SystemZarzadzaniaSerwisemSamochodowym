@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.5.0](///compare/v1.4.0...v1.5.0) (2025-05-20)
+
+
+### Features
+
+* Dodano obsługę klawisza Enter do logowania 09df2ff
+
+
+### Bug Fixes
+
+* Małe poprawki loginPage.fxml c8f2c90
+* Poprawiono wyświetlanie hasła a931235
+
 ## [1.4.0](///compare/v1.3.0...v1.4.0) (2025-05-18)
 
 
