@@ -19,6 +19,20 @@ import javafx.animation.Interpolator;
 import java.io.IOException;
 
 public class PageManagerUtils {
+    public static void showInitialPage(Stage stage, String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(PageManagerUtils.class.getResource(fxmlPath));
+            Parent root = loader.load();
+
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.centerOnScreen();
+
+        } catch (Exception e) {
+            showErrorDialog("Błąd ładowania widoku: " + fxmlPath + "\nSzczegóły: " + e.getMessage());
+        }
+    }
+
     public static void showPageInSameWindow(String fxmlPath, Node anyNodeFromScene) {
         try {
             FXMLLoader loader = new FXMLLoader(PageManagerUtils.class.getResource(fxmlPath));
@@ -43,7 +57,7 @@ public class PageManagerUtils {
             fadeOut.setFromValue(1.0);
             fadeOut.setToValue(0.0);
 
-            fadeOut.setOnFinished(event -> {
+            fadeOut.setOnFinished(_ -> {
                 targetPane.getChildren().clear();
                 targetPane.getChildren().add(content);
                 AnchorPane.setTopAnchor(content, 0.0);
