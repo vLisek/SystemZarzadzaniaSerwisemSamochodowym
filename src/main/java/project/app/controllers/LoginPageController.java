@@ -1,7 +1,7 @@
 package project.app.controllers;
 
 // Lista import'ów:
-import javafx.animation.FadeTransition;
+import javafx.animation.*;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -21,8 +21,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 import javafx.scene.control.Label;
-import javafx.animation.Timeline;
-import javafx.animation.KeyFrame;
 import project.app.utils.ConfirmationHandler;
 import project.app.utils.Constants;
 import project.app.utils.DatabaseConnector;
@@ -80,17 +78,27 @@ public class LoginPageController {
     @FXML
     public void handleExit() {
         Stage currentStage = (Stage) exitButton.getScene().getWindow();
-        ConfirmationHandler.show("Potwierdzenie wyjścia", "Czy napewno chcesz zamknąć aplikację?", currentStage::close);
+        ConfirmationHandler.show("Potwierdzenie wyjścia", "Czy na pewno chcesz zamknąć aplikację?", currentStage::close);
     }
 
     // Inicjalizacja aplikacji.
     @FXML
     public void initialize() {
-        // Przejście powolnego pojawiania się.
-        FadeTransition ft = new FadeTransition(Duration.seconds(2), loginPane);
-        ft.setFromValue(0);
-        ft.setToValue(1);
-        ft.play();
+        loginPane.setOpacity(0);
+        loginPane.setScaleX(0.9);
+        loginPane.setScaleY(0.9);
+
+        FadeTransition fade = new FadeTransition(Duration.millis(400), loginPane);
+        fade.setToValue(1);
+
+        ScaleTransition scale = new ScaleTransition(Duration.millis(400), loginPane);
+        scale.setToX(1);
+        scale.setToY(1);
+
+        ParallelTransition show = new ParallelTransition(fade, scale);
+        show.play();
+
+
 
         versionLabel.setText(Constants.appVersion);
 
@@ -100,7 +108,7 @@ public class LoginPageController {
         dateLabel.setText(actualDate);
 
         loginPane.setOnMouseClicked(event -> {
-            // Po kliknięciu poza elementy panelu logowania, tracą one fokus i "odznaczają się".
+            // Po kliknięciu poza elementy panelu logowania tracą one fokus i "odznaczają się".
             if (!(event.getTarget() instanceof TextField) && !(event.getTarget() instanceof PasswordField) && !(event.getTarget() instanceof Button)) {
                 // Zabranie fokusa z pól tekstowych.
                 loginPane.requestFocus();
