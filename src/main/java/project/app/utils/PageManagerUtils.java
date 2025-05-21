@@ -1,14 +1,20 @@
 package project.app.utils;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.ParallelTransition;
+import javafx.animation.ScaleTransition;
+import javafx.animation.TranslateTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.animation.Interpolator;
 
 import java.io.IOException;
 
@@ -45,12 +51,28 @@ public class PageManagerUtils {
                 AnchorPane.setLeftAnchor(content, 0.0);
                 AnchorPane.setRightAnchor(content, 0.0);
 
-                FadeTransition fadeIn = new FadeTransition(Duration.millis(300), targetPane);
-                fadeIn.setFromValue(0.0);
-                fadeIn.setToValue(1.0);
-                fadeIn.play();
-            });
+                targetPane.setTranslateY(20);
+                targetPane.setOpacity(0);
+                targetPane.setScaleX(0.97);
+                targetPane.setScaleY(0.97);
+                targetPane.setEffect(new DropShadow(15, Color.rgb(0, 0, 0, 0.2)));
 
+                FadeTransition fadeIn = new FadeTransition(Duration.millis(400), targetPane);
+                fadeIn.setToValue(1.0);
+                fadeIn.setInterpolator(Interpolator.EASE_IN);
+
+                TranslateTransition slideUp = new TranslateTransition(Duration.millis(400), targetPane);
+                slideUp.setToY(0);
+                slideUp.setInterpolator(Interpolator.EASE_OUT);
+
+                ScaleTransition scaleUp = new ScaleTransition(Duration.millis(400), targetPane);
+                scaleUp.setToX(1.0);
+                scaleUp.setToY(1.0);
+                scaleUp.setInterpolator(Interpolator.EASE_OUT);
+
+                ParallelTransition reveal = new ParallelTransition(fadeIn, slideUp, scaleUp);
+                reveal.play();
+            });
             fadeOut.play();
 
         } catch (IOException e) {

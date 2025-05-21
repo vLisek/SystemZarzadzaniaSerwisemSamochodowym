@@ -1,0 +1,30 @@
+.addingVBox {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-radius: 8px;
+    -fx-border-radius: 5px;
+    -fx-border-color: rgb(102, 102, 102);
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+}
+
+.tableVBox {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-radius: 8px;
+    -fx-border-radius: 5px;
+    -fx-border-color: rgb(102, 102, 102);
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+}
+
+.pageNameLabel {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-background-radius: 8px;
+    -fx-border-radius: 5px;
+    -fx-border-color: rgb(102, 102, 102);
+    -fx-border-style: solid;
+    -fx-border-width: 2px;
+    -fx-font-family: "Futura";
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+
+}

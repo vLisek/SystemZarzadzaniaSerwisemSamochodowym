@@ -25,7 +25,7 @@
 .loginLabel {
     -fx-text-fill: rgb(119,103,199);
     -fx-font-weight: bold;
-    -fx-font-size: 28px;
+        -fx-font-size: 28px;
 }
 
 .textField, .passwordField {

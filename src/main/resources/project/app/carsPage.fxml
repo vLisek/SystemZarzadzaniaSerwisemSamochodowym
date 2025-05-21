@@ -10,50 +10,62 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../values/carsPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="566.0" spacing="10">
+      <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Samochody - Panel" textAlignment="CENTER">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Label>
+      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="1132.0" spacing="20.0" stylesheets="@../../values/carsPage.css">
          <children>
-            <Label style="-fx-font-size: 16px;" text="Dodaj / Edytuj samochód" />
-            <Label text="Marka:" />
-            <ComboBox fx:id="markaComboBox" />
-            <Label text="Model:" />
-            <ComboBox fx:id="modelComboBox" />
-            <Label text="Nadwozie:" />
-            <ComboBox fx:id="nadwozieComboBox" />
-            <Label text="Silnik:" />
-            <ComboBox fx:id="silnikComboBox" />
-            <Label text="Numer rejestracyjny:" />
-            <TextField fx:id="rejestracjaTextField" />
-            <Label text="Właściciel:" />
-            <ComboBox fx:id="wlascicielComboBox" />
-            <HBox spacing="10">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="541.0" styleClass="addingVBox">
                <children>
-                  <Button fx:id="dodajButton" text="Dodaj" />
-                  <Button fx:id="wyczyscButton" text="Wyczyść" />
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="553.0" style="-fx-font-size: 16px;" text="Dodaj / Edytuj samochód" />
+                  <Label text="Marka:" />
+                  <ComboBox fx:id="markaComboBox" />
+                  <Label text="Model:" />
+                  <ComboBox fx:id="modelComboBox" />
+                  <Label text="Nadwozie:" />
+                  <ComboBox fx:id="nadwozieComboBox" />
+                  <Label text="Silnik:" />
+                  <ComboBox fx:id="silnikComboBox" />
+                  <Label text="Numer rejestracyjny:" />
+                  <TextField fx:id="rejestracjaTextField" prefWidth="304.0" />
+                  <Label text="Właściciel:" />
+                  <ComboBox fx:id="wlascicielComboBox" />
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="81.0" prefWidth="506.0" spacing="10">
+                     <children>
+                        <Button fx:id="addButton" text="Dodaj" />
+                        <Button fx:id="clearButton" text="Wyczyść" />
+                        <Button fx:id="saveButton" layoutX="68.0" layoutY="10.0" text="Zapisz zmiany" />
+                     </children>
+                  </HBox>
                </children>
-            </HBox>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </VBox>
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="541.0" spacing="10" styleClass="tableVBox">
+               <children>
+                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="573.0" style="-fx-font-size: 16px;" text="Lista samochodów" />
+                  <TableView fx:id="samochodyTable">
+                     <columns>
+                        <TableColumn fx:id="markaColumn" text="Marka" />
+                        <TableColumn fx:id="modelColumn" text="Model" />
+                        <TableColumn fx:id="nadwozieColumn" text="Nadwozie" />
+                        <TableColumn fx:id="rejestracjaColumn" text="Rejestracja" />
+                     </columns>
+                  </TableView>
+                  <HBox alignment="BOTTOM_LEFT" prefHeight="81.0" prefWidth="546.0" spacing="10">
+                     <children>
+                        <Button fx:id="dodajButton1" text="Usuń" />
+                        <Button fx:id="wyczyscButton1" text="Edytuj" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
          </children>
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
-      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="566.0" spacing="10">
-         <children>
-            <Label style="-fx-font-size: 16px;" text="Lista samochodów" />
-            <TableView fx:id="samochodyTable">
-               <columns>
-                  <TableColumn fx:id="markaColumn" text="Marka" />
-                  <TableColumn fx:id="modelColumn" text="Model" />
-                  <TableColumn fx:id="nadwozieColumn" text="Nadwozie" />
-                  <TableColumn fx:id="rejestracjaColumn" text="Rejestracja" />
-               </columns>
-            </TableView>
-            <Button fx:id="usunButton" text="Usuń wybrany" />
-         </children>
-         <padding>
-            <Insets bottom="10.0" right="10.0" top="10.0" />
-         </padding>
-      </VBox>
+      </HBox>
    </children>
-</HBox>
+</VBox>
