@@ -11,61 +11,51 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../values/carsPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
-      <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Samochody - Panel" textAlignment="CENTER">
-         <VBox.margin>
-            <Insets top="10.0" />
-         </VBox.margin>
-      </Label>
-      <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="1132.0" spacing="20.0" stylesheets="@../../values/carsPage.css">
-         <children>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="541.0" styleClass="addingVBox">
-               <children>
-                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="553.0" style="-fx-font-size: 16px;" text="Dodaj / Edytuj samochód" />
-                  <Label text="Marka:" />
-                  <ComboBox fx:id="markaComboBox" />
-                  <Label text="Model:" />
-                  <ComboBox fx:id="modelComboBox" />
-                  <Label text="Nadwozie:" />
-                  <ComboBox fx:id="nadwozieComboBox" />
-                  <Label text="Silnik:" />
-                  <ComboBox fx:id="silnikComboBox" />
-                  <Label text="Numer rejestracyjny:" />
-                  <TextField fx:id="rejestracjaTextField" prefWidth="304.0" />
-                  <Label text="Właściciel:" />
-                  <ComboBox fx:id="wlascicielComboBox" />
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="81.0" prefWidth="506.0" spacing="10">
-                     <children>
-                        <Button fx:id="addButton" text="Dodaj" />
-                        <Button fx:id="clearButton" text="Wyczyść" />
-                        <Button fx:id="saveButton" layoutX="68.0" layoutY="10.0" text="Zapisz zmiany" />
-                     </children>
-                  </HBox>
-               </children>
-               <HBox.margin>
-                  <Insets />
-               </HBox.margin>
-            </VBox>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="541.0" spacing="10" styleClass="tableVBox">
-               <children>
-                  <Label alignment="CENTER" prefHeight="25.0" prefWidth="573.0" style="-fx-font-size: 16px;" text="Lista samochodów" />
-                  <TableView fx:id="samochodyTable">
-                     <columns>
-                        <TableColumn fx:id="markaColumn" text="Marka" />
-                        <TableColumn fx:id="modelColumn" text="Model" />
-                        <TableColumn fx:id="nadwozieColumn" text="Nadwozie" />
-                        <TableColumn fx:id="rejestracjaColumn" text="Rejestracja" />
-                     </columns>
-                  </TableView>
-                  <HBox alignment="BOTTOM_LEFT" prefHeight="81.0" prefWidth="546.0" spacing="10">
-                     <children>
-                        <Button fx:id="dodajButton1" text="Usuń" />
-                        <Button fx:id="wyczyscButton1" text="Edytuj" />
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-         </children>
-      </HBox>
-   </children>
+   <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Samochody - Panel" textAlignment="CENTER">
+      <VBox.margin>
+         <Insets top="10.0" />
+      </VBox.margin>
+   </Label>
+   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="1132.0" spacing="20.0" stylesheets="@../../values/carsPage.css">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="541.0" styleClass="addingVBox">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <Label alignment="CENTER" prefHeight="45.0" prefWidth="553.0" style="-fx-font-size: 16px;" text="Dodaj / Edytuj samochód" />
+         <Label text="Marka:" />
+         <ComboBox fx:id="brandComboBox" />
+         <Label text="Model:" />
+         <ComboBox fx:id="modelComboBox" />
+         <Label text="Nadwozie:" />
+         <ComboBox fx:id="bodyTypeComboBox" />
+         <Label text="Silnik:" />
+         <ComboBox fx:id="engineComboBox" />
+         <Label text="Numer rejestracyjny:" />
+         <TextField fx:id="licensePlateTextField" prefWidth="304.0" />
+         <Label text="Właściciel:" />
+         <ComboBox fx:id="ownerComboBox" />
+         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="537.0" spacing="10">
+            <Button fx:id="addButton" text="Dodaj"/>
+            <Button fx:id="clearButton" text="Wyczyść"/>
+            <Button fx:id="saveButton" layoutX="68.0" layoutY="10.0" text="Zapisz zmiany"/>
+         </HBox>
+      </VBox>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="541.0" styleClass="tableVBox">
+         <Label alignment="CENTER" prefHeight="45.0" prefWidth="537.0" style="-fx-font-size: 16px;" text="Lista samochodów" />
+         <TableView fx:id="samochodyTable" prefHeight="348.0">
+            <columns>
+               <TableColumn fx:id="brandColumn" prefWidth="90.0" text="Marka" />
+               <TableColumn fx:id="modelColumn" prefWidth="90.0" text="Model" />
+               <TableColumn fx:id="bodyTypeColumn" prefWidth="90.0" text="Nadwozie" />
+               <TableColumn fx:id="engineColumn" prefWidth="90.0" text="Silnik" />
+               <TableColumn fx:id="licensePlateColumn" prefWidth="90.0" text="Rejestracja" />
+               <TableColumn fx:id="ownerColumn" prefWidth="90.0" text="Właściciel" />
+            </columns>
+         </TableView>
+         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="546.0" spacing="10">
+            <Button fx:id="removeButton" text="Usuń" />
+            <Button fx:id="editButton" text="Edytuj" />
+         </HBox>
+      </VBox>
+   </HBox>
 </VBox>
