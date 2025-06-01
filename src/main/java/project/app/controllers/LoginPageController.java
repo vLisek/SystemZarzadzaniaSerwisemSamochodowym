@@ -1,78 +1,155 @@
 package project.app.controllers;
 
-// Lista import'ów:
+// JavaFX
 import javafx.animation.*;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
+// Java SQL
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
+// Java Util
 import java.util.Objects;
 
-import javafx.scene.control.Label;
-import project.app.utils.ConfirmationHandler;
+// Klasy
 import project.app.utils.Constants;
 import project.app.utils.DatabaseConnector;
+import project.app.utils.PageManagerUtils;
+import project.app.utils.ConfirmationHandler;
 
 public class LoginPageController {
 
-    // Główny element logowania.
-    @FXML
-    private StackPane loginPane;
+    // ---------------------------
+    // Elementy FXML
+    // ---------------------------
 
-    // Pole użytkownika.
-    @FXML
-    private TextField usernameField;
+    // Kontenery
+    @FXML private StackPane loginPane;
 
-    // Pole hasła.
-    @FXML
-    private PasswordField passwordField;
+    // Pola formularza
+    @FXML private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private TextField visiblePasswordField;
 
-    // Pole widoczności hasła.
-    @FXML
-    private TextField visiblePasswordField;
+    // Przyciski
+    @FXML private ToggleButton togglePasswordButton;
+    @FXML private Button loginButton;
+    @FXML private Button exitButton;
 
-    // Button do wyświetlania hasła.
-    @FXML
-    private ToggleButton togglePasswordButton;
+    // Wyświetlanie informacji
+    @FXML private Label errorMessage;
+    @FXML private Label versionLabel;
+    @FXML private Label dateLabel;
 
+
+    // ---------------------------
+    // Pola kontrolera
+    // ---------------------------
     private Image eyeOpenIcon;
     private Image eyeClosedIcon;
     private ImageView eyeIcon;
 
-    // Przycisk od logowania.
-    @FXML
-    private Button loginButton;
 
-    // Wyświetlanie statusu logowania.
+    // ---------------------------
+    // Metody publiczne
+    // ---------------------------
     @FXML
-    private Label errorMessage;
+    public void initialize() {
 
-    // Wyświetlanie wersji aplikacji.
+        // Wywołanie metody "Pokaż / ukryj hasło".
+        initializePasswordVisibilityToggle();
+
+        // Wyświetlenie wersji aplikacji i aktualnej daty w odpowiednich labelach.
+        versionLabel.setText(Constants.appVersion);
+        dateLabel.setText(Constants.getCurrentDate());
+
+        // Obsługa kliknięcia poza pole formularza logowania i usunięcie focusu.
+        loginPane.setOnMouseClicked(event -> {
+            Node target = (Node) event.getTarget();
+            if (target != usernameField && target != passwordField && target != loginButton) {
+                loginPane.requestFocus();
+            }
+        });
+
+        loginButton.setDefaultButton(true);
+    }
+
     @FXML
-    private Label versionLabel;
+    public void handleLogin() {
+        String username = usernameField.getText();
+        String password = passwordField.getText();
 
-    // Wyświetlanie aktualnej daty.
-    @FXML
-    private Label dateLabel;
+        if (username.isEmpty() && password.isEmpty()) {
+            errorMessage.setText("Wprowadź login i hasło.");
+            clearErrorAfterDelay();
+            return;
+        }
+        else if (username.isEmpty()) {
+            errorMessage.setText("Wprowadź login.");
+            clearErrorAfterDelay();
+            return;
+        }
+        else if (password.isEmpty()) {
+            errorMessage.setText("Wprowadź hasło.");
+            clearErrorAfterDelay();
+            return;
+        }
 
-    // Przycisk do zamykania.
-    @FXML
-    private Button exitButton;
+        try (Connection connection = DatabaseConnector.getConnection()) {
+            String sql = "SELECT p.imie, p.rola, p.stanowisko FROM loginy l JOIN pracownicy p ON l.pracownik_id = p.id WHERE l.login = ? AND l.haslo = ?";
 
-    private void clearErrorAfterDelay() {
-        new Timeline(new KeyFrame(Duration.seconds(3), _ -> errorMessage.setText(""))).play();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+            statement.setString(2, password);
+
+            ResultSet resultSet = statement.executeQuery();
+
+            if (resultSet.next()) {
+                String name = resultSet.getString("p.imie");
+                String role = resultSet.getString("p.rola");
+                String position = resultSet.getString("p.stanowisko");
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+
+                switch (role.toLowerCase()) {
+                    case "właściciel":
+                        PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/adminPage.fxml", name, position);
+                        break;
+                    case "kierownik":
+                        PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/managerPage.fxml", name, position);
+                        break;
+                    case "mechanik":
+                        PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/mechanicPage.fxml", name, position);
+                        break;
+                    case "recepcjonista":
+                        PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/receptionistPage.fxml", name, position);
+                        break;
+                    case "magazynier":
+                        PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/warehousemanPage.fxml", name, position);
+                        break;
+                    default:
+                        errorMessage.setText("Nieznana rola użytkownika.");
+                        clearErrorAfterDelay();
+                }
+            }
+            else {
+                errorMessage.setText("Niepoprawny login lub hasło.");
+                clearErrorAfterDelay();
+            }
+
+        } catch (SQLException e) {
+            errorMessage.setText("Błąd połączenia z bazą.");
+            clearErrorAfterDelay();
+        }
     }
 
     @FXML
@@ -81,73 +158,44 @@ public class LoginPageController {
         ConfirmationHandler.show("Potwierdzenie wyjścia", "Czy na pewno chcesz zamknąć aplikację?", currentStage::close);
     }
 
-    // Inicjalizacja aplikacji.
-    @FXML
-    public void initialize() {
-        loginPane.setOpacity(0);
-        loginPane.setScaleX(0.9);
-        loginPane.setScaleY(0.9);
 
-        FadeTransition fade = new FadeTransition(Duration.millis(400), loginPane);
-        fade.setToValue(1);
+    // ---------------------------
+    // Metody prywatne
+    // ---------------------------
+    private void clearErrorAfterDelay() {
+        new Timeline(new KeyFrame(Duration.seconds(3), _ -> errorMessage.setText(""))).play();
+    }
 
-        ScaleTransition scale = new ScaleTransition(Duration.millis(400), loginPane);
-        scale.setToX(1);
-        scale.setToY(1);
+    private void initializePasswordVisibilityToggle() {
 
-        ParallelTransition show = new ParallelTransition(fade, scale);
-        show.play();
-
-
-
-        versionLabel.setText(Constants.appVersion);
-
-        // Wyświetlanie aktualnej daty.
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
-        String actualDate = LocalDate.now().format(formatter);
-        dateLabel.setText(actualDate);
-
-        loginPane.setOnMouseClicked(event -> {
-            // Po kliknięciu poza elementy panelu logowania tracą one fokus i "odznaczają się".
-            if (!(event.getTarget() instanceof TextField) && !(event.getTarget() instanceof PasswordField) && !(event.getTarget() instanceof Button)) {
-                // Zabranie fokusa z pól tekstowych.
-                loginPane.requestFocus();
-            }
-        });
-
-        loginButton.setDefaultButton(true);
-
+        // Domyślna widoczność pól.
         visiblePasswordField.setVisible(false);
         passwordField.setVisible(true);
 
-        // Synchronizacja widoczności i zarządzania layoutem
+        // Zarządzanie layoutem.
         visiblePasswordField.managedProperty().bind(visiblePasswordField.visibleProperty());
         passwordField.managedProperty().bind(passwordField.visibleProperty());
 
-        // Wspólna wartość tekstu między polami
+        // Synchronizacja tekstu.
         visiblePasswordField.textProperty().bindBidirectional(passwordField.textProperty());
 
-        // Załaduj ikony
+        // Ładowanie ikon.
         eyeOpenIcon = new Image(Objects.requireNonNull(getClass().getResource("/images/eye_open_icon.png")).toExternalForm());
         eyeClosedIcon = new Image(Objects.requireNonNull(getClass().getResource("/images/eye_closed_icon.png")).toExternalForm());
 
-        // Obiekt ImageView, który dynamicznie zmienia ikonę
+        // Konfiguracja przycisku.
         eyeIcon = new ImageView(eyeClosedIcon);
         eyeIcon.setFitWidth(20);
         eyeIcon.setFitHeight(20);
         eyeIcon.setPreserveRatio(true);
-
         togglePasswordButton.setGraphic(eyeIcon);
 
+        // Obsługa kliknięcia przycisku.
         togglePasswordButton.selectedProperty().addListener((_, _, isNowSelected) -> {
-            // Zmień pole
             passwordField.setVisible(!isNowSelected);
             visiblePasswordField.setVisible(isNowSelected);
-
-            // Zmień ikonę
             eyeIcon.setImage(isNowSelected ? eyeOpenIcon : eyeClosedIcon);
 
-            // Zmień fokus i kursor
             if (isNowSelected) {
                 visiblePasswordField.requestFocus();
                 visiblePasswordField.positionCaret(visiblePasswordField.getText().length());
@@ -156,49 +204,5 @@ public class LoginPageController {
                 passwordField.positionCaret(passwordField.getText().length());
             }
         });
-    }
-
-    // Uchwyt do bazy danych.
-    @FXML
-    public void handleLogin() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
-
-        // Wyświetlenie odpowiedniej informacji na temat wprowadzonych danych.
-        if (username.isEmpty() || password.isEmpty()) {
-            if (username.isEmpty() && password.isEmpty()) {
-                errorMessage.setText("Proszę wypełnić wszystkie pola!");
-            }
-            else if (username.isEmpty()) {
-                errorMessage.setText("Proszę wprowadzić login!");
-            }
-            else {
-                errorMessage.setText("Proszę wprowadzić hasło!");
-            }
-            clearErrorAfterDelay();
-            return;
-        }
-        try (Connection connection = DatabaseConnector.getConnection()) {
-            String loginSQL = "SELECT * FROM loginy WHERE login = ? AND haslo = ?";
-            var statement = connection.prepareStatement(loginSQL);
-            statement.setString(1, username);
-            statement.setString(2, password);
-
-            var resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/app/mainPage.fxml"));
-                Parent root = loader.load();
-
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                stage.setScene(new Scene(root));
-                stage.show();
-            }
-            else {
-                errorMessage.setText("Niepoprawny login lub hasło.");
-                clearErrorAfterDelay();
-            }
-        } catch (SQLException | IOException e) {
-            errorMessage.setText("Błąd połączenia z bazą.");
-        }
     }
 }
