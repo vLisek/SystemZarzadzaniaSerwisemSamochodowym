@@ -13,7 +13,7 @@ import project.app.utils.ConfirmationHandler;
 import project.app.utils.Constants;
 import project.app.utils.PageManagerUtils;
 
-public class MainPageController implements UserDataReceiver {
+public class ManagerPageController implements UserDataReceiver {
 
     @FXML
     private StackPane mainPane;

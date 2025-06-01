@@ -13,7 +13,7 @@ import project.app.utils.ConfirmationHandler;
 import project.app.utils.Constants;
 import project.app.utils.PageManagerUtils;
 
-public class MainPageController implements UserDataReceiver {
+public class MechanicPageController implements UserDataReceiver {
 
     @FXML
     private StackPane mainPane;
@@ -49,11 +49,6 @@ public class MainPageController implements UserDataReceiver {
     }
 
     @FXML
-    private void handleCustomersButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/customersPage.fxml", contentPane);
-    }
-
-    @FXML
     private void handleOrdersButton() {
         PageManagerUtils.loadPageIntoAnchorPane("/project/app/ordersPage.fxml", contentPane);
     }
@@ -61,21 +56,6 @@ public class MainPageController implements UserDataReceiver {
     @FXML
     private void handleCarPartsButton() {
         PageManagerUtils.loadPageIntoAnchorPane("/project/app/carPartsPage.fxml", contentPane);
-    }
-
-    @FXML
-    private void handleCalendarButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/calendarPage.fxml", contentPane);
-    }
-
-    @FXML
-    private void handleEmployeesButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/employeesPage.fxml", contentPane);
-    }
-
-    @FXML
-    private void handleInvoicesButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/invoicesPage.fxml", contentPane);
     }
 
     @FXML
