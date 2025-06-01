@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.animation.Interpolator;
+import project.app.interfaces.UserDataReceiver;
 
 import java.io.IOException;
 
@@ -27,6 +28,25 @@ public class PageManagerUtils {
             stage.setScene(new Scene(root));
             stage.setResizable(false);
             stage.centerOnScreen();
+        } catch (Exception e) {
+            showErrorDialog("Błąd ładowania widoku: " + fxmlPath + "\nSzczegóły: " + e.getMessage());
+        }
+    }
+
+    public static void showInitialPageWithUserData(Stage stage, String fxmlPath, String imie, String position) {
+        try {
+            FXMLLoader loader = new FXMLLoader(PageManagerUtils.class.getResource(fxmlPath));
+            Parent root = loader.load();
+
+            Object controller = loader.getController();
+            if (controller instanceof UserDataReceiver) {
+                ((UserDataReceiver) controller).initUserData(imie, position);
+            }
+
+            stage.setScene(new Scene(root));
+            stage.setResizable(false);
+            stage.centerOnScreen();
+            stage.show();
 
         } catch (Exception e) {
             showErrorDialog("Błąd ładowania widoku: " + fxmlPath + "\nSzczegóły: " + e.getMessage());

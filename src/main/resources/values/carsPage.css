@@ -28,3 +28,52 @@
     -fx-font-weight: bold;
 
 }
+
+.nameLabel {
+    -fx-font-family: "Futura";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+}
+
+.actionButton {
+    -fx-background-color: rgb(119,103,199);
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+    -fx-font-family: "Inter";
+    -fx-cursor: hand;
+    }
+
+.myTabPane {
+    -fx-background-color: rgb(255, 255, 255);
+    -fx-tab-min-width: 100px;
+    -fx-tab-max-width: 200px;
+    -fx-tab-min-height: 30px;
+    -fx-tab-max-height: 40px;
+}
+
+.myTabPane .tab-header-area {
+    -fx-background-color: #3c3f41; /* tło paska z zakładkami */
+}
+
+.myTabPane .tab {
+    -fx-background-insets: 0;
+    -fx-padding: 5px 10px;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.myTabPane .tab:selected {
+    -fx-background-color: #4a90e2; /* kolor aktywnej zakładki */
+    -fx-text-fill: white;
+}
+
+.myTabPane .tab-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: white; /* kolor tekstu zakładki */
+}
+
+.myTabPane .tab:selected .tab-label {
+    -fx-text-fill: white;
+}

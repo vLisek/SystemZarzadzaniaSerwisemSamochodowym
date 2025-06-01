@@ -96,7 +96,7 @@
             <VBox.margin>
                 <Insets left="10.0" right="10.0" />
             </VBox.margin>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="235.0" styleClass="statusLabel" stylesheets="@../../values/mainPage.css" text="Zalogowany jako: Filip">
+            <Label fx:id="nameLabel" alignment="CENTER" prefHeight="30.0" prefWidth="235.0" styleClass="statusLabel" stylesheets="@../../values/mainPage.css">
                 <HBox.margin>
                     <Insets left="10.0" />
                 </HBox.margin>
@@ -104,11 +104,11 @@
             <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../../images/vertical_line_icon.png" />
             </ImageView>
-            <Label alignment="CENTER" prefHeight="30.0" prefWidth="235.0" styleClass="statusLabel" stylesheets="@../../values/mainPage.css" text="Rola: Administrator" />
+            <Label fx:id="positionLabel" alignment="CENTER" prefHeight="30.0" prefWidth="235.0" styleClass="statusLabel" stylesheets="@../../values/mainPage.css" />
             <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="511.0" layoutY="20.0" pickOnBounds="true" preserveRatio="true">
                 <Image url="@../../images/vertical_line_icon.png" />
             </ImageView>
-            <Label alignment="CENTER" layoutX="539.0" layoutY="27.0" prefHeight="30.0" prefWidth="235.0" styleClass="statusLabel" stylesheets="@../../values/mainPage.css" text="Dzisiaj: 18.05.2025" />
+            <Label fx:id="dateLabel" alignment="CENTER" layoutX="539.0" layoutY="27.0" prefHeight="30.0" prefWidth="235.0" styleClass="statusLabel" stylesheets="@../../values/mainPage.css" />
             <Button maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#handleAboutButton" prefHeight="30.0" prefWidth="153.0" styleClass="actionButton" stylesheets="@../../values/mainPage.css" text="O aplikacji">
                 <graphic>
                     <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">

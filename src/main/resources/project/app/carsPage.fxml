@@ -2,11 +2,12 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
@@ -21,27 +22,29 @@
          <HBox.margin>
             <Insets />
          </HBox.margin>
-         <Label alignment="CENTER" prefHeight="45.0" prefWidth="553.0" style="-fx-font-size: 16px;" text="Dodaj / Edytuj samochód" />
-         <Label text="Marka:" />
-         <ComboBox fx:id="brandComboBox" />
-         <Label text="Model:" />
-         <ComboBox fx:id="modelComboBox" />
-         <Label text="Nadwozie:" />
-         <ComboBox fx:id="bodyTypeComboBox" />
-         <Label text="Silnik:" />
-         <ComboBox fx:id="engineComboBox" />
-         <Label text="Numer rejestracyjny:" />
-         <TextField fx:id="licensePlateTextField" prefWidth="304.0" />
-         <Label text="Właściciel:" />
-         <ComboBox fx:id="ownerComboBox" />
-         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="537.0" spacing="10">
-            <Button fx:id="addButton" text="Dodaj"/>
-            <Button fx:id="clearButton" text="Wyczyść"/>
-            <Button fx:id="saveButton" layoutX="68.0" layoutY="10.0" text="Zapisz zmiany"/>
+         <Label alignment="CENTER" prefHeight="45.0" prefWidth="541.0" styleClass="nameLabel" stylesheets="@../../values/carsPage.css" text="Dodaj / Edytuj samochód" />
+         <TabPane prefHeight="200.0" prefWidth="200.0" styleClass="myTabPane" tabClosingPolicy="UNAVAILABLE">
+           <tabs>
+             <Tab text="Untitled Tab 1">
+               <content>
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+             </Tab>
+             <Tab text="Untitled Tab 2">
+               <content>
+                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+               </content>
+             </Tab>
+           </tabs>
+         </TabPane>
+         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="541.0" spacing="10">
+            <Button fx:id="addButton" styleClass="actionButton" text="Dodaj" />
+            <Button fx:id="clearButton" styleClass="actionButton" text="Wyczyść" />
+            <Button fx:id="saveButton" layoutX="68.0" layoutY="10.0" styleClass="actionButton" text="Zapisz zmiany" />
          </HBox>
       </VBox>
       <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="541.0" styleClass="tableVBox">
-         <Label alignment="CENTER" prefHeight="45.0" prefWidth="537.0" style="-fx-font-size: 16px;" text="Lista samochodów" />
+         <Label alignment="CENTER" prefHeight="45.0" prefWidth="541.0" styleClass="nameLabel" text="Lista samochodów" />
          <TableView fx:id="samochodyTable" prefHeight="348.0">
             <columns>
                <TableColumn fx:id="brandColumn" prefWidth="90.0" text="Marka" />
@@ -52,9 +55,9 @@
                <TableColumn fx:id="ownerColumn" prefWidth="90.0" text="Właściciel" />
             </columns>
          </TableView>
-         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="546.0" spacing="10">
-            <Button fx:id="removeButton" text="Usuń" />
-            <Button fx:id="editButton" text="Edytuj" />
+         <HBox alignment="CENTER" prefHeight="45.0" prefWidth="541.0" spacing="10">
+            <Button fx:id="removeButton" styleClass="actionButton" text="Usuń" />
+            <Button fx:id="editButton" styleClass="actionButton" text="Edytuj" />
          </HBox>
       </VBox>
    </HBox>
