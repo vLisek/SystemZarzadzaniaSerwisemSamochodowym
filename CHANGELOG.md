@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.7.0](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/compare/v1.6.0...v1.7.0) (2025-06-01)
+
+
+### Features
+
+* Dodano animację dla otwierania scen. ([e556faf](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/e556faf95dee68d9d60d4f2bbde6998b34e0af28))
+* Dodano interfejs UserDataReceiver do przekazywania danych użytkownika. ([5c37f46](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/5c37f465696b549bdac340f7b4eb97ca29b0e186))
+* Dodano kontrolery dla użytkowników. Dodano wyświetlanie imienia, roli i daty na stronie użytkowników. ([1288a9e](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/1288a9e50a219fcc2ba10428fd1c4a0e2d891420))
+* Dodano kontrolery dla użytkowników. Dodano wyświetlanie imienia, roli i daty na stronie użytkowników. ([6fb3fd9](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/6fb3fd9d413414697b948b821977e15c6169c034))
+* Zmieniono logikę logowania – dodano przekazywanie danych użytkownika przez UserDataReceiver. ([bc55d5a](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/bc55d5a2a75bbd3624304a0998144339f0c04432))
+* Zmieniono sposób ladowania scen. ([fb78417](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/fb78417c44cf9f82c1f8adf6269a2e8743cec05a))
+
+
+### Bug Fixes
+
+* Aktualizacja LoginPageController.java. ([ab52737](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/ab527378c9034e976741a6f1fa85349d90e1fe05))
+* Aktualizacja widoku carsPage.fxml. ([9cd3a7b](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/9cd3a7b9263810a78d43bacbabf395121d4117b1))
+* Małe poprawki związane z wyświetlaniem stron. Nadal niedokończone. ([ae61251](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/ae6125157179d10c84ab097d395fe5f52f7ae2ab))
+* Poprawiono sposób ladowania glownej sceny. ([6974cf1](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/6974cf1f577b508565b220d721894c6812383ffc))
+
 ## [1.6.0](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/compare/v1.5.1...v1.6.0) (2025-05-20)
 
 
