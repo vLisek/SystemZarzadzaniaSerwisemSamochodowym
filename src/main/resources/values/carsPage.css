@@ -26,18 +26,21 @@
     -fx-font-family: "Futura";
     -fx-font-size: 22px;
     -fx-font-weight: bold;
-
+    -fx-text-fill: rgb(119,103,199);
 }
 
 .nameLabel {
+    -fx-text-fill: rgb(119,103,199);
     -fx-font-family: "Futura";
     -fx-font-size: 16px;
     -fx-font-weight: bold;
+    -fx-border-color: rgb(102, 102, 102);
+    -fx-border-width: 0 0 2px 0;
 }
 
 .actionButton {
     -fx-background-color: rgb(119,103,199);
-    -fx-text-fill: white;
+    -fx-text-fill: rgb(255, 255, 255);
     -fx-background-radius: 10px;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
@@ -45,35 +48,106 @@
     -fx-cursor: hand;
     }
 
-.myTabPane {
-    -fx-background-color: rgb(255, 255, 255);
-    -fx-tab-min-width: 100px;
-    -fx-tab-max-width: 200px;
-    -fx-tab-min-height: 30px;
-    -fx-tab-max-height: 40px;
+.buttonLabel {
+    -fx-border-color: rgb(102, 102, 102);
+    -fx-border-width: 2px 0 0 0;
 }
 
-.myTabPane .tab-header-area {
-    -fx-background-color: #3c3f41; /* tło paska z zakładkami */
-}
-
-.myTabPane .tab {
-    -fx-background-insets: 0;
-    -fx-padding: 5px 10px;
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-}
-
-.myTabPane .tab:selected {
-    -fx-background-color: #4a90e2; /* kolor aktywnej zakładki */
-    -fx-text-fill: white;
-}
-
-.myTabPane .tab-label {
+.comboBox {
+    -fx-background-color: #f2f2f2;
+    -fx-border-color: #7a7a7a;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
     -fx-font-size: 14px;
-    -fx-text-fill: white; /* kolor tekstu zakładki */
 }
 
-.myTabPane .tab:selected .tab-label {
-    -fx-text-fill: white;
+.comboBox:hover {
+    -fx-border-color: #5c5c5c;
+    -fx-background-color: #e6e6e6;
 }
+
+.comboBox:focused {
+    -fx-border-color: #6a5acd;
+    -fx-background-color: #ffffff;
+}
+
+.comboBox .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.comboBox .arrow-button:hover {
+    -fx-background-color: #d0d0d0;
+}
+
+.comboBox .list-cell {
+    -fx-font-size: 14px;
+}
+
+.comboBox .list-view {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}
+
+.comboBox .list-view .list-cell:hover {
+    -fx-background-color: #dcdcdc;
+}
+
+.textField {
+    -fx-background-color: #f2f2f2;
+    -fx-border-color: #7a7a7a;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 6px 8px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.textField:hover {
+    -fx-border-color: #5c5c5c;
+    -fx-background-color: #e6e6e6;
+}
+
+.textField:focused {
+    -fx-border-color: #6a5acd;
+    -fx-background-color: #ffffff;
+}
+
+.tableView {
+    -fx-table-cell-border-color: #bbbbbb;
+    -fx-background-color: white;
+}
+
+.tableView {
+    -fx-border-color: #bbbbbb;
+    -fx-font-size: 13px;
+    -fx-text-fill: #333;
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-color: transparent;
+}
+
+.tableView .column-header-background {
+    -fx-background-color: #f2f2f2;
+    -fx-border-color: transparent transparent rgb(102,102,102) transparent;
+}
+
+.tableView .column-header {
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-border-color: transparent rgb(102,102,102) rgb(102,102,102) transparent;
+    -fx-border-width: 1px;
+    -fx-alignment: CENTER_LEFT;
+    -fx-background-color: transparent;
+}
+
+.tableView .filler {
+    -fx-background-color: #f2f2f2;
+}
+
+.errorMessageLabel {
+    -fx-text-fill: rgb(255,0,0);
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+

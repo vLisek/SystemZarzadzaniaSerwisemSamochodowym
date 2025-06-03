@@ -35,7 +35,7 @@ public class MainPageController implements UserDataReceiver {
 
     @FXML
     public void initialize() {
-        dateLabel.setText("Dziś: " + Constants.getCurrentDate());
+        dateLabel.setText(Constants.getCurrentDate());
 
         FadeTransition ft = new FadeTransition(Duration.seconds(2), mainPane);
         ft.setFromValue(0);
@@ -96,7 +96,7 @@ public class MainPageController implements UserDataReceiver {
 
     @Override
     public void initUserData(String name, String position) {
-        nameLabel.setText("Zalogowany jako: " + name);
-        positionLabel.setText("Stanowisko: " + position);
+        nameLabel.setText(name);
+        positionLabel.setText(position);
     }
 }

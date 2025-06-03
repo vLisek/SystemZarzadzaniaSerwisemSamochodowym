@@ -106,7 +106,7 @@ public class LoginPageController {
         }
 
         try (Connection connection = DatabaseConnector.getConnection()) {
-            String sql = "SELECT p.imie, p.rola, p.stanowisko FROM loginy l JOIN pracownicy p ON l.pracownik_id = p.id WHERE l.login = ? AND l.haslo = ?";
+            String sql = "SELECT e.first_name, e.role, e.position FROM logins l JOIN employees e ON l.employee_id = e.employee_id WHERE l.login = ? AND l.password = ?";
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
@@ -115,25 +115,25 @@ public class LoginPageController {
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String name = resultSet.getString("p.imie");
-                String role = resultSet.getString("p.rola");
-                String position = resultSet.getString("p.stanowisko");
+                String name = resultSet.getString("e.first_name");
+                String role = resultSet.getString("e.role");
+                String position = resultSet.getString("e.position");
                 Stage stage = (Stage) loginButton.getScene().getWindow();
 
-                switch (role.toLowerCase()) {
-                    case "właściciel":
+                switch (role) {
+                    case "admin":
                         PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/adminPage.fxml", name, position);
                         break;
-                    case "kierownik":
+                    case "manager":
                         PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/managerPage.fxml", name, position);
                         break;
-                    case "mechanik":
+                    case "mechanic":
                         PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/mechanicPage.fxml", name, position);
                         break;
-                    case "recepcjonista":
+                    case "receptionist":
                         PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/receptionistPage.fxml", name, position);
                         break;
-                    case "magazynier":
+                    case "warehouseman":
                         PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/warehousemanPage.fxml", name, position);
                         break;
                     default:
