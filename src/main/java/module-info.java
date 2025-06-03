@@ -15,8 +15,19 @@ module project.app {
 
     opens project.app to javafx.fxml;
     exports project.app;
+
     exports project.app.utils;
     opens project.app.utils to javafx.fxml;
+
     exports project.app.controllers;
     opens project.app.controllers to javafx.fxml;
+
+    exports project.app.model;
+    opens project.app.model to javafx.fxml;
+
+    exports project.app.dao;
+    opens project.app.dao to javafx.fxml;
+
+    exports project.app.interfaces;
+    opens project.app.interfaces to javafx.fxml;
 }
