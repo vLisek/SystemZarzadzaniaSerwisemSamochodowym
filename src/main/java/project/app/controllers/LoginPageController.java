@@ -106,7 +106,7 @@ public class LoginPageController {
         }
 
         try (Connection connection = DatabaseConnector.getConnection()) {
-            String sql = "SELECT e.first_name, e.role, e.position FROM logins l JOIN employees e ON l.employee_id = e.employee_id WHERE l.login = ? AND l.password = ?";
+            String sql = "SELECT e.first_name, e.role, e.position FROM logins l JOIN employees e ON l.employee_id = e.employee_id WHERE l.username = ? AND l.password = ?"; // WHERE l.login = ? AND l.password = ?" zostaje
 
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);

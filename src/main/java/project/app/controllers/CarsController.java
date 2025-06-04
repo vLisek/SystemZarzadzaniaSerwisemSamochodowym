@@ -1,9 +1,8 @@
 package project.app.controllers;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import project.app.dao.*;
 import project.app.model.*;
 import project.app.utils.FxUtils;
@@ -44,6 +43,36 @@ public class CarsController {
     @FXML
     private TextField mileageTextField;
 
+    @FXML
+    private TableColumn<VehicleDisplay, String> bodyTypeColumn;
+
+    @FXML
+    private TableColumn<VehicleDisplay, String> brandColumn;
+
+    @FXML
+    private TableColumn<VehicleDisplay, String> modelColumn;
+
+    @FXML
+    private TableColumn<VehicleDisplay, String> fuelTypeColumn;
+
+    @FXML
+    private TableColumn<VehicleDisplay, String> engineTypeColumn;
+
+    @FXML
+    private TableColumn<VehicleDisplay, String> engineCapacityColumn;
+
+    @FXML
+    private TableColumn<VehicleDisplay, String> driveTypeColumn;
+
+    @FXML
+    private TableColumn<VehicleDisplay, String> productionYearColumn;
+
+    @FXML
+    private TableColumn<VehicleDisplay, String> mileageColumn;
+
+    @FXML
+    private TableView<VehicleDisplay> vehicleTable;
+
     private final ModelDAO modelDAO = new ModelDAO();
     private final BodyTypeDAO bodyTypeDAO = new BodyTypeDAO();
     private final FuelTypeDAO fuelTypeDAO = new FuelTypeDAO();
@@ -55,13 +84,35 @@ public class CarsController {
     public void initialize() {
         loadInitialData();
         setupListeners();
+
+        bodyTypeColumn.setCellValueFactory(new PropertyValueFactory<>("bodyType"));
+        brandColumn.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        modelColumn.setCellValueFactory(new PropertyValueFactory<>("model"));
+        fuelTypeColumn.setCellValueFactory(new PropertyValueFactory<>("fuelType"));
+        engineTypeColumn.setCellValueFactory(new PropertyValueFactory<>("engineType"));
+        engineCapacityColumn.setCellValueFactory(new PropertyValueFactory<>("engineCapacity"));
+        driveTypeColumn.setCellValueFactory(new PropertyValueFactory<>("driveType"));
+        productionYearColumn.setCellValueFactory(new PropertyValueFactory<>("productionYear"));
+        mileageColumn.setCellValueFactory(new PropertyValueFactory<>("mileage"));
+
+        refreshVehicleTable();
+    }
+
+    private void refreshVehicleTable() {
+        try {
+            CarDAO carDAO = new CarDAO();
+            List<VehicleDisplay> vehicles = carDAO.getAllVehiclesForDisplay();
+            vehicleTable.getItems().setAll(vehicles);
+        } catch (SQLException e) {
+            showError("Nie udało się załadować pojazdów.");
+        }
     }
 
     @FXML
     public void clearForm() {
         // Czyścimy wszystkie ComboBoxy
         brandComboBox.getSelectionModel().clearSelection();
-        brandComboBox.setValue(null);
+        brandComboBox.setValue(null); // ustawic wartosc pobierajac pierwszy element z comboboxach. title()
 
         modelComboBox.getItems().clear();
         modelComboBox.setValue(null);
@@ -93,13 +144,25 @@ public class CarsController {
             EngineType engineType = engineTypeComboBox.getValue();
             DriveType driveType = driveTypeComboBox.getValue();
 
+            if (brand == null || model == null || bodyType == null || fuelType == null ||
+                    engineType == null || driveType == null) {
+                showError("Uzupełnij wszystkie pola wyboru!");
+                return;
+            }
+
+            if (engineCapacityTextField.getText().trim().isEmpty() ||
+                    productionYearTextField.getText().trim().isEmpty() ||
+                    mileageTextField.getText().trim().isEmpty()) {
+                showError("Uzupełnij wszystkie pola tekstowe!");
+                return;
+            }
+
             int engineCapacity = Integer.parseInt(engineCapacityTextField.getText().trim());
             int productionYear = Integer.parseInt(productionYearTextField.getText().trim());
             int mileage = Integer.parseInt(mileageTextField.getText().trim());
 
-            if (brand == null || model == null || bodyType == null || fuelType == null ||
-                    engineType == null || driveType == null) {
-                showError("Uzupełnij wszystkie pola!");
+            if (productionYear < 1900 || productionYear > 2025) {
+                showError("Rok produkcji musi być liczbą z zakresu 1900–2025.");
                 return;
             }
 
@@ -116,6 +179,19 @@ public class CarsController {
                     mileage
             );
 
+            VehicleDisplay newVehicle = new VehicleDisplay(
+                    brand.getName(),
+                    model.getName(),
+                    bodyType.getName(),
+                    fuelType.getName(),
+                    engineType.getName(),
+                    driveType.getName(),
+                    engineCapacity,
+                    productionYear,
+                    mileage
+            );
+            vehicleTable.getItems().add(newVehicle);
+
             clearForm();
             errorMessage.setText("Dodano pojazd.");
         } catch (NumberFormatException e) {
@@ -124,6 +200,8 @@ public class CarsController {
             showError("Błąd zapisu do bazy.");
         }
     }
+
+
 
     private void loadInitialData() {
         loadBrands();
