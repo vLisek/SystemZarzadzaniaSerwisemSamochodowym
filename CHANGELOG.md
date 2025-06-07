@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.8.0](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/compare/v1.7.0...v1.8.0) (2025-06-07)
+
+
+### Features
+
+* Dodano obsługę dodawania, wyświetlania, usuwania klientów do BD ([801997c](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/801997c03958f7ef78ecc12865b65aa03551c37d))
+* Dodano obsługę dodawania, wyświetlania, usuwania samochodów do BD ([ccfc12f](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/ccfc12f075f46e6a1dacd6287f0d618904d08c86))
+* WSZYSTKO DZIALA ALE NIEDOKONCZONE ([12618fe](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/12618fe78da88b120c4b190dbd72193fdb1ec442))
+* WSZYSTKO DZIALA ALE NIEDOKONCZONE ([6da88e6](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/6da88e6488738b0abd3ccc6123242f783d42b5ba))
+
+
+### Bug Fixes
+
+* poprawki ([87a43a7](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/87a43a7a4fb7a1acf05077e0a1574202e606cf03))
+
 ## [1.7.0](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/compare/v1.6.0...v1.7.0) (2025-06-01)
 
 
