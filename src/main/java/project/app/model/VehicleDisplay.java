@@ -1,5 +1,6 @@
 package project.app.model;
 
+@SuppressWarnings("unused")
 public class VehicleDisplay {
     private final int vehicleId;
     private final String brand;

@@ -16,8 +16,6 @@ import project.app.dao.*;
 import project.app.model.*;
 import project.app.utils.FxUtils;
 
-
-
 public class CarsController {
 
     // ---------------------------
@@ -165,7 +163,7 @@ public class CarsController {
             );
 
             VehicleDisplay newVehicle = new VehicleDisplay(
-                    vehicleId, // Dodaj na początku!
+                    vehicleId,
                     brand.getName(),
                     model.getName(),
                     bodyType.getName(),

@@ -21,7 +21,7 @@
          <HBox.margin>
             <Insets />
          </HBox.margin>
-         <Label alignment="CENTER" prefHeight="40.0" prefWidth="541.0" styleClass="nameLabel" stylesheets="@../../values/carsPage.css" text="Dodaj / Edytuj samochód" />
+         <Label alignment="CENTER" prefHeight="40.0" prefWidth="541.0" styleClass="nameLabel" stylesheets="@../../values/carsPage.css" text="Dodaj samochód" />
          <VBox alignment="TOP_CENTER" prefHeight="354.0" spacing="5.0">
             <children>
                <ComboBox fx:id="bodyTypeComboBox" prefHeight="32.0" prefWidth="306.0" promptText="Typ nadwozia" styleClass="comboBox" />
