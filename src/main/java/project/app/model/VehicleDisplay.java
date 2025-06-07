@@ -1,6 +1,7 @@
 package project.app.model;
 
 public class VehicleDisplay {
+    private final int vehicleId;
     private final String brand;
     private final String model;
     private final String bodyType;
@@ -11,9 +12,19 @@ public class VehicleDisplay {
     private final int productionYear;
     private final int mileage;
 
-    public VehicleDisplay(String brand, String model, String bodyType, String fuelType,
-                          String engineType, String driveType, int engineCapacity,
-                          int productionYear, int mileage) {
+    public VehicleDisplay(
+            int vehicleId,
+            String brand,
+            String model,
+            String bodyType,
+            String fuelType,
+            String engineType,
+            String driveType,
+            int engineCapacity,
+            int productionYear,
+            int mileage
+    ) {
+        this.vehicleId = vehicleId;
         this.brand = brand;
         this.model = model;
         this.bodyType = bodyType;
@@ -59,5 +70,9 @@ public class VehicleDisplay {
 
     public int getMileage() {
         return mileage; }
+
+    public int getVehicleId() {
+        return vehicleId;
+    }
 }
 

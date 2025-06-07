@@ -8,16 +8,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAO {
-    public void insertVehicle(int bodyTypeId, int brandId, int modelId, int fuelTypeId,
-                              int engineTypeId, int engineCapacity, int driveTypeId,
-                              int productionYear, int mileage) throws SQLException {
+    public static int insertVehicle(int bodyTypeId, int brandId, int modelId, int fuelTypeId,
+                                    int engineTypeId, int engineCapacity, int driveTypeId,
+                                    int productionYear, int mileage) throws SQLException {
 
         String sql = "INSERT INTO vehicles (body_type_id, brand_id, model_id, fuel_type_id, " +
                 "engine_type_id, engine_capacity, drive_type_id, production_year, mileage) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) { // KOMUNIKAT generowania kluczy
+
 
             stmt.setInt(1, bodyTypeId);
             stmt.setInt(2, brandId);
@@ -30,6 +31,14 @@ public class CarDAO {
             stmt.setInt(9, mileage);
 
             stmt.executeUpdate();
+
+            try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
+                if (generatedKeys.next()) {
+                    return generatedKeys.getInt(1);
+                } else {
+                    throw new SQLException("Nie udało się pobrać ID nowego samochodu");
+                }
+            }
         }
     }
 
@@ -37,6 +46,7 @@ public class CarDAO {
         List<VehicleDisplay> list = new ArrayList<>();
         String sql = """
             SELECT
+                v.vehicle_id,
                 b.name AS brand,
                 m.name AS model,
                 bt.name AS body_type,
@@ -61,6 +71,7 @@ public class CarDAO {
 
             while (resultSet.next()) {
                 list.add(new VehicleDisplay(
+                        resultSet.getInt("vehicle_id"),
                         resultSet.getString("brand"),
                         resultSet.getString("model"),
                         resultSet.getString("body_type"),
@@ -75,6 +86,16 @@ public class CarDAO {
         }
 
         return list;
+    }
+
+    public void deleteVehicle(int vehicleId) throws SQLException {
+        String sql = "DELETE FROM vehicles WHERE vehicle_id = ?";
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, vehicleId);
+            stmt.executeUpdate();
+        }
     }
 }
 
