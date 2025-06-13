@@ -22,10 +22,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 // Klasy
-import project.app.utils.Constants;
-import project.app.utils.DatabaseConnector;
-import project.app.utils.PageManagerUtils;
-import project.app.utils.ConfirmationHandler;
+import project.app.utils.*;
 
 public class LoginPageController {
 
@@ -86,69 +83,64 @@ public class LoginPageController {
 
     @FXML
     public void handleLogin() {
-        String username = usernameField.getText();
-        String password = passwordField.getText();
+        String username = usernameField.getText().trim();
+        String password = passwordField.getText().trim();
 
         if (username.isEmpty() && password.isEmpty()) {
-            errorMessage.setText("Wprowadź login i hasło.");
-            clearErrorAfterDelay();
+            showError("Wprowadź login i hasło.");
             return;
         }
         else if (username.isEmpty()) {
-            errorMessage.setText("Wprowadź login.");
-            clearErrorAfterDelay();
+            showError("Wprowadź login.");
             return;
         }
         else if (password.isEmpty()) {
-            errorMessage.setText("Wprowadź hasło.");
-            clearErrorAfterDelay();
+            showError("Wprowadź hasło.");
             return;
         }
 
         try (Connection connection = DatabaseConnector.getConnection()) {
-            String sql = "SELECT e.first_name, e.role, e.position FROM logins l JOIN employees e ON l.employee_id = e.employee_id WHERE l.login = ? AND l.password = ?";
+            String sql = "SELECT e.first_name, r.name AS role, e.position FROM logins l JOIN employees e ON l.employee_id = e.employee_id JOIN roles r ON e.role_id = r.id WHERE l.login = ? AND l.password = ?";
 
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, username);
-            statement.setString(2, password);
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                statement.setString(1, username);
+                statement.setString(2, password);
 
-            ResultSet resultSet = statement.executeQuery();
+                try (ResultSet resultSet = statement.executeQuery()) {
+                    if (resultSet.next()) {
+                        String name = resultSet.getString("first_name");
+                        String role = resultSet.getString("role");
+                        String position = resultSet.getString("position");
 
-            if (resultSet.next()) {
-                String name = resultSet.getString("e.first_name");
-                String role = resultSet.getString("e.role");
-                String position = resultSet.getString("e.position");
-                Stage stage = (Stage) loginButton.getScene().getWindow();
+                        Stage stage = (Stage) loginButton.getScene().getWindow();
 
-                switch (role) {
-                    case "admin":
-                        PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/adminPage.fxml", name, position);
-                        break;
-                    case "manager":
-                        PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/managerPage.fxml", name, position);
-                        break;
-                    case "mechanic":
-                        PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/mechanicPage.fxml", name, position);
-                        break;
-                    case "receptionist":
-                        PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/receptionistPage.fxml", name, position);
-                        break;
-                    case "warehouseman":
-                        PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/warehousemanPage.fxml", name, position);
-                        break;
-                    default:
-                        errorMessage.setText("Nieznana rola użytkownika.");
-                        clearErrorAfterDelay();
+                        switch (role.toLowerCase()) {
+                            case "admin":
+                                PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/admin/adminPage.fxml", name, position);
+                                break;
+                            case "manager":
+                                PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/employees/managerPage.fxml", name, position);
+                                break;
+                            case "mechanic":
+                                PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/employees/mechanicPage.fxml", name, position);
+                                break;
+                            case "receptionist":
+                                PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/employees/receptionistPage.fxml", name, position);
+                                break;
+                            case "warehouseman":
+                                PageManagerUtils.showInitialPageWithUserData(stage, "/project/app/employees/warehousemanPage.fxml", name, position);
+                                break;
+                            default:
+                                showError("Nieznana rola użytkownika: " + role);
+                        }
+                    } else {
+                        showError("Niepoprawny login lub hasło.");
+                    }
                 }
             }
-            else {
-                errorMessage.setText("Niepoprawny login lub hasło.");
-                clearErrorAfterDelay();
-            }
-
         } catch (SQLException e) {
-            errorMessage.setText("Błąd połączenia z bazą.");
-            clearErrorAfterDelay();
+            showError("Błąd połączenia z bazą: " + e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -156,6 +148,12 @@ public class LoginPageController {
     public void handleExit() {
         Stage currentStage = (Stage) exitButton.getScene().getWindow();
         ConfirmationHandler.show("Potwierdzenie wyjścia", "Czy na pewno chcesz zamknąć aplikację?", currentStage::close);
+    }
+
+    private void showError(String message) {
+        errorMessage.setText(message);
+        errorMessage.setStyle("-fx-text-fill: red;");
+        FxUtils.clearErrorAfterDelay(errorMessage);
     }
 
 
