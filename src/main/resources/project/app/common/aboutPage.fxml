@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../../values/aboutPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.controllers.AboutController">
+    <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="O aplikacji" textAlignment="CENTER">
+        <VBox.margin>
+            <Insets top="10.0" />
+        </VBox.margin>
+    </Label>
+    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="1132.0" spacing="20.0">
+        <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="1102.0" styleClass="addingVBox">
+            <HBox.margin>
+                <Insets />
+            </HBox.margin>
+            <HBox prefHeight="438.0" prefWidth="1102.0" spacing="5.0" styleClass="HBox">
+                <padding>
+                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                </padding>
+                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="857.0">
+                    <HBox.margin>
+                        <Insets />
+                    </HBox.margin>
+                    <Label prefHeight="25.0" prefWidth="535.0" styleClass="titleLabel" text="REPAIRO v1.8.0 BETA">
+                        <VBox.margin>
+                            <Insets />
+                        </VBox.margin>
+                    </Label>
+                    <Label prefHeight="18.0" prefWidth="535.0" styleClass="subtitleLabel" text="System zarządzania serwisem samochodowym." wrapText="true">
+                        <VBox.margin>
+                            <Insets top="40.0" />
+                        </VBox.margin>
+                    </Label>
+                    <Label prefHeight="25.0" prefWidth="465.0" styleClass="subtitleLabel" text="Rejestracja klientów, pojazdów, napraw i pracowników." />
+                    <Label prefHeight="18.0" prefWidth="474.0" styleClass="textAreaLabel" text="Autor: Filip Lisowski">
+                        <VBox.margin>
+                            <Insets top="50.0" />
+                        </VBox.margin>
+                    </Label>
+                    <Label layoutX="10.0" layoutY="64.0" prefHeight="18.0" prefWidth="474.0" styleClass="textAreaLabel" text="Uniwersytet Rzeszowski - Informatyka" />
+                    <Label layoutX="10.0" layoutY="82.0" prefHeight="18.0" prefWidth="474.0" styleClass="textAreaLabel" text="Projekt zaliczeniowy, 2025" />
+                    <Label layoutX="10.0" layoutY="100.0" prefHeight="18.0" prefWidth="474.0" styleClass="textAreaLabel" text="Technologie: Java, JavaFX, MySQL" />
+               <HBox prefHeight="17.0" prefWidth="857.0">
+                  <children>
+                          <Label prefHeight="20.0" prefWidth="354.0" styleClass="linkLabel" text="Wszystkie ikony użyte w aplikacji pochodzą z serwisu " />
+                     <Label layoutX="10.0" layoutY="10.0" prefHeight="18.0" prefWidth="474.0" styleClass="links" text="[Icons8 (link)]" />
+                  </children>
+                  <VBox.margin>
+                     <Insets top="50.0" />
+                  </VBox.margin>
+               </HBox>
+                    <Label prefHeight="18.0" prefWidth="474.0" styleClass="links" text="Zobacz kod źródłowy na GitHubie (link)" />
+                    <Label layoutX="10.0" layoutY="118.0" prefHeight="20.0" prefWidth="360.0" styleClass="textAreaLabel" text="© 2025 Filip Lisowski. Nie do użytku komercyjnego.  ">
+                        <VBox.margin>
+                            <Insets top="50.0" />
+                        </VBox.margin>
+                    </Label>
+                </VBox>
+                <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="214.0">
+                    <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" />
+                    </padding>
+                    <ImageView fitHeight="194.0" fitWidth="194.0" pickOnBounds="true" preserveRatio="true">
+                        <Image url="@../../../images/black_logo.png" />
+                    </ImageView>
+                </VBox>
+            </HBox>
+        </VBox>
+    </HBox>
+</VBox>
