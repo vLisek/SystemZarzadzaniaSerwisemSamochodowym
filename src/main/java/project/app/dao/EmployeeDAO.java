@@ -15,9 +15,7 @@ public class EmployeeDAO {
     public List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
 
-        String query = """
-            SELECT e.employee_id, e.first_name, e.last_name, e.phone_number, e.position, l.login FROM employees e JOIN logins l ON e.employee_id = l.employee_id ORDER BY e.employee_id
-            """;
+        String query = "SELECT e.employee_id, e.first_name, e.last_name, e.phone_number, e.position, l.login FROM employees e JOIN logins l ON e.employee_id = l.employee_id ORDER BY e.employee_id";
 
         try {
             Connection connection = DatabaseConnector.getConnection();
