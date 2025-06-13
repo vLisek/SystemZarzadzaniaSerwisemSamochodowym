@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../../values/carsPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.controllers.CarsController">
+   <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Samochody - Panel" textAlignment="CENTER">
+      <VBox.margin>
+         <Insets top="10.0" />
+      </VBox.margin>
+   </Label>
+   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="1132.0" spacing="20.0" stylesheets="@../../../values/carsPage.css">
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="320.0" styleClass="addingVBox">
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
+         <Label alignment="CENTER" prefHeight="40.0" prefWidth="541.0" styleClass="nameLabel" stylesheets="@../../../values/carsPage.css" text="Dodaj samochód" />
+         <VBox alignment="TOP_CENTER" prefHeight="354.0" spacing="5.0">
+            <padding>
+               <Insets left="5.0" right="5.0" top="5.0"/>
+            </padding>
+            <ComboBox fx:id="bodyTypeComboBox" prefHeight="32.0" prefWidth="306.0" promptText="Typ nadwozia"
+                      styleClass="comboBox"/>
+            <ComboBox fx:id="brandComboBox" prefHeight="32.0" prefWidth="306.0" promptText="Marka pojazdu"
+                      styleClass="comboBox"/>
+            <ComboBox fx:id="modelComboBox" prefHeight="32.0" prefWidth="306.0" promptText="Model pojazdu"
+                      styleClass="comboBox"/>
+            <ComboBox fx:id="fuelTypeComboBox" prefHeight="32.0" prefWidth="306.0" promptText="Rodzaj paliwa"
+                      styleClass="comboBox"/>
+            <ComboBox fx:id="engineTypeComboBox" layoutX="15.0" layoutY="200.0" prefHeight="32.0" prefWidth="306.0"
+                      promptText="Rodzaj silnika" styleClass="comboBox"/>
+            <TextField fx:id="engineCapacityTextField" layoutX="15.0" layoutY="126.0" maxHeight="-Infinity"
+                       maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0"
+                       prefWidth="306.0" promptText="Pojemność silnika" styleClass="textField"/>
+            <ComboBox fx:id="driveTypeComboBox" layoutX="15.0" layoutY="163.0" prefHeight="32.0" prefWidth="306.0"
+                      promptText="Rodzaj napędu" styleClass="comboBox"/>
+            <TextField fx:id="productionYearTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="32.0" prefWidth="306.0" promptText="Rok produkcji"
+                       styleClass="textField"/>
+            <TextField fx:id="mileageTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                       minWidth="-Infinity" prefHeight="32.0" prefWidth="306.0" promptText="Przebieg (km)"
+                       styleClass="textField">
+               <opaqueInsets>
+                  <Insets/>
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets/>
+               </VBox.margin>
+            </TextField>
+            <Label fx:id="errorMessage" alignment="CENTER" prefHeight="32.0" prefWidth="306.0"/>
+         </VBox>
+         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="541.0" spacing="10" styleClass="buttonLabel">
+            <Button onAction="#addCarToDatabase" styleClass="actionButton" text="Dodaj" />
+            <Button onAction="#clearForm" styleClass="actionButton" text="Wyczyść" />
+         </HBox>
+      </VBox>
+      <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="762.0" styleClass="tableVBox">
+         <Label alignment="CENTER" prefHeight="40.0" prefWidth="762.0" styleClass="nameLabel" text="Lista samochodów" />
+         <TableView fx:id="vehicleTable" fixedCellSize="0.0" prefHeight="354.0" styleClass="tableView" stylesheets="@../../../values/carsPage.css">
+            <columns>
+               <TableColumn fx:id="bodyTypeColumn" editable="false" prefWidth="70.0" text="Nadwozie" />
+               <TableColumn fx:id="brandColumn" editable="false" prefWidth="50.0" text="Marka" />
+               <TableColumn fx:id="modelColumn" editable="false" prefWidth="50.0" text="Model" />
+               <TableColumn fx:id="fuelTypeColumn" editable="false" prefWidth="90.0" text="Rodzaj paliwa" />
+               <TableColumn fx:id="engineTypeColumn" editable="false" prefWidth="90.0" text="Rodzaj silnika" />
+               <TableColumn fx:id="engineCapacityColumn" editable="false" text="Pojemność" />
+               <TableColumn fx:id="driveTypeColumn" editable="false" text="Napęd" />
+               <TableColumn fx:id="productionYearColumn" editable="false" prefWidth="90.0" text="Rok produkcji" />
+               <TableColumn fx:id="mileageColumn" editable="false" prefWidth="110.0" text="Przebieg (km)" />
+            </columns>
+            <columnResizePolicy>
+               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+            </columnResizePolicy>
+         </TableView>
+         <HBox alignment="CENTER" prefHeight="40.0" prefWidth="541.0" spacing="10" styleClass="buttonLabel">
+            <Button onAction="#deleteVehicle" styleClass="actionButton" text="Usuń pozycję" />
+         </HBox>
+      </VBox>
+   </HBox>
+</VBox>

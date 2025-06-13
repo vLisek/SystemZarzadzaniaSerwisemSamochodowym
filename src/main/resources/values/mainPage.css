@@ -4,7 +4,6 @@
     -fx-background-radius: 10px;
     -fx-font-weight: bold;
     -fx-font-size: 14px;
-    -fx-font-family: "Inter";
     -fx-cursor: hand;
     }
 
@@ -23,15 +22,19 @@
 }
 
 .statusLabel {
-    -fx-font-family: "Inter";
     -fx-font-weight: bold;
     -fx-font-size: 14px;
     -fx-text-fill: rgb(102, 102, 102);
 }
 
 .actionLabel {
-    -fx-font-family: "Inter";
     -fx-font-weight: bold;
     -fx-font-size: 14px;
     -fx-text-fill: rgba(102, 102, 102, 0.3);
+}
+
+.middleLabel {
+    -fx-font-weight: bold;
+    -fx-font-size: 17px;
+    -fx-text-fill: rgba(102, 102, 102, 0.6);
 }

@@ -16,7 +16,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         primaryStage.setTitle(Constants.appName + " " + Constants.appVersion);
         primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/black_logo.png"))));
-        PageManagerUtils.showInitialPage(primaryStage, "/project/app/loginPage.fxml");
+        PageManagerUtils.showInitialPage(primaryStage, "/project/app/common/loginPage.fxml");
         primaryStage.show();
         primaryStage.setOnCloseRequest(event -> {
             event.consume();

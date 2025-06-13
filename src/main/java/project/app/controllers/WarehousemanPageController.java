@@ -45,18 +45,18 @@ public class WarehousemanPageController implements UserDataReceiver {
 
     @FXML
     private void handleCarPartsButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/carPartsPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/cars/carPartsPage.fxml", contentPane);
     }
 
     @FXML
     private void handleAboutButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/aboutPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/common/aboutPage.fxml", contentPane);
     }
 
     @FXML
     private void handleLogout() {
         ConfirmationHandler.show("Potwierdzenie", "Czy na pewno chcesz się wylogować?",
-                () -> PageManagerUtils.showPageInSameWindow("/project/app/loginPage.fxml", logoutButton));
+                () -> PageManagerUtils.showPageInSameWindow("/project/app/common/loginPage.fxml", logoutButton));
     }
 
     @Override

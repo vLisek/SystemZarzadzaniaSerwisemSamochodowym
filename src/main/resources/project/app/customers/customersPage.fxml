@@ -10,18 +10,18 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../values/carsPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.controllers.CustomersController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../../values/carsPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.controllers.CustomersController">
     <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Klienci - Panel" textAlignment="CENTER">
         <VBox.margin>
             <Insets top="10.0" />
         </VBox.margin>
     </Label>
-    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="1132.0" spacing="20.0" stylesheets="@../../values/carsPage.css">
+    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="1132.0" spacing="20.0" stylesheets="@../../../values/carsPage.css">
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="320.0" styleClass="addingVBox">
             <HBox.margin>
                 <Insets />
             </HBox.margin>
-            <Label alignment="CENTER" prefHeight="40.0" prefWidth="541.0" styleClass="nameLabel" stylesheets="@../../values/carsPage.css" text="Dodaj klienta" />
+            <Label alignment="CENTER" prefHeight="40.0" prefWidth="541.0" styleClass="nameLabel" stylesheets="@../../../values/carsPage.css" text="Dodaj klienta" />
             <VBox alignment="TOP_CENTER" prefHeight="354.0" spacing="5.0">
                 <padding>
                     <Insets left="5.0" right="5.0" top="5.0" />
@@ -52,7 +52,7 @@
         </VBox>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="762.0" styleClass="tableVBox">
             <Label alignment="CENTER" prefHeight="40.0" prefWidth="762.0" styleClass="nameLabel" text="Lista klientów" />
-            <TableView fx:id="clientTable" fixedCellSize="0.0" prefHeight="354.0" styleClass="tableView" stylesheets="@../../values/carsPage.css">
+            <TableView fx:id="clientTable" fixedCellSize="0.0" prefHeight="354.0" styleClass="tableView" stylesheets="@../../../values/carsPage.css">
                 <columns>
                     <TableColumn fx:id="firstNameColumn" editable="false" prefWidth="50.0" text="Imię" />
                     <TableColumn fx:id="lastNameColumn" editable="false" prefWidth="60.0" text="Nazwisko" />

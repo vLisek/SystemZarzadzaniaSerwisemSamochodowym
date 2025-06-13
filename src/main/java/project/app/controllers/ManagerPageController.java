@@ -45,53 +45,53 @@ public class ManagerPageController implements UserDataReceiver {
 
     @FXML
     private void handleCarsButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/carsPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/cars/carsPage.fxml", contentPane);
     }
 
     @FXML
     private void handleCustomersButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/customersPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/customers/customersPage.fxml", contentPane);
     }
 
     @FXML
     private void handleOrdersButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/ordersPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/orders/ordersPage.fxml", contentPane);
     }
 
     @FXML
     private void handleCarPartsButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/carPartsPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/cars/carPartsPage.fxml", contentPane);
     }
 
     @FXML
     private void handleCalendarButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/calendarPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/calendar/calendarPage.fxml", contentPane);
     }
 
     @FXML
     private void handleEmployeesButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/employeesPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/employees/employeesPage.fxml", contentPane);
     }
 
     @FXML
     private void handleInvoicesButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/invoicesPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/orders/invoicesPage.fxml", contentPane);
     }
 
     @FXML
     private void handleAboutButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/aboutPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/common/aboutPage.fxml", contentPane);
     }
 
     @FXML
     private void handleServicesButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/servicesPage.fxml", contentPane);
+        PageManagerUtils.loadPageIntoAnchorPane("/project/app/services/servicesPage.fxml", contentPane);
     }
 
     @FXML
     private void handleLogout() {
         ConfirmationHandler.show("Potwierdzenie", "Czy na pewno chcesz się wylogować?",
-                () -> PageManagerUtils.showPageInSameWindow("/project/app/loginPage.fxml", logoutButton));
+                () -> PageManagerUtils.showPageInSameWindow("/project/app/common/loginPage.fxml", logoutButton));
     }
 
     @Override
