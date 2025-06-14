@@ -43,6 +43,33 @@ public class PartsDAO {
         }
     }
 
+    public int getQuantity(int partId) {
+        String query = "SELECT quantity FROM parts WHERE part_id = ?";
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setInt(1, partId);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt("quantity");
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
+    public void reduceQuantity(int partId, int quantityToReduce) throws SQLException {
+        String sql = "UPDATE parts SET quantity = quantity - ? WHERE part_id = ?";
+        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, quantityToReduce);
+            stmt.setInt(2, partId);
+            stmt.executeUpdate();
+        }
+    }
+
+
     public void deletePart(int partId) {
         String query = "DELETE FROM parts WHERE part_id = ?";
 
@@ -53,4 +80,5 @@ public class PartsDAO {
             throw new RuntimeException("Błąd przy usuwaniu części: " + e.getMessage(), e);
         }
     }
+
 }

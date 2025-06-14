@@ -57,27 +57,32 @@ public class OrderDAO {
 
     public void addOrder(Order order) throws SQLException {
         String sql = """
-                    INSERT INTO orders (customer_id, vehicle_id, employee_id,
-                                        service_id, part_id, deadline, status,
-                                        description, total_cost)
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                """;
+        INSERT INTO orders (customer_id, vehicle_id, employee_id,
+                            service_id, part_id, used_part_quantity, deadline, status,
+                            description, total_cost)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        """;
 
-        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseConnector.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, order.getCustomer().getCustomerId());
             stmt.setInt(2, order.getVehicle().getVehicleId());
             stmt.setInt(3, order.getEmployee().getEmployeeId());
             stmt.setInt(4, order.getService().getId());
             stmt.setInt(5, order.getPart().getPartId());
-            stmt.setDate(6, Date.valueOf(order.getDeadline()));
-            stmt.setString(7, order.getStatus());
-            stmt.setString(8, order.getDescription());
-            stmt.setDouble(9, order.getTotalCost());
+
+            stmt.setInt(6, order.getUsedPartQuantity());
+
+            stmt.setDate(7, Date.valueOf(order.getDeadline()));
+            stmt.setString(8, order.getStatus());
+            stmt.setString(9, order.getDescription());
+            stmt.setDouble(10, order.getTotalCost());
 
             stmt.executeUpdate();
         }
     }
+
 
     public boolean vehicleHasActiveOrder(int vehicleId) throws SQLException {
         String sql = """
@@ -150,5 +155,4 @@ public class OrderDAO {
             stmt.executeUpdate();
         }
     }
-
 }

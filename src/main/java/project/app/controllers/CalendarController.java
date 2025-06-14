@@ -142,19 +142,35 @@ public class CalendarController {
 
             for (int i = 0; i < orders.size(); i++) {
                 Order order = orders.get(i);
-                content.append((i + 1)).append(". ").append("ID: ").append(order.getOrderId()).append("\n").append("   Opis: ").append(order.getDescription()).append("\n");
+                content.append((i + 1)).append(". ").append(formatOrderDetails(order));
 
                 if (i < orders.size() - 1) {
-                    content.append("\n");
+                    content.append("\n\n");
                 }
             }
         }
 
         alert.setContentText(content.toString());
 
-        alert.getDialogPane().setPrefSize(400, 300);
+        alert.getDialogPane().setPrefSize(500, 400);
         alert.setResizable(true);
 
         alert.showAndWait();
     }
+
+    private String formatOrderDetails(Order order) {
+        return String.format(
+                """
+                        ID: %d
+                        Opis: %s
+                        Termin: %s
+                        Status: %s
+                        """,
+                order.getOrderId(),
+                order.getDescription(),
+                order.getDeadline().format(DateTimeFormatter.ofPattern("dd.MM.yyyy")),
+                order.getStatus()
+        );
+    }
+
 }

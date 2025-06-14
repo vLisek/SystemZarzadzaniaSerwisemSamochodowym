@@ -9,13 +9,29 @@ public class Order {
     private Employee employee;
     private Service service;
     private Parts parts;
+    private int usedPartQuantity;
     private LocalDate deadline;
     private String status;
     private String description;
     private double totalCost;
 
+
     public Order() {
 
+    }
+
+    public Order(int orderId, Customer customer, VehicleDisplay vehicle, Employee employee, Service service, Parts parts, int usedPartQuantity, LocalDate deadline, String status, String description, double totalCost) {
+        this.orderId = orderId;
+        this.customer = customer;
+        this.vehicle = vehicle;
+        this.employee = employee;
+        this.service = service;
+        this.parts = parts;
+        this.deadline = deadline;
+        this.status = status;
+        this.description = description;
+        this.totalCost = totalCost;
+        this.usedPartQuantity = usedPartQuantity;
     }
 
     public Order(int orderId, Customer customer, VehicleDisplay vehicle, Employee employee, Service service, Parts parts, LocalDate deadline, String status, String description, double totalCost) {
@@ -40,7 +56,11 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order #" + orderId + ": " + description + " (deadline: " + deadline + ")";
+        return orderId + " " + customer + " " + vehicle + " " + employee + " " + service + " " + parts + " " + deadline + " " + status + " " + description + " " + totalCost;
+    }
+
+    public int getUsedPartQuantity() {
+        return usedPartQuantity;
     }
 
 

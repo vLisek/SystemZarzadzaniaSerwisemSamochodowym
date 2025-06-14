@@ -7,9 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-      prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../../values/aboutPage.css"
-      xmlns="http://javafx.com/javafx/23.0.1">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../../values/aboutPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="O aplikacji" textAlignment="CENTER">
         <VBox.margin>
             <Insets top="10.0" />
@@ -38,7 +36,7 @@
                             <Insets top="40.0" />
                         </VBox.margin>
                     </Label>
-                    <Label prefHeight="25.0" prefWidth="465.0" styleClass="subtitleLabel" text="Rejestracja klientów, pojazdów, napraw i pracowników." />
+                    <Label prefHeight="27.0" prefWidth="501.0" styleClass="subtitleLabel" text="Rejestracja klientów, pojazdów, napraw i pracowników." />
                     <Label prefHeight="18.0" prefWidth="474.0" styleClass="textAreaLabel" text="Autor: Filip Lisowski">
                         <VBox.margin>
                             <Insets top="95.0" />

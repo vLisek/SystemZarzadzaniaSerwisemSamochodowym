@@ -54,6 +54,8 @@ public class OrdersController {
     private Button changeStatusButton;
     @FXML
     private ComboBox<String> statusChangeComboBox;
+    @FXML
+    private Spinner<Integer> spinnerPartQuantity;
 
     public void initialize() {
         setupTableColumns();
@@ -62,6 +64,17 @@ public class OrdersController {
 
         statusChangeComboBox.setItems(FXCollections.observableArrayList("Nowe", "W trakcie", "Zakończone"));
         changeStatusButton.setOnAction(_ -> changeOrderStatus());
+
+        partComboBox.valueProperty().addListener((_, _, newPart) -> {
+            if (newPart != null) {
+                int availableQuantity = partsDAO.getQuantity(newPart.getPartId());
+                int min = 1;
+                int max = Math.max(min, availableQuantity);
+                spinnerPartQuantity.setValueFactory(
+                        new SpinnerValueFactory.IntegerSpinnerValueFactory(min, max, min)
+                );
+            }
+        });
     }
 
     private void setupTableColumns() {
@@ -125,27 +138,38 @@ public class OrdersController {
     @FXML
     private void addOrder() {
         try {
+            Parts part = partComboBox.getValue();
+            int quantity = spinnerPartQuantity.getValue();
+
+            int available = partsDAO.getQuantity(part.getPartId());
+            if (quantity > available) {
+                AlertUtils.showWarning("Za dużo", "Nie ma tylu części na magazynie.");
+                return;
+            }
+
             Order newOrder = createOrderFromForm();
             if (newOrder == null) return;
 
             if (orderDAO.vehicleHasActiveOrder(newOrder.getVehicle().getVehicleId())) {
-                AlertUtils.showWarning("Błąd", "Wybrany pojazd ma już aktywne zlecenie.");
+                AlertUtils.showWarning("Błąd", "Pojazd ma już aktywne zlecenie.");
                 return;
             }
 
             if (orderDAO.employeeHasActiveOrder(newOrder.getEmployee().getEmployeeId())) {
-                AlertUtils.showWarning("Błąd", "Pracownik prowadzi już inne zlecenie.");
+                AlertUtils.showWarning("Błąd", "Pracownik prowadzi inne zlecenie.");
                 return;
             }
 
             orderDAO.addOrder(newOrder);
+            partsDAO.reduceQuantity(part.getPartId(), quantity);
             refreshOrdersTable();
             clearForm();
-            AlertUtils.showInfo("Sukces", "Zlecenie dodane pomyślnie.");
+            AlertUtils.showInfo("Sukces", "Zlecenie dodane.");
         } catch (SQLException e) {
-            AlertUtils.showError("Error", "Błąd zapisu do bazy: " + e.getMessage());
+            AlertUtils.showError("Error", "Błąd zapisu: " + e.getMessage());
         }
     }
+
 
     private Order createOrderFromForm() {
         Customer customer = clientComboBox.getValue();
@@ -157,15 +181,29 @@ public class OrdersController {
         String status = statusComboBox.getValue();
         String description = descriptionArea.getText();
 
-        if (customer == null || vehicle == null || employee == null || service == null || part == null || deadline == null || status == null || description == null || description.isBlank()) {
+        if (customer == null || vehicle == null || employee == null || service == null || part == null
+                || deadline == null || status == null || description == null || description.isBlank()) {
             AlertUtils.showWarning("Niepoprawne dane", "Wszystkie pola są wymagane.");
             return null;
         }
 
-        double totalCost = service.getPrice() + part.getUnitPrice();
+        int quantity = spinnerPartQuantity.getValue();
+        double totalCost = service.getPrice() + (part.getUnitPrice() * quantity);
 
-        return new Order(0, customer, vehicle, employee, service, part, deadline, status, description, totalCost);
+        int available = partsDAO.getQuantity(part.getPartId());
+        if (quantity > available) {
+            AlertUtils.showWarning("Za dużo", "Wybrano więcej części niż jest dostępne.");
+            return null;
+        }
+
+        if (quantity <= 0) {
+            AlertUtils.showWarning("Niepoprawna ilość", "Ilość części musi być większa niż 0.");
+            return null;
+        }
+
+        return new Order(0, customer, vehicle, employee, service, part, quantity, deadline, status, description, totalCost);
     }
+
 
     private void clearForm() {
         clientComboBox.getSelectionModel().clearSelection();
