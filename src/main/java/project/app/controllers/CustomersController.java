@@ -8,32 +8,41 @@ import project.app.dao.ClientTypeDAO;
 import project.app.dao.CustomerDAO;
 import project.app.model.ClientType;
 import project.app.model.Customer;
-import project.app.utils.FxUtils;
+import project.app.utils.AlertUtils;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class CustomersController {
 
-    @FXML private TextField firstNameTextField;
-    @FXML private TextField lastNameTextField;
-    @FXML private TextField phoneTextField;
-    @FXML private TextField emailTextField;
-    @FXML private ComboBox<ClientType> clientTypeComboBox;
-    @FXML private TextField companyNameTextField;
-
-    @FXML private Label errorMessage;
-
-    @FXML private TableView<Customer> clientTable;
-    @FXML private TableColumn<Customer, String> firstNameColumn;
-    @FXML private TableColumn<Customer, String> lastNameColumn;
-    @FXML private TableColumn<Customer, String> phoneColumn;
-    @FXML private TableColumn<Customer, String> emailColumn;
-    @FXML private TableColumn<Customer, String> clientTypeColumn;
-    @FXML private TableColumn<Customer, String> companyNameColumn;
-
     private final ClientTypeDAO clientTypeDAO = new ClientTypeDAO();
     private final CustomerDAO customerDAO = new CustomerDAO();
+    @FXML
+    private TextField firstNameTextField;
+    @FXML
+    private TextField lastNameTextField;
+    @FXML
+    private TextField phoneTextField;
+    @FXML
+    private TextField emailTextField;
+    @FXML
+    private ComboBox<ClientType> clientTypeComboBox;
+    @FXML
+    private TextField companyNameTextField;
+    @FXML
+    private TableView<Customer> clientTable;
+    @FXML
+    private TableColumn<Customer, String> firstNameColumn;
+    @FXML
+    private TableColumn<Customer, String> lastNameColumn;
+    @FXML
+    private TableColumn<Customer, String> phoneColumn;
+    @FXML
+    private TableColumn<Customer, String> emailColumn;
+    @FXML
+    private TableColumn<Customer, String> clientTypeColumn;
+    @FXML
+    private TableColumn<Customer, String> companyNameColumn;
 
     @FXML
     public void initialize() {
@@ -50,7 +59,7 @@ public class CustomersController {
             List<ClientType> clientTypes = clientTypeDAO.getAllClientTypes();
             clientTypeComboBox.setItems(FXCollections.observableArrayList(clientTypes));
         } catch (SQLException e) {
-            showError("Nie udało się załadować typów klientów: " + e.getMessage());
+            AlertUtils.showError("Error", "Nie udało się załadować typów klientów: " + e.getMessage());
         }
 
         clientTypeComboBox.setOnAction(_ -> {
@@ -76,22 +85,22 @@ public class CustomersController {
         String companyName = companyNameTextField.getText().trim();
 
         if (firstName.isEmpty() || lastName.isEmpty() || phone.isEmpty() || selectedType == null) {
-            showError("Uzupełnij wszystkie wymagane pola!");
+            AlertUtils.showWarning("Niepoprawne dane", "Uzupełnij wszystkie wymagane pola!");
             return;
         }
 
         if ("Firma".equals(selectedType.getName()) && companyName.isEmpty()) {
-            showError("Nazwa firmy jest wymagana!");
+            AlertUtils.showWarning("Niepoprawne dane", "Nazwa firmy jest wymagana!");
             return;
         }
 
         if (!isValidPhone(phone)) {
-            showError("Niepoprawny numer telefonu! \nWprowadź 9 cyfr lub +48 i 9 cyfr.");
+            AlertUtils.showWarning("Niepoprawne dane", "Niepoprawny numer telefonu! \nWprowadź 9 cyfr lub +48 i 9 cyfr.");
             return;
         }
 
         if (!email.isEmpty() && !isValidEmail(email)) {
-            showError("Niepoprawny adres email!");
+            AlertUtils.showWarning("Niepoprawne dane", "Niepoprawny adres email!");
             return;
         }
 
@@ -99,9 +108,9 @@ public class CustomersController {
             customerDAO.insertCustomer(firstName, lastName, phone, email, selectedType.getId(), companyName);
             refreshClientTable();
             clearForm();
-            showError("Dodano klienta.");
+            AlertUtils.showInfo("Sukces", "Dodano klienta.");
         } catch (SQLException e) {
-            showError("Błąd dodawania klienta: " + e.getMessage());
+            AlertUtils.showError("Error", "Błąd dodawania klienta: " + e.getMessage());
         }
     }
 
@@ -124,40 +133,37 @@ public class CustomersController {
         clientTypeComboBox.getSelectionModel().clearSelection();
         companyNameTextField.clear();
         companyNameTextField.setDisable(true);
-        errorMessage.setText("");
     }
 
     @FXML
     public void deleteCustomerFromDatabase() {
         Customer selectedCustomer = clientTable.getSelectionModel().getSelectedItem();
         if (selectedCustomer == null) {
-            showError("Musisz wybrać klienta z tabeli!");
+            AlertUtils.showWarning("Błąd", "Musisz wybrać klienta z tabeli!");
             return;
         }
 
-        try {
-            customerDAO.deleteCustomer(selectedCustomer.getCustomerId());
-            refreshClientTable();
-            showError("Usunięto klienta.");
-        } catch (SQLException e) {
-            showError("Błąd usuwania klienta: " + e.getMessage());
-        }
+        AlertUtils.showConfirmation("Potwierdzenie usunięcia", "Czy na pewno chcesz usunąć klienta: " + selectedCustomer.getFirstName() + " " + selectedCustomer.getLastName() + "?", () -> {
+            try {
+                customerDAO.deleteCustomer(selectedCustomer.getCustomerId());
+                refreshClientTable();
+                AlertUtils.showInfo("Sukces", "Usunięto klienta.");
+            } catch (SQLException e) {
+                AlertUtils.showWarning("Błąd", "Nie można usunąć klienta – jest powiązany ze zleceniem!");
+            }
+        });
     }
+
 
     private void refreshClientTable() {
         try {
             List<Customer> customerList = customerDAO.getAllCustomers();
             clientTable.setItems(FXCollections.observableArrayList(customerList));
             if (customerList.isEmpty()) {
-                showError("Brak klientów w bazie danych.");
+                AlertUtils.showInfo("Informacja", "Brak klientów w bazie danych.");
             }
         } catch (SQLException e) {
-            showError("Nie udało się załadować klientów: " + e.getMessage());
+            AlertUtils.showError("Error", "Nie udało się załadować klientów: " + e.getMessage());
         }
-    }
-
-    private void showError(String message) {
-        errorMessage.setText(message);
-        FxUtils.clearErrorAfterDelay(errorMessage);
     }
 }

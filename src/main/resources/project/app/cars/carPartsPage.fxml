@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../../values/carsPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.controllers.CarPartsController">
-    <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Części - Panel" textAlignment="CENTER">
+    <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Części" textAlignment="CENTER">
         <VBox.margin>
             <Insets top="10.0" />
         </VBox.margin>
@@ -36,7 +36,6 @@
                         <Insets />
                     </VBox.margin>
                 </TextField>
-                <Label fx:id="infoLabel" alignment="CENTER" prefHeight="130.0" prefWidth="306.0" wrapText="true" />
             </VBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="541.0" spacing="10" styleClass="buttonLabel">
                 <Button onAction="#onAddPart" styleClass="actionButton" text="Dodaj" />

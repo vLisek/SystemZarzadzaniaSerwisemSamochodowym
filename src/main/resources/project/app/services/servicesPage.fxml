@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../../values/carsPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.controllers.ServicesController">
-    <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Usługi - Panel" textAlignment="CENTER">
+    <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Usługi" textAlignment="CENTER">
         <VBox.margin>
             <Insets top="10.0" />
         </VBox.margin>
@@ -56,7 +56,7 @@
             </TableView>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="541.0" spacing="10" styleClass="buttonLabel">
             <Button fx:id="updateButton" layoutX="337.0" layoutY="16.0" onAction="#updateService" styleClass="actionButton" text="Zapisz" />
-                <Button fx:id="deleteButton" onAction="#deleteService" styleClass="actionButton" text="Usuń pozycję" />
+                <Button onAction="#deleteService" styleClass="actionButton" text="Usuń pozycję" />
             </HBox>
         </VBox>
     </HBox>

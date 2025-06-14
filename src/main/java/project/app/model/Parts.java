@@ -1,7 +1,7 @@
 package project.app.model;
 
 public class Parts {
-    private int partId;
+    private final int partId;
     private String brand;
     private String name;
     private double price;
@@ -35,8 +35,6 @@ public class Parts {
     }
 
 
-
-
     public int getPartId() {
         return partId;
     }
@@ -45,28 +43,28 @@ public class Parts {
         return brand;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
     public void setBrand(String brand) {
         this.brand = brand;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
+    public double getPrice() {
+        return price;
+    }
+
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 
     public void setQuantity(int quantity) {

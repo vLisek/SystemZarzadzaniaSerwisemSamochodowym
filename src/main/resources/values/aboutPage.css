@@ -7,7 +7,7 @@
     -fx-border-width: 2px;
     -fx-font-size: 22px;
     -fx-font-weight: bold;
-    -fx-text-fill: rgb(119,103,199);
+    -fx-text-fill: rgb(119, 103, 199);
 }
 
 .HBox {
@@ -21,7 +21,7 @@
 .titleLabel {
     -fx-font-size: 22px;
     -fx-font-weight: bold;
-    -fx-text-fill: rgb(119,103,199);
+    -fx-text-fill: rgb(119, 103, 199);
 }
 
 .subtitleLabel {

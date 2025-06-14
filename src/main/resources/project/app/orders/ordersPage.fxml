@@ -32,14 +32,13 @@
                 <ComboBox fx:id="employeeComboBox" prefHeight="32.0" prefWidth="306.0" promptText="Pracownik prowadzący" styleClass="comboBox" />
                 <ComboBox fx:id="serviceComboBox" prefHeight="32.0" prefWidth="306.0" promptText="Rodzaj usługi" styleClass="comboBox" />
                 <ComboBox fx:id="partComboBox" layoutX="15.0" layoutY="200.0" prefHeight="32.0" prefWidth="306.0" promptText="Rodzaj części" styleClass="comboBox" />
-            <DatePicker fx:id="deadlinePicker" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="306.0" promptText="Termin oddania" />
-            <TextArea fx:id="descriptionArea" prefHeight="52.0" prefWidth="306.0" promptText="Opis usługi" styleClass="textField" />
+            <DatePicker fx:id="deadlinePicker" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="306.0" promptText="Termin oddania" />
+            <TextArea fx:id="descriptionArea" prefHeight="83.0" prefWidth="306.0" promptText="Opis usługi" styleClass="textField" />
             <ComboBox fx:id="statusComboBox" prefHeight="32.0" prefWidth="306.0" promptText="Status zlecenia" styleClass="comboBox" />
-            <Label fx:id="infoLabel" alignment="CENTER" prefHeight="32.0" prefWidth="306.0" styleClass="errorMessageLabel" />
             </VBox>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="541.0" spacing="10" styleClass="buttonLabel">
                 <Button onAction="#addOrder" styleClass="actionButton" text="Dodaj" />
-                <Button styleClass="actionButton" text="Wyczyść" />
+                <Button onAction="#clearFormButtonPressed" styleClass="actionButton" text="Wyczyść" />
             </HBox>
         </VBox>
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="762.0" styleClass="tableVBox">
@@ -58,7 +57,13 @@
             </columnResizePolicy>
             </TableView>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="541.0" spacing="10" styleClass="buttonLabel">
-                <Button styleClass="actionButton" text="Usuń pozycję" />
+                <Button onAction="#deleteOrder" styleClass="actionButton" text="Usuń pozycję" />
+            <Button fx:id="changeStatusButton" layoutX="337.0" layoutY="16.0" styleClass="actionButton" text="Zmień status">
+               <HBox.margin>
+                  <Insets left="410.0" />
+               </HBox.margin>
+            </Button>
+            <ComboBox fx:id="statusChangeComboBox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="103.0" promptText="Status" styleClass="comboBox" />
             </HBox>
         </VBox>
     </HBox>

@@ -10,11 +10,10 @@ public class Employee {
     private String password;
     private String roleName;
 
-    public Employee() {}
+    public Employee() {
+    }
 
-    public Employee(int employeeId, String firstName, String lastName,
-                    String phoneNumber, String position, String login,
-                    String password, String roleName) {
+    public Employee(int employeeId, String firstName, String lastName, String phoneNumber, String position, String login, String password, String roleName) {
         this.employeeId = employeeId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -45,13 +44,12 @@ public class Employee {
         return employeeId;
     }
 
-    public String getFullName() {
-        return firstName + " " + lastName;
-    }
-
-
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 
     public String getFirstName() {

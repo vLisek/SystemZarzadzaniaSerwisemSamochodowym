@@ -63,7 +63,6 @@
             </HBox>
          </StackPane>
       </VBox>
-      <Label fx:id="errorMessage" alignment="CENTER" prefHeight="25.0" prefWidth="316.0" styleClass="errorMessageLabel" stylesheets="@../../../values/loginPage.css" />
       <VBox alignment="CENTER" prefHeight="112.0" prefWidth="316.0" spacing="8.0">
          <padding>
             <Insets left="20.0" right="20.0" />

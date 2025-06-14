@@ -2,7 +2,6 @@ package project.app.utils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.regex.Pattern;
 
 public class Constants {
     public static final String appVersion = "v1.8.0 BETA";

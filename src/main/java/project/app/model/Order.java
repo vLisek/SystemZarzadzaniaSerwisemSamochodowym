@@ -14,9 +14,11 @@ public class Order {
     private String description;
     private double totalCost;
 
-    public Order(int orderId, Customer customer, VehicleDisplay vehicle, Employee employee,
-                 Service service, Parts parts, LocalDate deadline,
-                 String status, String description, double totalCost) {
+    public Order() {
+
+    }
+
+    public Order(int orderId, Customer customer, VehicleDisplay vehicle, Employee employee, Service service, Parts parts, LocalDate deadline, String status, String description, double totalCost) {
         this.orderId = orderId;
         this.customer = customer;
         this.vehicle = vehicle;
@@ -29,10 +31,16 @@ public class Order {
         this.totalCost = totalCost;
     }
 
-    public Order(Customer customer, VehicleDisplay vehicle, Employee employee,
-                 Service service, Parts parts, LocalDate deadline,
-                 String status, String description, double totalCost) {
-        this(-1, customer, vehicle, employee, service, parts, deadline, status, description, totalCost);
+    public Order(int orderId, String description, LocalDate deadline, String status) {
+        this.orderId = orderId;
+        this.description = description;
+        this.deadline = deadline;
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Order #" + orderId + ": " + description + " (deadline: " + deadline + ")";
     }
 
 
@@ -44,76 +52,76 @@ public class Order {
         return orderId;
     }
 
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public VehicleDisplay getCar() {
-        return vehicle;
-    }
-
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public Service getService() {
-        return service;
-    }
-
-    public Parts getPart() {
-        return parts;
-    }
-
-    public LocalDate getDeadline() {
-        return deadline;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public double getTotalCost() {
-        return totalCost;
-    }
-
     public void setOrderId(int orderId) {
         this.orderId = orderId;
+    }
+
+    public Customer getCustomer() {
+        return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
+    public VehicleDisplay getCar() {
+        return vehicle;
+    }
+
     public void setCar(VehicleDisplay vehicle) {
         this.vehicle = vehicle;
+    }
+
+    public Employee getEmployee() {
+        return employee;
     }
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
 
+    public Service getService() {
+        return service;
+    }
+
     public void setService(Service service) {
         this.service = service;
+    }
+
+    public Parts getPart() {
+        return parts;
     }
 
     public void setPart(Parts parts) {
         this.parts = parts;
     }
 
+    public LocalDate getDeadline() {
+        return deadline;
+    }
+
     public void setDeadline(LocalDate deadline) {
         this.deadline = deadline;
+    }
+
+    public String getStatus() {
+        return status;
     }
 
     public void setStatus(String status) {
         this.status = status;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public double getTotalCost() {
+        return totalCost;
     }
 
     public void setTotalCost(double totalCost) {

@@ -13,18 +13,10 @@ public class PartsDAO {
         List<Parts> parts = new ArrayList<>();
         String query = "SELECT * FROM parts";
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(query)) {
+        try (Connection conn = DatabaseConnector.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                Parts part = new Parts(
-                        rs.getInt("part_id"),
-                        rs.getString("producer"),
-                        rs.getString("name"),
-                        rs.getDouble("unit_price"),
-                        rs.getInt("quantity")
-                );
+                Parts part = new Parts(rs.getInt("part_id"), rs.getString("producer"), rs.getString("name"), rs.getDouble("unit_price"), rs.getInt("quantity"));
                 parts.add(part);
             }
 
@@ -38,8 +30,7 @@ public class PartsDAO {
     public void addPart(Parts part) {
         String query = "INSERT INTO parts (producer, name, unit_price, quantity) VALUES (?, ?, ?, ?)";
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
+        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
 
             ps.setString(1, part.getBrand());
             ps.setString(2, part.getName());
@@ -55,17 +46,11 @@ public class PartsDAO {
     public void deletePart(int partId) {
         String query = "DELETE FROM parts WHERE part_id = ?";
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement ps = conn.prepareStatement(query)) {
-
+        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement ps = conn.prepareStatement(query)) {
             ps.setInt(1, partId);
             ps.executeUpdate();
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Błąd przy usuwaniu części: " + e.getMessage(), e);
         }
     }
 }
-
-
-

@@ -145,12 +145,6 @@
     -fx-background-color: #f2f2f2;
 }
 
-.errorMessageLabel {
-    -fx-text-fill: rgb(255,0,0);
-    -fx-font-weight: bold;
-    -fx-font-size: 14px;
-}
-
 
 
 
@@ -174,4 +168,69 @@
     -fx-text-fill: rgb(119,103,199);
     -fx-font-size: 16px;
     -fx-font-weight: bold;
+}
+
+.text-area {
+    -fx-background-color: #f2f2f2;
+    -fx-border-color: #7a7a7a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 6px 8px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.text-area:hover {
+    -fx-border-color: #5c5c5c;
+    -fx-background-color: #e6e6e6;
+}
+
+.text-area:focused {
+    -fx-border-color: #6a5acd;
+    -fx-background-color: #ffffff;
+}
+
+.date-picker {
+    -fx-background-color: #f2f2f2;
+    -fx-border-color: #7a7a7a;
+    -fx-border-width: 1px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 6px 8px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.date-picker:hover {
+    -fx-border-color: #5c5c5c;
+    -fx-background-color: #e6e6e6;
+}
+
+.date-picker:focused {
+    -fx-border-color: #6a5acd;
+    -fx-background-color: #ffffff;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: transparent;
+}
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #d0d0d0;
+}
+
+.date-picker-popup {
+    -fx-background-color: white;
+    -fx-border-color: #ccc;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+}
+
+.date-picker-popup .day-cell {
+    -fx-font-size: 14px;
+}
+
+.date-picker-popup .day-cell:hover {
+    -fx-background-color: #dcdcdc;
 }

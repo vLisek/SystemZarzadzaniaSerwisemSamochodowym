@@ -8,16 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CarDAO {
-    public static int insertVehicle(int bodyTypeId, int brandId, int modelId, int fuelTypeId,
-                                    int engineTypeId, int engineCapacity, int driveTypeId,
-                                    int productionYear, int mileage) throws SQLException {
+    public static int insertVehicle(int bodyTypeId, int brandId, int modelId, int fuelTypeId, int engineTypeId, int engineCapacity, int driveTypeId, int productionYear, int mileage) throws SQLException {
 
-        String sql = "INSERT INTO vehicles (body_type_id, brand_id, model_id, fuel_type_id, " +
-                "engine_type_id, engine_capacity, drive_type_id, production_year, mileage) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO vehicles (body_type_id, brand_id, model_id, fuel_type_id, " + "engine_type_id, engine_capacity, drive_type_id, production_year, mileage) " + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) { // KOMUNIKAT generowania kluczy
+        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) { // KOMUNIKAT generowania kluczy
 
 
             stmt.setInt(1, bodyTypeId);
@@ -45,43 +40,30 @@ public class CarDAO {
     public List<VehicleDisplay> getAllVehiclesForDisplay() throws SQLException {
         List<VehicleDisplay> list = new ArrayList<>();
         String sql = """
-            SELECT
-                v.vehicle_id,
-                b.name AS brand,
-                m.name AS model,
-                bt.name AS body_type,
-                ft.name AS fuel_type,
-                e.name AS engine_type,
-                d.name AS drive_type,
-                v.engine_capacity,
-                v.production_year,
-                v.mileage
-            FROM vehicles v
-            JOIN brands b ON v.brand_id = b.brand_id
-            JOIN models m ON v.model_id = m.model_id
-            JOIN body_types bt ON v.body_type_id = bt.body_type_id
-            JOIN fuel_types ft ON v.fuel_type_id = ft.fuel_type_id
-            JOIN engines e ON v.engine_type_id = e.engine_id
-            JOIN drive d ON v.drive_type_id = d.drive_id
-        """;
+                    SELECT
+                        v.vehicle_id,
+                        b.name AS brand,
+                        m.name AS model,
+                        bt.name AS body_type,
+                        ft.name AS fuel_type,
+                        e.name AS engine_type,
+                        d.name AS drive_type,
+                        v.engine_capacity,
+                        v.production_year,
+                        v.mileage
+                    FROM vehicles v
+                    JOIN brands b ON v.brand_id = b.brand_id
+                    JOIN models m ON v.model_id = m.model_id
+                    JOIN body_types bt ON v.body_type_id = bt.body_type_id
+                    JOIN fuel_types ft ON v.fuel_type_id = ft.fuel_type_id
+                    JOIN engines e ON v.engine_type_id = e.engine_id
+                    JOIN drive d ON v.drive_type_id = d.drive_id
+                """;
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet resultSet = stmt.executeQuery(sql)) {
+        try (Connection conn = DatabaseConnector.getConnection(); Statement stmt = conn.createStatement(); ResultSet resultSet = stmt.executeQuery(sql)) {
 
             while (resultSet.next()) {
-                list.add(new VehicleDisplay(
-                        resultSet.getInt("vehicle_id"),
-                        resultSet.getString("brand"),
-                        resultSet.getString("model"),
-                        resultSet.getString("body_type"),
-                        resultSet.getString("fuel_type"),
-                        resultSet.getString("engine_type"),
-                        resultSet.getString("drive_type"),
-                        resultSet.getInt("engine_capacity"),
-                        resultSet.getInt("production_year"),
-                        resultSet.getInt("mileage")
-                ));
+                list.add(new VehicleDisplay(resultSet.getInt("vehicle_id"), resultSet.getString("brand"), resultSet.getString("model"), resultSet.getString("body_type"), resultSet.getString("fuel_type"), resultSet.getString("engine_type"), resultSet.getString("drive_type"), resultSet.getInt("engine_capacity"), resultSet.getInt("production_year"), resultSet.getInt("mileage")));
             }
         }
 
@@ -90,12 +72,10 @@ public class CarDAO {
 
     public void deleteVehicle(int vehicleId) throws SQLException {
         String sql = "DELETE FROM vehicles WHERE vehicle_id = ?";
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, vehicleId);
             stmt.executeUpdate();
         }
     }
 }
-

@@ -1,16 +1,21 @@
 package project.app;
 
 // Lista import'ów:
+
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import project.app.utils.ConfirmationHandler;
+import project.app.utils.AlertUtils;
 import project.app.utils.Constants;
 import project.app.utils.PageManagerUtils;
 
 import java.util.Objects;
 
 public class Main extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
 
     @Override
     public void start(Stage primaryStage) {
@@ -20,11 +25,7 @@ public class Main extends Application {
         primaryStage.show();
         primaryStage.setOnCloseRequest(event -> {
             event.consume();
-            ConfirmationHandler.show("Zamykanie aplikacji", "Czy na pewno chcesz zamknąć aplikację?", primaryStage::close);
+            AlertUtils.showConfirmation("Zamykanie aplikacji", "Czy na pewno chcesz zamknąć aplikację?", primaryStage::close);
         });
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

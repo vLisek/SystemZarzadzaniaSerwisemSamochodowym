@@ -7,9 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-
 import project.app.interfaces.UserDataReceiver;
-import project.app.utils.ConfirmationHandler;
+import project.app.utils.AlertUtils;
 import project.app.utils.Constants;
 import project.app.utils.PageManagerUtils;
 
@@ -17,19 +16,14 @@ public class MainPageController implements UserDataReceiver {
 
     @FXML
     private StackPane mainPane;
-
     @FXML
     private Button logoutButton;
-
     @FXML
     private AnchorPane contentPane;
-
     @FXML
     private Label nameLabel;
-
     @FXML
     private Label positionLabel;
-
     @FXML
     private Label dateLabel;
 
@@ -74,11 +68,6 @@ public class MainPageController implements UserDataReceiver {
     }
 
     @FXML
-    private void handleInvoicesButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/orders/invoicesPage.fxml", contentPane);
-    }
-
-    @FXML
     private void handleAboutButton() {
         PageManagerUtils.loadPageIntoAnchorPane("/project/app/common/aboutPage.fxml", contentPane);
     }
@@ -90,8 +79,7 @@ public class MainPageController implements UserDataReceiver {
 
     @FXML
     private void handleLogout() {
-        ConfirmationHandler.show("Potwierdzenie", "Czy na pewno chcesz się wylogować?",
-                () -> PageManagerUtils.showPageInSameWindow("/project/app/common/loginPage.fxml", logoutButton));
+        AlertUtils.showConfirmation("Potwierdzenie", "Czy na pewno chcesz się wylogować?", () -> PageManagerUtils.showPageInSameWindow("/project/app/common/loginPage.fxml", logoutButton));
     }
 
     @Override

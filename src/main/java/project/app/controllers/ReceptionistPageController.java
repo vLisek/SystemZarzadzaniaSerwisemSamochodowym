@@ -7,9 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-
 import project.app.interfaces.UserDataReceiver;
-import project.app.utils.ConfirmationHandler;
+import project.app.utils.AlertUtils;
 import project.app.utils.Constants;
 import project.app.utils.PageManagerUtils;
 
@@ -35,7 +34,7 @@ public class ReceptionistPageController implements UserDataReceiver {
 
     @FXML
     public void initialize() {
-        dateLabel.setText("Dziś: " + Constants.getCurrentDate());
+        dateLabel.setText(Constants.getCurrentDate());
 
         FadeTransition ft = new FadeTransition(Duration.seconds(2), mainPane);
         ft.setFromValue(0);
@@ -64,24 +63,18 @@ public class ReceptionistPageController implements UserDataReceiver {
     }
 
     @FXML
-    private void handleInvoicesButton() {
-        PageManagerUtils.loadPageIntoAnchorPane("/project/app/orders/invoicesPage.fxml", contentPane);
-    }
-
-    @FXML
     private void handleAboutButton() {
         PageManagerUtils.loadPageIntoAnchorPane("/project/app/common/aboutPage.fxml", contentPane);
     }
 
     @FXML
     private void handleLogout() {
-        ConfirmationHandler.show("Potwierdzenie", "Czy na pewno chcesz się wylogować?",
-                () -> PageManagerUtils.showPageInSameWindow("/project/app/common/loginPage.fxml", logoutButton));
+        AlertUtils.showConfirmation("Potwierdzenie", "Czy na pewno chcesz się wylogować?", () -> PageManagerUtils.showPageInSameWindow("/project/app/common/loginPage.fxml", logoutButton));
     }
 
     @Override
     public void initUserData(String name, String position) {
-        nameLabel.setText("Zalogowany jako: " + name);
-        positionLabel.setText("Stanowisko: " + position);
+        nameLabel.setText(name);
+        positionLabel.setText(position);
     }
 }

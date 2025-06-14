@@ -7,7 +7,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../../values/aboutPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.controllers.AboutController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+      prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../../values/aboutPage.css"
+      xmlns="http://javafx.com/javafx/23.0.1">
     <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="O aplikacji" textAlignment="CENTER">
         <VBox.margin>
             <Insets top="10.0" />
@@ -39,25 +41,15 @@
                     <Label prefHeight="25.0" prefWidth="465.0" styleClass="subtitleLabel" text="Rejestracja klientów, pojazdów, napraw i pracowników." />
                     <Label prefHeight="18.0" prefWidth="474.0" styleClass="textAreaLabel" text="Autor: Filip Lisowski">
                         <VBox.margin>
-                            <Insets top="50.0" />
+                            <Insets top="95.0" />
                         </VBox.margin>
                     </Label>
                     <Label layoutX="10.0" layoutY="64.0" prefHeight="18.0" prefWidth="474.0" styleClass="textAreaLabel" text="Uniwersytet Rzeszowski - Informatyka" />
                     <Label layoutX="10.0" layoutY="82.0" prefHeight="18.0" prefWidth="474.0" styleClass="textAreaLabel" text="Projekt zaliczeniowy, 2025" />
                     <Label layoutX="10.0" layoutY="100.0" prefHeight="18.0" prefWidth="474.0" styleClass="textAreaLabel" text="Technologie: Java, JavaFX, MySQL" />
-               <HBox prefHeight="17.0" prefWidth="857.0">
-                  <children>
-                          <Label prefHeight="20.0" prefWidth="354.0" styleClass="linkLabel" text="Wszystkie ikony użyte w aplikacji pochodzą z serwisu " />
-                     <Label layoutX="10.0" layoutY="10.0" prefHeight="18.0" prefWidth="474.0" styleClass="links" text="[Icons8 (link)]" />
-                  </children>
-                  <VBox.margin>
-                     <Insets top="50.0" />
-                  </VBox.margin>
-               </HBox>
-                    <Label prefHeight="18.0" prefWidth="474.0" styleClass="links" text="Zobacz kod źródłowy na GitHubie (link)" />
                     <Label layoutX="10.0" layoutY="118.0" prefHeight="20.0" prefWidth="360.0" styleClass="textAreaLabel" text="© 2025 Filip Lisowski. Nie do użytku komercyjnego.  ">
                         <VBox.margin>
-                            <Insets top="50.0" />
+                            <Insets top="95.0" />
                         </VBox.margin>
                     </Label>
                 </VBox>

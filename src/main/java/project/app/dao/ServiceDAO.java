@@ -13,17 +13,10 @@ public class ServiceDAO {
         List<Service> list = new ArrayList<>();
         String sql = "SELECT * FROM services";
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
+        try (Connection conn = DatabaseConnector.getConnection(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
 
             while (rs.next()) {
-                Service s = new Service(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getDouble("price"),
-                        rs.getInt("duration")
-                );
+                Service s = new Service(rs.getInt("id"), rs.getString("name"), rs.getDouble("price"), rs.getInt("duration"));
                 list.add(s);
             }
         }
@@ -34,8 +27,7 @@ public class ServiceDAO {
     public static void insertService(Service service) throws SQLException {
         String sql = "INSERT INTO services (name, price, duration) VALUES (?, ?, ?)";
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, service.getName());
             ps.setDouble(2, service.getPrice());
@@ -54,8 +46,7 @@ public class ServiceDAO {
     public static void updateService(Service service) throws SQLException {
         String sql = "UPDATE services SET name = ?, price = ?, duration = ? WHERE id = ?";
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, service.getName());
             ps.setDouble(2, service.getPrice());
@@ -69,8 +60,7 @@ public class ServiceDAO {
     public static void deleteService(int id) throws SQLException {
         String sql = "DELETE FROM services WHERE id = ?";
 
-        try (Connection conn = DatabaseConnector.getConnection();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+        try (Connection conn = DatabaseConnector.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, id);
             ps.executeUpdate();

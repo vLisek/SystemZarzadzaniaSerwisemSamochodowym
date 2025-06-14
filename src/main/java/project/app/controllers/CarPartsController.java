@@ -1,29 +1,39 @@
 package project.app.controllers;
 
-import javafx.beans.property.*;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import project.app.dao.PartsDAO;
 import project.app.model.Parts;
-import project.app.utils.FxUtils;
+import project.app.utils.AlertUtils;
 
 public class CarPartsController {
 
-    @FXML private TextField brandField;
-    @FXML private TextField nameField;
-    @FXML private TextField priceField;
-    @FXML private TextField quantityField;
-
-    @FXML private Label infoLabel;
-
-    @FXML private TableView<Parts> partsTable;
-    @FXML private TableColumn<Parts, String> brandColumn;
-    @FXML private TableColumn<Parts, String> nameColumn;
-    @FXML private TableColumn<Parts, Double> priceColumn;
-    @FXML private TableColumn<Parts, Integer> quantityColumn;
-
     private final PartsDAO partsDAO = new PartsDAO();
+    @FXML
+    private TextField brandField;
+    @FXML
+    private TextField nameField;
+    @FXML
+    private TextField priceField;
+    @FXML
+    private TextField quantityField;
+    @FXML
+    private TableView<Parts> partsTable;
+    @FXML
+    private TableColumn<Parts, String> brandColumn;
+    @FXML
+    private TableColumn<Parts, String> nameColumn;
+    @FXML
+    private TableColumn<Parts, Double> priceColumn;
+    @FXML
+    private TableColumn<Parts, Integer> quantityColumn;
 
     @FXML
     public void initialize() {
@@ -43,7 +53,7 @@ public class CarPartsController {
         String quantityText = quantityField.getText().trim();
 
         if (brand.isEmpty() || name.isEmpty() || priceText.isEmpty() || quantityText.isEmpty()) {
-            setInfo("Wszystkie pola muszą być wypełnione.");
+            AlertUtils.showWarning("Niepoprawne dane", "Wszystkie pola muszą być wypełnione.");
             return;
         }
 
@@ -54,7 +64,7 @@ public class CarPartsController {
             price = Double.parseDouble(priceText);
             if (price < 0) throw new NumberFormatException();
         } catch (NumberFormatException e) {
-            setInfo("Cena musi być poprawną liczbą dodatnią.");
+            AlertUtils.showWarning("Niepoprawne dane", "Cena musi być poprawną liczbą dodatnią.");
             return;
         }
 
@@ -62,7 +72,7 @@ public class CarPartsController {
             quantity = Integer.parseInt(quantityText);
             if (quantity < 0) throw new NumberFormatException();
         } catch (NumberFormatException e) {
-            setInfo("Ilość musi być poprawną liczbą całkowitą dodatnią.");
+            AlertUtils.showWarning("Niepoprawne dane", "Ilość musi być poprawną liczbą całkowitą dodatnią.");
             return;
         }
 
@@ -70,7 +80,7 @@ public class CarPartsController {
         partsDAO.addPart(part);
         loadParts();
         clearForm();
-        setInfo("Dodano część.");
+        AlertUtils.showInfo("Sukces", "Dodano część");
     }
 
 
@@ -78,15 +88,24 @@ public class CarPartsController {
     private void onDeletePart() {
         Parts selectedPart = partsTable.getSelectionModel().getSelectedItem();
         if (selectedPart == null) {
-            setInfo("Wybierz część do usunięcia.");
+            AlertUtils.showWarning("Błąd", "Wybierz część do usunięcia.");
             return;
         }
 
-        partsDAO.deletePart(selectedPart.getPartId());
-        loadParts();
-        clearForm();
-        setInfo("Usunięto część.");
+        String partInfo = String.format("ID części: %d\nNazwa: %s\nProducent: %s\nCena: %.2f zł", selectedPart.getPartId(), selectedPart.getName(), selectedPart.getBrand(), selectedPart.getPrice());
+
+        AlertUtils.showConfirmation("Potwierdzenie usunięcia", "Czy na pewno chcesz usunąć tę część?\n\n" + partInfo, () -> {
+            try {
+                partsDAO.deletePart(selectedPart.getPartId());
+                loadParts();
+                clearForm();
+                AlertUtils.showInfo("Sukces", "Usunięto część");
+            } catch (Exception e) {
+                AlertUtils.showWarning("Błąd", "Nie można usunąć części – jest powiązana ze zleceniem!");
+            }
+        });
     }
+
 
     @FXML
     private void onClearForm() {
@@ -102,10 +121,5 @@ public class CarPartsController {
         nameField.clear();
         priceField.clear();
         quantityField.clear();
-    }
-
-    private void setInfo(String message) {
-        infoLabel.setText(message);
-        FxUtils.clearErrorAfterDelay(infoLabel);
     }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="508.0" prefWidth="1132.0" stylesheets="@../../../values/carsPage.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.app.controllers.EmployeesController">
-    <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Pracownicy - Panel" textAlignment="CENTER">
+    <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="pageNameLabel" text="Pracownicy" textAlignment="CENTER">
         <VBox.margin>
             <Insets top="10.0" />
         </VBox.margin>
@@ -16,7 +16,7 @@
     <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="458.0" prefWidth="1132.0" spacing="20.0" stylesheets="@../../../values/carsPage.css">
         <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="438.0" prefWidth="1102.0" styleClass="tableVBox">
             <Label alignment="CENTER" prefHeight="40.0" prefWidth="1102.0" styleClass="nameLabel" text="Lista pracowników" />
-            <TableView fx:id="employeeTable" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="1100.0" styleClass="tableView" stylesheets="@../../../values/carsPage.css">
+            <TableView fx:id="employeeTable" fixedCellSize="0.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="394.0" prefWidth="1100.0" styleClass="tableView" stylesheets="@../../../values/carsPage.css">
                 <columns>
                <TableColumn fx:id="idColumn" editable="false" prefWidth="35.0" text="ID" />
                     <TableColumn fx:id="firstNameColumn" editable="false" prefWidth="152.0" text="Imię" />
@@ -29,9 +29,6 @@
                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
             </TableView>
-            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="541.0" spacing="10" styleClass="buttonLabel">
-            <Label fx:id="errorLabel" />
-            </HBox>
         </VBox>
     </HBox>
 </VBox>

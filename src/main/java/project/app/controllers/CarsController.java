@@ -1,68 +1,65 @@
 package project.app.controllers;
 
-// JavaFX
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-
-// Java SQL
-import java.sql.SQLException;
-
-// Java Util
-import java.util.List;
-
-// Klasy
 import project.app.dao.*;
 import project.app.model.*;
-import project.app.utils.FxUtils;
+import project.app.utils.AlertUtils;
+
+import java.sql.SQLException;
+import java.util.List;
 
 public class CarsController {
 
-    // ---------------------------
-    // Elementy FXML
-    // ---------------------------
-
-    // Pola formularza
-    @FXML private ComboBox<Brand> brandComboBox;
-    @FXML private ComboBox<Model> modelComboBox;
-    @FXML private ComboBox<BodyType> bodyTypeComboBox;
-    @FXML private ComboBox<FuelType> fuelTypeComboBox;
-    @FXML private ComboBox<EngineType> engineTypeComboBox;
-    @FXML private ComboBox<DriveType> driveTypeComboBox;
-    @FXML private TextField engineCapacityTextField;
-    @FXML private TextField productionYearTextField;
-    @FXML private TextField mileageTextField;
-
-
-    // Wyświetlanie informacji
-    @FXML private Label errorMessage;
-
-    // Tabela
-    @FXML private TableView<VehicleDisplay> vehicleTable;
-    @FXML private TableColumn<VehicleDisplay, String> bodyTypeColumn;
-    @FXML private TableColumn<VehicleDisplay, String> brandColumn;
-    @FXML private TableColumn<VehicleDisplay, String> modelColumn;
-    @FXML private TableColumn<VehicleDisplay, String> fuelTypeColumn;
-    @FXML private TableColumn<VehicleDisplay, String> engineTypeColumn;
-    @FXML private TableColumn<VehicleDisplay, String> engineCapacityColumn;
-    @FXML private TableColumn<VehicleDisplay, String> driveTypeColumn;
-    @FXML private TableColumn<VehicleDisplay, String> productionYearColumn;
-    @FXML private TableColumn<VehicleDisplay, String> mileageColumn;
-
-
-    // ---------------------------
-    // Pola kontrolera
-    // ---------------------------
     private final ModelDAO modelDAO = new ModelDAO();
     private final BodyTypeDAO bodyTypeDAO = new BodyTypeDAO();
     private final FuelTypeDAO fuelTypeDAO = new FuelTypeDAO();
     private final EngineTypeDAO engineTypeDAO = new EngineTypeDAO();
     private final DriveTypeDAO driveTypeDAO = new DriveTypeDAO();
 
+    @FXML
+    private ComboBox<Brand> brandComboBox;
+    @FXML
+    private ComboBox<Model> modelComboBox;
+    @FXML
+    private ComboBox<BodyType> bodyTypeComboBox;
+    @FXML
+    private ComboBox<FuelType> fuelTypeComboBox;
+    @FXML
+    private ComboBox<EngineType> engineTypeComboBox;
+    @FXML
+    private ComboBox<DriveType> driveTypeComboBox;
+    @FXML
+    private TextField engineCapacityTextField;
+    @FXML
+    private TextField productionYearTextField;
+    @FXML
+    private TextField mileageTextField;
+    @FXML
+    private TableView<VehicleDisplay> vehicleTable;
+    @FXML
+    private TableColumn<VehicleDisplay, String> bodyTypeColumn;
+    @FXML
+    private TableColumn<VehicleDisplay, String> brandColumn;
+    @FXML
+    private TableColumn<VehicleDisplay, String> modelColumn;
+    @FXML
+    private TableColumn<VehicleDisplay, String> fuelTypeColumn;
+    @FXML
+    private TableColumn<VehicleDisplay, String> engineTypeColumn;
+    @FXML
+    private TableColumn<VehicleDisplay, String> engineCapacityColumn;
+    @FXML
+    private TableColumn<VehicleDisplay, String> driveTypeColumn;
+    @FXML
+    private TableColumn<VehicleDisplay, String> productionYearColumn;
+    @FXML
+    private TableColumn<VehicleDisplay, String> mileageColumn;
 
-    // ---------------------------
-    // Metody publiczne
-    // ---------------------------
     @FXML
     public void initialize() {
         loadInitialData();
@@ -100,22 +97,25 @@ public class CarsController {
         VehicleDisplay selectedVehicle = vehicleTable.getSelectionModel().getSelectedItem();
 
         if (selectedVehicle == null) {
-            showError("Musisz wybrać samochód z tabeli!");
+            AlertUtils.showWarning("Błąd", "Musisz wybrać samochód z tabeli!");
             return;
         }
 
-        try {
-            CarDAO carDAO = new CarDAO();
-            carDAO.deleteVehicle(selectedVehicle.getVehicleId());
-            vehicleTable.getItems().remove(selectedVehicle);
-            refreshVehicleTable();
+        String vehicleInfo = String.format("ID pojazdu: %d\nMarka: %s\nModel: %s", selectedVehicle.getVehicleId(), selectedVehicle.getBrand(), selectedVehicle.getModel());
 
-            showError("Usunięto samochód");
-
-        } catch (SQLException e) {
-            showError("Błąd usuwania: " + e.getMessage());
-        }
+        AlertUtils.showConfirmation("Potwierdzenie usunięcia", "Czy na pewno chcesz usunąć ten pojazd?\n\n" + vehicleInfo, () -> {
+            try {
+                CarDAO carDAO = new CarDAO();
+                carDAO.deleteVehicle(selectedVehicle.getVehicleId());
+                vehicleTable.getItems().remove(selectedVehicle);
+                refreshVehicleTable();
+                AlertUtils.showInfo("Sukces", "Usunięto samochód");
+            } catch (SQLException e) {
+                AlertUtils.showWarning("Błąd", "Nie można usunąć pojazdu – jest powiązany ze zleceniem!");
+            }
+        });
     }
+
 
     @FXML
     public void addCarToDatabase() {
@@ -127,17 +127,13 @@ public class CarsController {
             EngineType engineType = engineTypeComboBox.getValue();
             DriveType driveType = driveTypeComboBox.getValue();
 
-            if (brand == null || brand.getId() == 0 || model == null || model.getId() == 0 ||
-                    bodyType == null || bodyType.getId() == 0 || fuelType == null || fuelType.getId() == 0 ||
-                    engineType == null || engineType.getId() == 0 || driveType == null || driveType.getId() == 0) {
-                showError("Uzupełnij wszystkie pola wyboru!");
+            if (brand == null || brand.getId() == 0 || model == null || model.getId() == 0 || bodyType == null || bodyType.getId() == 0 || fuelType == null || fuelType.getId() == 0 || engineType == null || engineType.getId() == 0 || driveType == null || driveType.getId() == 0) {
+                AlertUtils.showWarning("Niepoprawne dane", "Uzupełnij wszystkie pola wyboru!");
                 return;
             }
 
-            if (engineCapacityTextField.getText().trim().isEmpty() ||
-                    productionYearTextField.getText().trim().isEmpty() ||
-                    mileageTextField.getText().trim().isEmpty()) {
-                showError("Uzupełnij wszystkie pola tekstowe!");
+            if (engineCapacityTextField.getText().trim().isEmpty() || productionYearTextField.getText().trim().isEmpty() || mileageTextField.getText().trim().isEmpty()) {
+                AlertUtils.showWarning("Niepoprawne dane", "Uzupełnij wszystkie pola tekstowe!");
                 return;
             }
 
@@ -146,43 +142,22 @@ public class CarsController {
             int mileage = Integer.parseInt(mileageTextField.getText().trim());
 
             if (productionYear < 1900 || productionYear > 2025) {
-                showError("Rok produkcji musi być liczbą z zakresu 1900–2025.");
+                AlertUtils.showWarning("Niepoprawne dane", "Rok produkcji musi być liczbą z zakresu 1900–2025.");
                 return;
             }
 
-            int vehicleId = CarDAO.insertVehicle(
-                    bodyType.getId(),
-                    brand.getId(),
-                    model.getId(),
-                    fuelType.getId(),
-                    engineType.getId(),
-                    engineCapacity,
-                    driveType.getId(),
-                    productionYear,
-                    mileage
-            );
+            int vehicleId = CarDAO.insertVehicle(bodyType.getId(), brand.getId(), model.getId(), fuelType.getId(), engineType.getId(), engineCapacity, driveType.getId(), productionYear, mileage);
 
-            VehicleDisplay newVehicle = new VehicleDisplay(
-                    vehicleId,
-                    brand.getName(),
-                    model.getName(),
-                    bodyType.getName(),
-                    fuelType.getName(),
-                    engineType.getName(),
-                    driveType.getName(),
-                    engineCapacity,
-                    productionYear,
-                    mileage
-            );
+            VehicleDisplay newVehicle = new VehicleDisplay(vehicleId, brand.getName(), model.getName(), bodyType.getName(), fuelType.getName(), engineType.getName(), driveType.getName(), engineCapacity, productionYear, mileage);
 
             vehicleTable.getItems().add(newVehicle);
 
             clearForm();
-            errorMessage.setText("Dodano pojazd.");
+            AlertUtils.showInfo("Sukces", "Dodano pojazd.");
         } catch (NumberFormatException e) {
-            showError("Niepoprawna liczba w polach tekstowych.");
+            AlertUtils.showWarning("Niepoprawne dane", "Niepoprawna liczba w polach tekstowych.");
         } catch (SQLException e) {
-            showError("Błąd zapisu do bazy.");
+            AlertUtils.showError("Error", "Błąd zapisu do bazy.");
         }
     }
 
@@ -195,7 +170,7 @@ public class CarsController {
             bodyTypeComboBox.getItems().addAll(bodyTypes);
             bodyTypeComboBox.getSelectionModel().select(0);
         } catch (SQLException e) {
-            showError("Nie udało się załadować typów nadwozia.");
+            AlertUtils.showError("Error", "Nie udało się załadować typów nadwozia.");
         }
     }
 
@@ -208,7 +183,7 @@ public class CarsController {
             brandComboBox.getItems().addAll(brands);
             brandComboBox.getSelectionModel().select(0);
         } catch (SQLException e) {
-            showError("Nie udało się załadować marek.");
+            AlertUtils.showError("Error", "Nie udało się załadować marek.");
         }
     }
 
@@ -221,7 +196,7 @@ public class CarsController {
             modelComboBox.getItems().addAll(models);
             modelComboBox.getSelectionModel().select(placeholder);
         } catch (SQLException e) {
-            showError("Nie udało się załadować modeli.");
+            AlertUtils.showError("Error", "Nie udało się załadować modeli.");
         }
     }
 
@@ -234,7 +209,7 @@ public class CarsController {
             fuelTypeComboBox.getItems().addAll(fuelTypes);
             fuelTypeComboBox.getSelectionModel().select(0);
         } catch (SQLException e) {
-            showError("Nie udało się załadować rodzajów paliwa.");
+            AlertUtils.showError("Error", "Nie udało się załadować rodzajów paliwa.");
         }
     }
 
@@ -247,7 +222,7 @@ public class CarsController {
             engineTypeComboBox.getItems().addAll(engineTypes);
             engineTypeComboBox.getSelectionModel().select(0);
         } catch (SQLException e) {
-            showError("Nie udało się załadować silników.");
+            AlertUtils.showError("Error", "Nie udało się załadować silników.");
         }
     }
 
@@ -260,21 +235,17 @@ public class CarsController {
             driveTypeComboBox.getItems().addAll(driveTypes);
             driveTypeComboBox.getSelectionModel().select(0);
         } catch (SQLException e) {
-            showError("Nie udało się załadować typów napędu.");
+            AlertUtils.showError("Error", "Nie udało się załadować typów napędu.");
         }
     }
 
-
-    // ---------------------------
-    // Metody prywatne
-    // ---------------------------
     private void refreshVehicleTable() {
         try {
             CarDAO carDAO = new CarDAO();
             List<VehicleDisplay> vehicles = carDAO.getAllVehiclesForDisplay();
             vehicleTable.getItems().setAll(vehicles);
         } catch (SQLException e) {
-            showError("Nie udało się załadować pojazdów.");
+            AlertUtils.showError("Error", "Nie udało się załadować pojazdów.");
         }
     }
 
@@ -297,19 +268,4 @@ public class CarsController {
             modelComboBox.setValue(null);
         });
     }
-
-    private void showError(String message) {
-        errorMessage.setText(message);
-        FxUtils.clearErrorAfterDelay(errorMessage);
-    }
-
-
-
-
-
-
-
-
-
-
 }
