@@ -1,30 +1,18 @@
 package project.app.model;
 
-@SuppressWarnings("unused")
 public class VehicleDisplay {
     private final int vehicleId;
     private final String brand;
     private final String model;
-    private final String bodyType;
-    private final String fuelType;
-    private final String engineType;
-    private final String driveType;
-    private final int engineCapacity;
+    private String bodyType;
+    private String fuelType;
+    private String engineType;
+    private String driveType;
+    private int engineCapacity;
     private final int productionYear;
-    private final int mileage;
+    private int mileage;
 
-    public VehicleDisplay(
-            int vehicleId,
-            String brand,
-            String model,
-            String bodyType,
-            String fuelType,
-            String engineType,
-            String driveType,
-            int engineCapacity,
-            int productionYear,
-            int mileage
-    ) {
+    public VehicleDisplay(int vehicleId, String brand, String model, String bodyType, String fuelType, String engineType, String driveType, int engineCapacity, int productionYear, int mileage) {
         this.vehicleId = vehicleId;
         this.brand = brand;
         this.model = model;
@@ -36,6 +24,23 @@ public class VehicleDisplay {
         this.productionYear = productionYear;
         this.mileage = mileage;
     }
+
+    public VehicleDisplay(int id, String brand, String model, int productionYear) {
+        this.vehicleId = id;
+        this.brand = brand;
+        this.model = model;
+        this.productionYear = productionYear;
+    }
+
+    public String getDisplayName() {
+        return brand + " " + model + " - " + productionYear;
+    }
+
+    @Override
+    public String toString() {
+        return getDisplayName();
+    }
+
 
     public String getBrand() {
         return brand;

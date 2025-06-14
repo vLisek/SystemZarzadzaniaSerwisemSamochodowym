@@ -25,9 +25,30 @@ public class Employee {
         this.roleName = roleName;
     }
 
+    public Employee(int employeeId, String firstName, String lastName) {
+        this.employeeId = employeeId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public String getDisplayName() {
+        return firstName + " " + lastName + " – " + position;
+    }
+
+    @Override
+    public String toString() {
+        return getDisplayName();
+    }
+
+
     public int getEmployeeId() {
         return employeeId;
     }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
 
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;

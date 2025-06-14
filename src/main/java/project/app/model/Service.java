@@ -14,10 +14,26 @@ public class Service {
     }
 
     public Service(String name, double price, int duration) {
-        this(-1, name, price, duration); // -1 lub 0 jako placeholder
+        this(-1, name, price, duration);
     }
 
-    // Gettery i settery
+    public Service(int serviceId, String name, double price) {
+        this.id = serviceId;
+        this.name = name;
+        this.price = price;
+    }
+
+
+    public String getDisplayName() {
+        return name + " (" + price + " PLN)";
+    }
+
+    @Override
+    public String toString() {
+        return getDisplayName();
+    }
+
+
     public int getId() { return id; }
     public void setId(int id) { this.id = id; }
 

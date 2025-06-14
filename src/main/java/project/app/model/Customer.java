@@ -18,6 +18,21 @@ public class Customer {
         this.companyName = companyName;
     }
 
+    public Customer(int customerId, String name, String customerLastName) {
+        this.customerId = customerId;
+        this.firstName = name;
+        this.lastName = customerLastName;
+    }
+
+    public String getFullName() {
+        return firstName + " " + lastName;
+    }
+
+    @Override
+    public String toString() {
+        return getFullName();
+    }
+
     public int getCustomerId() {
         return customerId;
     }
