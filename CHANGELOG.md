@@ -2,6 +2,29 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.9.0](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/compare/v1.8.0...v1.9.0) (2025-06-17)
+
+
+### Features
+
+* Dodano obsługę dodawania, usuwania i edycji pracowników do BD ([9516c11](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/9516c11f10f5f482c7214308bd0e8a1f01218d86))
+* Dodano obsługę dodawania, usuwania i edycji usług do BD ([f88839c](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/f88839ce7db30f4c3e3c10d1fab785c7fc051073))
+* Dodano obsługę dodawania, wyświetlania części ([c5ea952](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/c5ea952bbd163ab86eb872c6ad9e97a679d20e30))
+* Dodano obsługę dodawania, wyświetlania zleceń ([d58a762](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/d58a762a8936c148cf54b8b2a82a40a4e9b91b5f))
+* Dodano widok "O aplikacji" ([80350fd](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/80350fd0d8c2d9740c1cf79af3f7c26260a9ba14))
+* ostatni commit ([d28ad92](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/d28ad92076fa5385813e172d6c48c5724cad14df))
+* ostatni commit ([b962efd](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/b962efd02464f42111c895265833a9619151e72e))
+
+
+### Bug Fixes
+
+* poprawka ([f3fc5e2](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/f3fc5e2f20d6320267fa97ecf5482fcee54c393d))
+* poprawka v2 ([63c8978](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/63c8978b63d1f651c12f2e0e028fabc8e63fcfc8))
+* Poprawki związane z wyświetlaniem ([038a98a](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/038a98a12e6534d6773750ee22e62df1d708ac5d))
+* Poprawki związane z wyświetlaniem ([0316580](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/0316580c78fb5a7249884dbe01e675fd029f32b8))
+* Poprawki związane z wyświetlaniem, dodano obsługę wyświetlania komunikatów w formie Alertów ([1dbd616](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/1dbd616431b454461ffe35775c81beac70be37d2))
+* Porządek w kodzie ([8f75fc8](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/commit/8f75fc86807d44f1bca7a03cb1b35e3e683d5f4c))
+
 ## [1.8.0](https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym/compare/v1.7.0...v1.8.0) (2025-06-07)
 
 
