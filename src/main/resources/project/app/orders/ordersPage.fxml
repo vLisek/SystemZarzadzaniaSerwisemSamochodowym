@@ -28,19 +28,25 @@
             <ScrollPane prefHeight="354.0" prefWidth="316.0">
                 <VBox prefHeight="354.0" spacing="4.0">
                     <padding>
-                        <Insets left="5.0" right="5.0" top="5.0" />
+                        <Insets left="5.0" right="5.0" top="5.0"/>
                     </padding>
-                    <children>
-                        <ComboBox fx:id="clientComboBox" prefHeight="32.0" prefWidth="290.0" promptText="Klient" styleClass="comboBox" />
-                        <ComboBox fx:id="vehicleComboBox" prefHeight="32.0" prefWidth="290.0" promptText="Pojazd" styleClass="comboBox" />
-                        <ComboBox fx:id="employeeComboBox" prefHeight="32.0" prefWidth="290.0" promptText="Pracownik prowadzący" styleClass="comboBox" />
-                        <ComboBox fx:id="serviceComboBox" prefHeight="32.0" prefWidth="290.0" promptText="Rodzaj usługi" styleClass="comboBox" />
-                        <ComboBox fx:id="partComboBox" layoutX="15.0" layoutY="200.0" prefHeight="32.0" prefWidth="290.0" promptText="Rodzaj części" styleClass="comboBox" />
-                        <Spinner fx:id="spinnerPartQuantity" prefHeight="25.0" prefWidth="290.0" />
-                        <DatePicker fx:id="deadlinePicker" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="290.0" promptText="Termin oddania" />
-                        <TextArea fx:id="descriptionArea" prefHeight="83.0" prefWidth="290.0" promptText="Opis usługi" styleClass="textField" />
-                        <ComboBox fx:id="statusComboBox" prefHeight="32.0" prefWidth="290.0" promptText="Status zlecenia" styleClass="comboBox" />
-                    </children>
+                    <ComboBox fx:id="clientComboBox" prefHeight="32.0" prefWidth="290.0" promptText="Klient"
+                              styleClass="comboBox"/>
+                    <ComboBox fx:id="vehicleComboBox" prefHeight="32.0" prefWidth="290.0" promptText="Pojazd"
+                              styleClass="comboBox"/>
+                    <ComboBox fx:id="employeeComboBox" prefHeight="32.0" prefWidth="290.0"
+                              promptText="Pracownik prowadzący" styleClass="comboBox"/>
+                    <ComboBox fx:id="serviceComboBox" prefHeight="32.0" prefWidth="290.0" promptText="Rodzaj usługi"
+                              styleClass="comboBox"/>
+                    <ComboBox fx:id="partComboBox" layoutX="15.0" layoutY="200.0" prefHeight="32.0" prefWidth="290.0"
+                              promptText="Rodzaj części" styleClass="comboBox"/>
+                    <Spinner fx:id="spinnerPartQuantity" prefHeight="25.0" prefWidth="290.0"/>
+                    <DatePicker fx:id="deadlinePicker" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                                minWidth="-Infinity" prefHeight="44.0" prefWidth="290.0" promptText="Termin oddania"/>
+                    <TextArea fx:id="descriptionArea" prefHeight="83.0" prefWidth="290.0" promptText="Opis usługi"
+                              styleClass="textField"/>
+                    <ComboBox fx:id="statusComboBox" prefHeight="32.0" prefWidth="290.0" promptText="Status zlecenia"
+                              styleClass="comboBox"/>
                 </VBox>
             </ScrollPane>
             <HBox alignment="CENTER" prefHeight="40.0" prefWidth="541.0" spacing="10" styleClass="buttonLabel">
