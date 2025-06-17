@@ -24,8 +24,6 @@ public class Service {
     }
 
 
-
-
     public String getDisplayName() {
         return name + " (" + price + " PLN)";
     }

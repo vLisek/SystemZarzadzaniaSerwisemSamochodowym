@@ -57,11 +57,11 @@ public class OrderDAO {
 
     public void addOrder(Order order) throws SQLException {
         String sql = """
-        INSERT INTO orders (customer_id, vehicle_id, employee_id,
-                            service_id, part_id, used_part_quantity, deadline, status,
-                            description, total_cost)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-        """;
+                INSERT INTO orders (customer_id, vehicle_id, employee_id,
+                                    service_id, part_id, used_part_quantity, deadline, status,
+                                    description, total_cost)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """;
 
         try (Connection conn = DatabaseConnector.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
