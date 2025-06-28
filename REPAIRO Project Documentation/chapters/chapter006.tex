@@ -1,0 +1,29 @@
+\chapter{Podsumowanie }
+\label{cha:podsumowanie}
+
+W ramach niniejszego projektu zrealizowano system wspomagający zarządzanie serwisem samochodowym. Aplikacja została stworzona z wykorzystaniem języka Java oraz biblioteki JavaFX, a do komunikacji z relacyjną bazą danych użyto JDBC. Projekt obejmuje zarówno część interfejsu użytkownika, jak i warstwę logiki biznesowej oraz integrację z bazą danych zaprojektowaną zgodnie z zasadami normalizacji.
+
+Główne funkcjonalności systemu to:
+
+\begin{itemize}
+  \item zarządzanie klientami (dodawanie, edycja, usuwanie, przeglądanie danych),
+  \item rejestracja i przegląd pojazdów wraz z ich szczegółowymi parametrami,
+  \item ewidencja pracowników wraz z przypisanymi rolami i danymi logowania,
+  \item obsługa zleceń serwisowych obejmujących klientów, pojazdy, pracowników, usługi, części oraz terminy wykonania,
+  \item dynamiczne formularze z walidacją danych wejściowych oraz rozwijanymi listami powiązanymi z danymi słownikowymi (np. typy nadwozia, rodzaje paliwa),
+  \item automatyczne odświeżanie tabel po wykonaniu operacji CRUD.
+\end{itemize}
+
+
+System został zaprojektowany modularnie, co umożliwia jego dalszy rozwój i łatwe wprowadzanie nowych funkcjonalności. W ramach potencjalnych kierunków rozwoju projektu można wymienić:
+
+\begin{itemize}
+  \item implementację systemu powiadomień (e-mail, SMS) o statusie zlecenia lub przypomnieniach dla klientów,
+  \item integrację z zewnętrznymi systemami płatności oraz fakturowania,
+  \item wdrożenie logowania za pomocą konta użytkownika z podziałem na role i poziomy uprawnień,
+  \item rozszerzenie bazy danych o historię napraw i archiwum zleceń zakończonych,
+  \item opracowanie wersji aplikacji internetowej dostępnej dla klientów,
+  \item stworzenie panelu analitycznego prezentującego dane statystyczne dotyczące serwisu (ilość zleceń, przychody, najczęściej naprawiane modele pojazdów).
+\end{itemize}
+
+Zaprojektowany system REPAIRO stanowi solidną podstawę do dalszego rozwoju i może być z powodzeniem zastosowany w rzeczywistych warunkach działania małego lub średniego warsztatu samochodowego. Jego elastyczna architektura oraz przejrzysty interfejs użytkownika pozwalają na łatwe dostosowanie do indywidualnych potrzeb konkretnego serwisu.

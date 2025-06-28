@@ -1,0 +1,66 @@
+\babel@toc {polish}{}\relax 
+\contentsline {chapter}{\numberline {1}Wprowadzenie}{7}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Opis założeń projektu}{8}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Cel projektu}{8}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Analiza problemu}{8}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Plan realizacji projektu}{8}{subsection.2.1.2}%
+\contentsline {section}{\numberline {2.2}Wymagania funkcjonalne}{9}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Logowanie do systemu}{9}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Funkcjonalność dla roli administrator i menadżer}{9}{subsection.2.2.2}%
+\contentsline {subsection}{\numberline {2.2.3}Funkcjonalność dla roli mechanik}{10}{subsection.2.2.3}%
+\contentsline {subsection}{\numberline {2.2.4}Funkcjonalność dla roli recepcjonista}{10}{subsection.2.2.4}%
+\contentsline {subsection}{\numberline {2.2.5}Funkcjonalność dla roli magazynier}{10}{subsection.2.2.5}%
+\contentsline {subsection}{\numberline {2.2.6}Porównanie ról użytkowników i ich uprawnień}{11}{subsection.2.2.6}%
+\contentsline {section}{\numberline {2.3}Wymagania niefunkcjonalne}{11}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Środowisko testowe}{11}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Wydajność}{12}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Bezpieczeństwo}{12}{subsection.2.3.3}%
+\contentsline {subsection}{\numberline {2.3.4}Użyteczność}{13}{subsection.2.3.4}%
+\contentsline {subsection}{\numberline {2.3.5}Skalowalność}{13}{subsection.2.3.5}%
+\contentsline {subsection}{\numberline {2.3.6}Integralność danych}{14}{subsection.2.3.6}%
+\contentsline {chapter}{\numberline {3}Opis struktury projektu}{15}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Technologie wykorzystane w projekcie}{15}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Struktura katalogów i plików}{16}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Architektura aplikacji i hierarchia klas}{17}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Architektura systemu}{17}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Hierarchia pakietów}{17}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Przepływ danych w aplikacji}{17}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Wybrane klasy i ich odpowiedzialności}{17}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Zasada pojedynczej odpowiedzialności (SRP)}{18}{subsection.3.3.5}%
+\contentsline {subsection}{\numberline {3.3.6}Walidacja danych}{18}{subsection.3.3.6}%
+\contentsline {subsection}{\numberline {3.3.7}Diagram UML}{19}{subsection.3.3.7}%
+\contentsline {section}{\numberline {3.4}Pakiet resources - widoki graficzne i zasoby pomocnicze}{20}{section.3.4}%
+\contentsline {subsection}{\numberline {3.4.1}Pliki FXML - definicje widoków}{20}{subsection.3.4.1}%
+\contentsline {subsection}{\numberline {3.4.2}Pozostałe zasoby}{20}{subsection.3.4.2}%
+\contentsline {section}{\numberline {3.5}Zarządzanie danymi i bazą danych}{21}{section.3.5}%
+\contentsline {subsection}{\numberline {3.5.1}Struktura encji i relacje}{21}{subsection.3.5.1}%
+\contentsline {subsection}{\numberline {3.5.2}Opis przykładowych tabel}{21}{subsection.3.5.2}%
+\contentsline {subsection}{\numberline {3.5.3}Relacje między tabelami}{22}{subsection.3.5.3}%
+\contentsline {subsection}{\numberline {3.5.4}Podsumowanie}{22}{subsection.3.5.4}%
+\contentsline {chapter}{\numberline {4}Harmonogram realizacji projektu}{23}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Etapy realizacji oraz wykres Gantta}{23}{section.4.1}%
+\contentsline {section}{\numberline {4.2}System kontroli wersji i repozytorium projektu}{23}{section.4.2}%
+\contentsline {chapter}{\numberline {5}Prezentacja warstwy użytkowej projektu}{24}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Opis szaty graficznej}{24}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Prezentacja głównych widoków interfejsu użytkownika}{24}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Okno logowania}{24}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}Główne okno interfejsu}{25}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Okno zarządzania samochodami}{25}{subsection.5.2.3}%
+\contentsline {subsection}{\numberline {5.2.4}Okno zarządzania klientami}{26}{subsection.5.2.4}%
+\contentsline {subsection}{\numberline {5.2.5}Okno zarządzania przyjęciami}{26}{subsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.2.6}Okno zarządzania częściami}{27}{subsection.5.2.6}%
+\contentsline {subsection}{\numberline {5.2.7}Okno zarządzania wizytami}{27}{subsection.5.2.7}%
+\contentsline {subsection}{\numberline {5.2.8}Okno zarządzania pracownikami}{28}{subsection.5.2.8}%
+\contentsline {subsection}{\numberline {5.2.9}Okno zarządzania usługami}{28}{subsection.5.2.9}%
+\contentsline {subsection}{\numberline {5.2.10}Okno wyświetlania informacji o aplikacji}{29}{subsection.5.2.10}%
+\contentsline {section}{\numberline {5.3}Mechanizm alertów systemowych}{30}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Podsumowanie }{31}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Instrukcja uruchomienia aplikacji REPAIRO}{32}{chapter.7}%
+\contentsline {subsection}{\numberline {7.0.1}Wymagania środowiskowe}{32}{subsection.7.0.1}%
+\contentsline {subsection}{\numberline {7.0.2}Baza danych}{32}{subsection.7.0.2}%
+\contentsline {subsection}{\numberline {7.0.3}Konfiguracja połączenia z bazą danych}{32}{subsection.7.0.3}%
+\contentsline {subsection}{\numberline {7.0.4}Kroki uruchomienia aplikacji REPAIRO}{33}{subsection.7.0.4}%
+\contentsline {subsection}{\numberline {7.0.5}Dane testowe (logowanie)}{34}{subsection.7.0.5}%
+\contentsline {section}{\textbf {Spis rysunków}}{35}{subsection.7.0.5}%
+\contentsline {section}{\textbf {Spis tabel}}{36}{subsection.7.0.5}%
+\contentsline {section}{\textbf {Oświadczenie studenta o samodzielności pracy}}{37}{section*.21}%

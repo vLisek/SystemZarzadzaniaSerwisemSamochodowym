@@ -1,0 +1,233 @@
+\chapter{Opis założeń projektu}
+
+\section{Cel projektu}
+\label{sec:celProjektu}
+Celem projektu jest stworzenie funkcjonalnego, przejrzystego i intuicyjnego systemu, który wspiera zarządzanie warsztatem samochodowym. Obejmuje to:
+
+\begin{itemize}
+    \item dodawanie danych klientów oraz ich pojazdów,
+    \item tworzenie zleceń napraw z przypisanymi usługami, częściami i pracownikami,
+    \item kontrolę i zarządzanie dostępnymi częściami i usługami,
+    \item przeliczanie kosztów zlecenia na podstawie wybranych pozycji,
+    \item zapewnienie prostego i przejrzystego interfejsu użytkownika.
+\end{itemize}
+
+\subsection{Analiza problemu}
+\label{sec:analizaProblemu}
+Zarządzanie warsztatem samochodowym to złożony proces, wymagający sprawnej organizacji informacji oraz płynnej obsługi klientów. Wiele warsztatów wciąż operuje na papierowej dokumentacji lub w niedostosowanych narzędziach ogólnego przeznaczenia, co wpływa negatywnie na efektywność pracy. Projekt ten odpowiada na realne potrzeby branży mechanicznej, oferując cyfrowe rozwiązanie dostosowane do pracy serwisu.
+Problem ten wpływa bezpośrednio na efektywność pracy warsztatu oraz przejrzystość informacji. Istnieje zapotrzebowanie na prosty, ale funkcjonalny system, który umożliwiłby szybkie dodawanie zleceń, przypisywanie ich do konkretnych pracowników i klientów oraz kontrolowanie terminów i kosztów usług.
+
+\subsection{Plan realizacji projektu}
+\label{sec:planRealizacji}
+
+Projekt zostanie wdrażany etapami, zgodnie z poniższą strukturą:
+\begin{enumerate}
+    \item Wstępna analiza potrzeb użytkowników oraz określenie kluczowych funkcjonalności.
+    \item Stworzenie projektu relacyjnej bazy danych (MySQL), gwarantującej spójność i wydajność danych,
+    \item Implementacja interfejsu graficznego z użyciem technologii JavaFX,
+    \item Integracja logiki aplikacji z bazą danych,
+    \item Przeprowadzenie testów w celu wyeliminowania błędów,
+    \item Sporządzenie kompletnej dokumentacji obejmującej założenia projektu, opis architektury oraz instrukcję obsługi.
+\end{enumerate}
+
+Efektem finalnym będzie funkcjonalna aplikacja desktopowa wspomagająca działalność warsztatu samochodowego. Dodatkowo, system będzie posiadał zabezpieczenia oraz możliwość rozbudowy o dodatkowe funkcjonalności w przyszłości.
+
+
+\section{Wymagania funkcjonalne}
+\label{sec:wymaganiaFunkcjonalne}
+System zarządzania serwisem samochodowym REPAIRO pozwala użytkownikom realizację konkretnych zadań w zależności od przypisanej roli. Każdy użytkownik, po zalogownaiu, ma dostęp wyłącznie do funkcjonalności niezbędnych do wykonywania swoich obowiązków. W tej sekcji opisano wymagania funkcjonalne procesu logowania a następnie przedstawiono podział funkcji dostępnych w aplikacji w zależności od roli użytkownika.
+
+\subsection{Logowanie do systemu}
+\label{sec:logowanie}
+
+\begin{itemize}
+    \item System umożliwia logowanie się do aplikacji i zapewnia dostęp wyłącznie uprawnionym użytkownikom. Uwierzytelnianie odbywa się na podstawie danych przechowywanych w bazie danych - użytkownik wprowadza nazwę użytkownika i hasło, a system sprawdza poprawność tych danych. W celu zapewnienia bezpieczeństwa, pole hasło domyślnie jest ukryte, z możliwością jego odsłonięcia za pomocą przycisku.
+    \item System wyposażono w mechanizmy ochronne. W przypadku wykrycia nieznanej roli, użytkownik otrzymuje jednoznaczny komunikat o błędzie. Przy próbie logowania z błędnymi danymi (np. niestniejący użytkownik lub niepoprawne hasło), aplikacja wyświetla odpowiedni komunikat.
+    \item W przypadku udanego logowania, system ustala rolę użytkownika (np. administrator, menadżer, mechanik, recepcjonista, magazynier) oraz pobiera dane z relacyjnych tabel bazy danych, takie jak pełna nazwa stanowiska oraz imię użytkownika, które są następnie wyświetlane na panelu głównym aplikacji. Interfejs dostowuje się do poziomu uprawnień każdej z ról, wyświetlając tylko dostępne widoki.
+    \item Po zalogowaniu, dane użytkownika - jego imię, stanowisko oraz rola - są przechowywane w pamięci aplikacji aż do momentu jej zamknięcia.
+\end{itemize}
+Po udanym zalogowaniu, użytkownik zostaje przekierowany do panelu głównego, który jest dostosowany do jego roli. Każda rola ma przypisane odpowiednie funkcje związane z kompetencjami i obowiązkami użytkowników. Niezależnie od roli, każdy użytkownik ma dostęp do wspólnych widoków systemowych, takich jak ekran logowania, wylogowanie się czy widok informacji o aplikacji. Użytkownik nie widzi zakładek i widoków, do których nie ma przypisanych uprawnień. Poniżej opisano szczegółowo funkcje dostępne dla pięciu ról w systemie: administratora, menadżera, mechanika, recepcjonisty i magazyniera.
+
+\subsection{Funkcjonalność dla roli administrator i menadżer}
+\label{sec:funkcjonalnoscAdministratora}
+Użytkownicy z rolą \textbf{administratora i menadżera} posiadają najwyższy stopień uprawnień w systemie. Logują się do systemu, wprowadzając unikalny login oraz hasło. Po zalogowaniu, mają dostęp do interfejsu, który umożliwia mu zarządzanie kluczowymi opcjami:
+
+\begin{itemize}
+    \item przeglądać, dodawać i usuwać pojazdy,
+    \item przeglądać, dodawać i usuwać klientów,
+    \item przeglądać, dodawać i usuwać części oraz usługi,
+    \item przeglądać listę pracowników (na potrzeby projektu założono, że zarządzanie pracownikami odbywa się wyłącznie poprzez system bazodanowy),
+    \item przeglądać, dodawać, edytować i usuwać zlecenia napraw,
+    \item wyświetlać kalendarz wizyt, w którym prezentowane są aktywne zlecenia.
+\end{itemize}
+
+Administator ma również możliwość swobodnego przełączania się pomiędzy widokami aplikacji, co pozwala na łatwy dostęp do wszystkich funkcjonalności.
+
+\subsection{Funkcjonalność dla roli mechanik}
+\label{sec:funkcjonalnoscMechanika}
+Użytkownicy z rolą \textbf{mechanika} logują się do systemu za pomocą unikalnego loginu i hasła. Po zalogowaniu, mają dostęp do interfejsu, który umożliwia mu zarządzanie kluczowymi opcjami.
+
+Mechanik ma dostęp do następujących funkcji:
+\begin{itemize}
+    \item przeglądać, dodawać i usuwać pojazdy,
+    \item przeglądać, dodawać i usuwać części oraz usługi,
+    \item przeglądać, dodawać, edytować i usuwać zlecenia napraw,
+    \item korzystania z dedykowanego widoku umożliwiającego sprawne przełączanie się między zakładkami i sekcjami aplikacji.
+\end{itemize}
+
+Interfejs graficzny został dostosowany do potrzeb pracownika technicznego - ograniczony do niezbędnych funkcjonalności, co upraszcza obsługę systemu.
+
+\subsection{Funkcjonalność dla roli recepcjonista}
+\label{sec:funkcjonalnoscRecepcjonisty}
+Użytkownicy z rolą \textbf{recepcjonisty} logują się do systemu za pomocą unikalnego loginu i hasła. Po zalogowaniu, mają dostęp do interfejsu, który umożliwia mu zarządzanie kluczowymi opcjami.
+
+Recepcjonista ma dostęp do następujących funkcji:
+\begin{itemize}
+    \item przeglądać, dodawać i usuwać pojazdy,
+    \item przeglądać, dodawać i usuwać klientów,
+    \item przeglądać, dodawać, edytować i usuwać zlecenia napraw,
+    \item przeglądanie kalendarza wizyt w celu koordynacji pracy warsztatu.
+\end{itemize}
+
+Interfejs graficzny został dostosowany do potrzeb pracownika obsługi klienta - ograniczony do niezbędnych funkcjonalności, co upraszcza obsługę systemu.
+
+\subsection{Funkcjonalność dla roli magazynier}
+\label{sec:funkcjonalnoscMagazyniera}
+Użytkownicy z rolą \textbf{magazyniera} logują się do systemu za pomocą unikalnego loginu i hasła. Po zalogowaniu, mają dostęp do interfejsu, który umożliwia mu zarządzanie kluczowymi opcjami.
+
+Rola magazyniera ogranicza się jedynie do zarządzania częściami samochodowymi. W związku z tym, użytkownik ma dostęp jedynie do widoku części, gdzie może:
+\begin{itemize}
+    \item dodawać nowe części do systemu,
+    \item przeglądać dostępne części,
+    \item usuwać części, które nie są już potrzebne.
+\end{itemize}
+
+Interfejs graficzny został dostosowany do potrzeb pracownika magazynu - ograniczony do niezbędnych funkcjonalności, co upraszcza obsługę systemu.
+
+
+Wszystkie role użytkowników mają również dostęp do wspólnych widoków systemowych, takich jak: ekran logowania, informacje o aplikacji, możliwość zmiany hasła oraz wylogowania się. Przełączanie między widokami jest dostępne zgodnie z przydzielonymi uprawnieniami - użytkownik widzi jedynie te opcje, do których posiada dostęp.
+
+\subsection{Porównanie ról użytkowników i ich uprawnień}
+\label{sec:podsumowanieFunkcjonalnosci}
+
+Poniżej przedstawiono tabelę porównującą dostęp poszczególnych ról użytkowników do modułów systemu. Znakiem \checkmark oznaczono pełny dostęp, natomiast znakiem \ding{55} brak dostępu:
+
+\begin{table}[H]
+    \centering
+    \caption{Dostęp poszczególnych ról użytkowników do modułów aplikacji.\label{tab:dostepy}}
+    \begin{tabularx}{\linewidth}{l*{5}{>{\centering\arraybackslash}X}}
+        \toprule
+        \textbf{Moduł} & \textbf{Administrator} & \textbf{Manager} & \textbf{Mechanik} & \textbf{Recepcjonista} & \textbf{Magazynier} \\
+        \midrule
+        Samochody             & \checkmark & \checkmark & \checkmark & \checkmark & \ding{55} \\
+        Klienci               & \checkmark & \checkmark & \ding{55}  & \checkmark & \ding{55} \\
+        Przyjęcia             & \checkmark & \checkmark & \checkmark & \checkmark & \ding{55} \\
+        Części                & \checkmark & \checkmark & \checkmark & \ding{55}  & \checkmark \\
+        Wizyty (kalendarz)    & \checkmark & \checkmark & \ding{55}  & \checkmark & \ding{55} \\
+        Pracownicy (podgląd)  & \checkmark & \checkmark & \ding{55}  & \ding{55}  & \ding{55} \\
+        Usługi                & \checkmark & \checkmark & \checkmark & \ding{55}  & \ding{55} \\
+        O aplikacji           & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\
+        \bottomrule
+    \end{tabularx}
+\end{table}
+
+\section{Wymagania niefunkcjonalne}
+\label{sec:wymaganiaNiefunkcjonalne}
+
+\subsection{Środowisko testowe}
+\label{sec:srodowiskoTestowe}
+Testy aplikacji przeprowadzono w środowisku o konfiguracji:
+\begin{itemize}
+  \item Procesor: Intel Core i5-13500
+  \item Karta graficzna: NVidia GeForce RTX 3060
+  \item Pamięć RAM: 32 GB
+  \item Dysk: SSD NVMe 1024 GB
+  \item System operacyjny: Windows 11 Home
+  \item IDE: IntelliJ IDEA 2024.3.3
+  \item JDK: OpenJDK 23.0.2
+  \item JavaFX: 23.0.1 (zgodnie z deklaracją xmlns)
+  \item JDBC: mysql-connector-java-8.0.33
+  \newpage
+  \item Baza danych: MySQL (phpMyAdmin)
+    \begin{itemize}
+        \item Serwer: 127.0.0.1 via TCP/IP
+        \item Typ serwera: MariaDB
+        \item Połączenie z serwerem: SSL nie jest używany
+        \item Wersja serwera: 10.4.32-MariaDB - mariadb.org binary distribution
+        \item Wersja protokołu: 10
+        \item Użytkownik: root@localhost
+        \item Kodowanie znaków serwera: UTF-8 Unicode (utf8mb4)
+    \end{itemize}
+\end{itemize}
+
+\subsection{Wydajność}
+\label{sec:wydajnosc}
+Aplikacja została zoptymalizowana pod kątem wydajności, aby zapewnić płynne działanie nawet przy dużej liczbie danych. Przeprowadzone testy wykazały:
+\begin{itemize}
+    \item Czas ładowania aplikacji wynosi średnio 2 sekundy.
+    \item Interfejs użytkownika jest responsywny, a przełączanie między widokami odbywa się bez opóźnień.
+    \item Operacje na bazie danych (dodawanie, edytowanie, usuwanie rekordów) są realizowane w czasie nieprzekraczającym 1 sekundy dla pojedynczych rekordów.
+    \item W trakcie działania aplikacja zużywa średnio 350 MB pamięci RAM oraz nie obciąża procesora.
+\end{itemize}
+
+\subsection{Bezpieczeństwo}
+\label{sec:bezpieczenstwo}
+
+Aplikacja została wyposażona w mechanizmy zabezpieczeń, które mają na celu zapewnienie integralności i dostępności informacji.
+
+\begin{itemize}
+    \item Aplikacja za każdym razem wymaga logowania przed uzyskaniem dostępu do systemu.
+    \item Każdy użytkownik posiada unikalną nazwę użytkownika,
+    \item Pole hasła zostało ukryte, a użytkownik ma możliwość odsłonięcia go za pomocą przycisku.
+    \item Uprawnienia użytkowników są kontrolowane na podstawie roli użytkownika,
+    \item Formularze posiadają walidację danych - nie można zapisać pustych ani niepoprawnych wartości (np. litery w polu liczbowym),
+    \item Komunikaty informujące o sukcesie lub błędzie wyświetlają jasną i klarowną użytkownikowi wiadomość,
+    \item Pola wymagające powiązania z innymi rekordami (np. pojazd, klient) są wybierane z rozwijanych list, co eliminuje możliwość wpisania niepoprawnych danych.
+\end{itemize}
+
+Aplikacja została stworzona z myślą o dalszym rozwoju i może być łatwo rozszerzona o dodatkowe zabezpieczenia, takie jak szyfrowanie danych czy logowanie zdarzeń.
+
+\subsection{Użyteczność}
+\label{sec:uzytecznosc}
+Użyteczność systemu odgrywa kluczową rolę w zapewnieniu efektywnej i przyjaznej obsługi przez użytkowników. Poniższe punkty definiują podstawowe założenia dotyczące wygody i intuicyjności korzystania z aplikacji.
+
+\begin{itemize}
+    \item Czytelny oraz intuicyjny interfejs z jasno opisynami przyciskami i polami edycji.
+    \item Formularze z walidacją danych - użytkownik nie może wprowadzić błędnych danych, a system informuje o błędach w czasie rzeczywistym.
+    \item Informacje zwrotne po wykonaniu operacji o sukcesie lub błędzie wyświetlane w formie komunikatów wyświetlane są natychmiast.
+    \item Usuwanie rekordów poprzedzone jest potwierdzeniem, aby uniknąć przypadkowego usunięcia danych.
+    \item Responsywność interfejsu - aplikacja działa płynnie, a przełączanie między widokami nie powoduje opóźnień.
+    \item Użycie ComboBoxów i kalendarzy (DatePicker) do wyboru danych zamiast ręcznego wpisywania.
+    \item Obsługa różnych ról użytkowników z dostosowanym widokiem (np. mechanik widzi inne funkcje niż administrator).
+\end{itemize}
+
+Przestrzeganie tych zasad ma na celu zwiększenie satysfakcji użytkowników oraz minimalizację błędów wynikających z nieporozumień lub trudności obsługi systemu.
+
+\subsection{Skalowalność}
+\label{sec:skalowalnosc}
+Aplikacja została zaprojektowana z myślą o przyszłej rozbudowie i skalowalności. Poniższe aspekty zapewniają elastyczność i możliwość dostosowania systemu do rosnących potrzeb:
+\begin{itemize}
+    \item Możliwość dodania hashowania haseł w celu zapewnienia bezpieczeństwa danych użytkowników.
+    \item Możliwość dodania dynamicznego zmieniania rozmiaru okna (powiększanie, pomniejszanie) poprawia użyteczność i pozwala na łatwiejszą adaptację interfejsu do różnych ekranów.
+    \item Struktura bazy danych została zaprojektowana z myślą o rozbudowie, umożliwiająca dodawanie nowych tabel i relacji bez zaburzania działania istniejących funkcji.
+    \item Interfejs aplikacji jest modularny i prosty do rozbudowy, co pozwala łatwo dodawać nowe zakładki i funkcjonalności bez przebudowy całego systemu.
+    \item Możliwość rozbudowania aplikacji o integrację z innymi systemami, np. pocztą elektroniczną czy systemami płatności. 
+    \item Struktura kodu i organizacja plików (jasny podział na warstwy, foldery według funkcjonalności i typów komponentów) ułatwiają orientację i rozwój aplikacji przez kolejnych programistów.
+    \item Obecny model przypisywania części do zleceń jest ograniczony do jednego rodzaju części, jednak architektura pozwala na łatwe rozszerzenie tej funkcjonalności, by obsłużyć wiele części dla jednego zlecenia.
+\end{itemize}
+
+Zorganizowana struktura kodu oraz bazy danych umożliwia łatwe wprowadzanie zmian i dodawanie nowych funkcji, co jest kluczowe w kontekście dynamicznie zmieniających się potrzeb użytkowników i rynku.
+
+\subsection{Integralność danych}
+\label{sec:integralnoscDanych}
+
+Integralność danych gwarantuje, że informacje przechowywane i przetwarzane w systemie są spójne, poprawne i wiarygodne przez cały czas działania aplikacji. 
+
+\begin{itemize}
+    \item \textbf{Klucze główne i obce:} - odpowiednio zdefiniowane relacje między tabelami w bazie danych zapobiegają powstawaniu niespójnych rekordów.
+    \item \textbf{Walidacja danych na poziomie aplikacji} - aplikacja sprawdza poprawność wprowadzanych danych przed ich zapisaniem do bazy, co minimalizuje ryzyko błędów.
+    \item \textbf{Spójność danych wprowadzanych przez użytkownika} - system wymaga uzupełnienia wszystkich niezbędnych informacji, eliminując możliwość pozostawienia pustych lub błędnych pól.
+    \item \textbf{Obsługa błędów} - system odpowiednio reaguje na błędy podczas operacji na danych, wyświetlając użytkownikowi klarowne komunikaty o sukcesie lub porażce.
+\end{itemize}
+
+Zastosowanie tych rozwiązań gwarantuje spójność danych w systemie oraz minimalizuje ryzyko błędów, które mogłyby negatywnie wpłynąć na funkcjonowanie aplikacji.

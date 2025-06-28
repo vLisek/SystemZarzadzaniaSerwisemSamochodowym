@@ -1,0 +1,107 @@
+\chapter{Instrukcja uruchomienia aplikacji REPAIRO}
+\label{cha:instrukcja_uruchomienia}
+
+\subsection{Wymagania środowiskowe}
+
+Do poprawnego uruchomienia aplikacji REPAIRO wymagane jest przygotowanie środowiska zgodnie z poniższymi specyfikacjami programowymi:
+
+\begin{itemize}
+    \item System operacyjny: \textbf{Windows 10} lub nowszy
+    \item Środowisko JDK: \textbf{OpenJDK 23.0.2}
+    \item IDE: \textbf{IntelliJ IDEA Community Edition 2024.3.3}
+    \item Sterownik JDBC: \textbf{mysql-connector-java-8.0.33} dołączony do repozytorium w katalogu \texttt{mysql-connector-j-9.3.0}.
+    \item Baza danych: \textbf{MariaDB} (środowisko \textbf{phpMyAdmin 5.2.1})
+    \item Panel sterowania: \textbf{XAMPP Control Panel}
+\end{itemize}
+
+\noindent
+\textbf{Uwaga:} Domyślnym użytkownikiem serwera bazy danych jest \texttt{root}, a hasło puste (\texttt{""}), zgodnie z domyślną konfiguracją XAMPP.
+
+\subsection{Baza danych}
+
+\begin{itemize}
+    \item Do repozytorium dołączony jest plik \texttt{warsztat.sql}, który zawiera strukturę i przykładowe dane bazy danych.
+    \item Po uruchomieniu serwera MySQL należy zaimportować bazę danych do środowiska \texttt{phpMyAdmin}.
+    \item Domyślny użytkownik: \texttt{root}, Hasło: \texttt{(puste lub zgodne z konfiguracją lokalną)}
+    \item Nazwa bazy danych: \texttt{warsztat}
+\end{itemize}
+
+\subsection{Konfiguracja połączenia z bazą danych}
+
+W katalogu głównym projektu znajduje się plik:
+
+\begin{center}
+\texttt{config-template.properties}
+\end{center}
+
+Zawiera on domyślną konfigurację połączenia z bazą danych i \textbf{musi zostać skopiowany oraz dostosowany} przed pierwszym uruchomieniem aplikacji.
+
+\subsubsection*{Kroki:}
+\begin{enumerate}
+  \item Skopiuj plik:
+  \begin{quote}
+    \texttt{config-template.properties} \(\rightarrow\) \texttt{config.properties}
+  \end{quote}
+  \item Otwórz \texttt{config.properties} w edytorze tekstu.
+  \newpage\item Uzupełnij dane zgodnie z lokalną konfiguracją użytkownika bazy danych:
+\begin{verbatim}
+    db.url=jdbc:mysql://localhost:3306/warsztat
+    db.user=root
+    db.password=
+\end{verbatim}
+\end{enumerate}
+
+\noindent
+\textbf{Uwaga:} Klasa \texttt{DatabaseConnector} pobiera dane z tego pliku w celu nawiązania połączenia z bazą. Dzięki temu nie trzeba edytować kodu źródłowego przy każdej zmianie konfiguracji.
+
+\subsection{Kroki uruchomienia aplikacji REPAIRO}
+
+\begin{enumerate}
+  \item \textbf{Klonowanie projektu z GitHub}
+  \begin{enumerate}
+    \item Przejdź do repozytorium projektu:\\ \url{https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym.git}
+    \item Pobierz repozytorium lokalnie:
+    \item {\small\texttt{git clone https://github.com/vLisek/SystemZarzadzaniaSerwisemSamochodowym.git}}
+    \item Otwórz folder projektu w IntelliJ IDEA Community Edition.
+  \end{enumerate}
+
+  \item \textbf{Dodanie sterownika JDBC}
+  \begin{enumerate}
+    \item Umieść folder \texttt{mysql-connector-j-9.3.0} w katalogu projektu
+    \item Dodaj go jako bibliotekę w: \texttt{File > Project Structure > Modules > Dependencies}
+  \end{enumerate}
+
+  \item \textbf{Import bazy danych}
+  \begin{enumerate}
+    \item Uruchom \texttt{XAMPP Control Panel} i włącz moduł MySQL
+    \item Otwórz \texttt{phpMyAdmin} w przeglądarce: \url{http://localhost/phpmyadmin}
+    \item Utwórz nową bazę danych: \texttt{warsztat}
+    \item Zaimportuj plik \texttt{warsztat.sql}
+  \end{enumerate}
+
+  \item \textbf{Uruchomienie aplikacji}
+  \begin{enumerate}
+    \item Kliknij przycisk \texttt{Run} w klasie \texttt{Main.java}
+    \item Aplikacja otworzy ekran logowania
+  \end{enumerate}
+\end{enumerate}
+
+\newpage
+\subsection{Dane testowe (logowanie)}
+
+\begin{itemize}
+  \item \textbf{Administator}
+  \begin{itemize}
+    \item Nazwa użytkownika: \texttt{admin}
+    \item Hasło: \texttt{admin}
+  \end{itemize}
+
+  \item \textbf{Mechanik}
+  \begin{itemize}
+    \item Nazwa użytkownika: \texttt{kszymanski}
+    \item Hasło: \texttt{1234}
+  \end{itemize}
+\end{itemize}
+
+\noindent
+Po wykonaniu powyższych kroków środowisko jest gotowe do pracy z aplikacją REPAIRO.
