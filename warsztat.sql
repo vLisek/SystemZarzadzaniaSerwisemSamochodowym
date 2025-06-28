@@ -308,7 +308,7 @@ CREATE TABLE `logins` (
 --
 
 INSERT INTO `logins` (`login_id`, `employee_id`, `login`, `password`) VALUES
-(1, 1, 'flisowski', '1234'),
+(1, 1, 'admin', 'admin'),
 (2, 2, 'kzaremba', '1234'),
 (3, 3, 'eleszczynska', '1234'),
 (4, 4, 'ebak', '1234'),
