@@ -1,202 +1,84 @@
 @startuml
-scale max 1600 width
+scale max 900 width
 left to right direction
 skinparam linetype ortho
 
-' ========== DAO ==========
-package project.app.dao {
-    class BodyTypeDAO
-    class BrandDAO
-    class CarDAO
-    class ClientTypeDAO
-    class CustomerDAO
-    class DriveTypeDAO
-    class EmployeeDAO
-    class EngineTypeDAO
-    class FuelTypeDAO
-    class ModelDAO
-    class OrderDAO
-    class PartsDAO
-    class ServiceDAO
+package "project.app" {
+    ' ========== GŁÓWNA APLIKACJA ==========
+    class Main {}
+    Main -|> javafx.application.Application
+
+    ' ========== INTERFEJSY ==========
+    package interfaces {
+        interface UserDataReceiver
+    }
+
+    ' ========== KONTROLERY ==========
+    package controllers {
+        class OrdersController
+        class OtherController
+    }
+
+    ' ========== DAO ==========
+    package dao {
+        class OrderDAO
+        class OtherDAO
+    }
+
+    ' ========== MODEL ==========
+    package model {
+        class Order
+        class Customer
+        class VehicleDisplay
+        class OtherModel
+    }
+
+    ' ========== UTILS ==========
+    package utils {
+        class AlertUtils
+        class DatabaseConnector
+        class OtherUtils
+        class PageManagerUtils
+    }
+
+    ' ========== RELACJE ==========
+    Main --> controllers.OrdersController
+    Main --> utils.AlertUtils
+    Main --> utils.PageManagerUtils
+
+    controllers.OrdersController --> dao.OrderDAO
+    controllers.OrdersController --> model.Order
+    controllers.OrdersController --> utils.AlertUtils
+    controllers.OrdersController ..|> interfaces.UserDataReceiver
+
+    controllers.OtherController --> dao.OtherDAO
+    controllers.OtherController --> model.OtherModel
+    controllers.OtherController --> utils.OtherUtils
+    controllers.OtherController ..|> interfaces.UserDataReceiver
+
+    dao.OrderDAO --> model.Order
+    dao.OrderDAO --> utils.DatabaseConnector
+
+    model.Order --> model.Customer
+    model.Order --> model.VehicleDisplay
+
+    utils.PageManagerUtils ..> interfaces.UserDataReceiver
+
+    note right of dao.OtherDAO
+      Reprezentuje inne DAO w aplikacji
+    end note
+
+    note right of model.OtherModel
+      Reprezentuje inne modele w aplikacji
+    end note
+
+    note right of utils.OtherUtils
+      Reprezentuje inne klasy pomocnicze
+    end note
+
+    note left of controllers.OtherController
+      Reprezentuje inne kontrolery
+    end note
 }
-' ========== MODEL ==========
-package project.app.model {
-    class BodyType
-    class Brand
-    class ClientType
-    class Customer
-    class DriveType
-    class Employee
-    class EngineType
-    class FuelType
-    class Model
-    class Order
-    class VehicleDisplay
-    class Parts
-    class Service
-}
-' ========== UTILS ==========
-
-package project.app.utils {
-    class AlertUtils
-    class Constants
-    class DatabaseConnector
-    class PageManagerUtils
-}
-
-' ========== INTERFACES ==========
-
-package project.app.interfaces {
-    interface UserDataReceiver
-}
-
-' ========== KONTROLERY ==========
-package project.app.controllers {
-    class CalendarController
-    class CarPartsController
-    class CarsController
-    class CustomersController
-    class EmployeesController
-    class LoginPageController
-    class MainPageController
-    class ManagerPageController
-    class MechanicPageController
-    class OrdersController
-    class ReceptionistPageController
-    class ServicesController
-    class WarehousemanPageController
-}
-' ========== GŁÓWNA APLIKACJA ==========
-
-package project.app {
-    class Main
-}
-
-' ========== RELACJE ==========
-
-' DAO relacje
-BodyTypeDAO --> BodyType
-BodyTypeDAO --> DatabaseConnector
-
-BrandDAO --> Brand
-BrandDAO --> DatabaseConnector
-
-CarDAO --> VehicleDisplay
-CarDAO --> DatabaseConnector
-
-ClientTypeDAO --> ClientType
-ClientTypeDAO --> DatabaseConnector
-
-CustomerDAO --> Customer
-CustomerDAO --> DatabaseConnector
-
-DriveTypeDAO --> DriveType
-DriveTypeDAO --> DatabaseConnector
-
-EmployeeDAO --> Employee
-EmployeeDAO --> DatabaseConnector
-
-EngineTypeDAO --> EngineType
-EngineTypeDAO --> DatabaseConnector
-
-FuelTypeDAO --> FuelType
-FuelTypeDAO --> DatabaseConnector
-
-ModelDAO --> BrandDAO
-ModelDAO --> Model
-ModelDAO --> DatabaseConnector
-Model --> Brand
-
-OrderDAO --> Order
-Order --> Customer
-Order --> VehicleDisplay
-Order --> Employee
-Order --> Service
-Order --> Parts
-
-PartsDAO --> Parts
-PartsDAO --> DatabaseConnector
-
-ServiceDAO --> Service
-ServiceDAO --> DatabaseConnector
-
-' Kontrolery
-CalendarController --> OrderDAO
-CalendarController --> Order
-
-CarPartsController --> PartsDAO
-CarPartsController --> Parts
-CarPartsController --> AlertUtils
-
-CarsController --> Brand
-CarsController --> Model
-CarsController --> BodyType
-CarsController --> FuelType
-CarsController --> EngineType
-CarsController --> DriveType
-CarsController --> VehicleDisplay
-CarsController --> AlertUtils
-CarsController --> CarDAO
-
-CustomersController --> ClientTypeDAO
-CustomersController --> CustomerDAO
-CustomersController --> ClientType
-CustomersController --> Customer
-CustomersController --> AlertUtils
-
-EmployeesController --> EmployeeDAO
-EmployeesController --> Employee
-EmployeesController --> AlertUtils
-
-LoginPageController --> AlertUtils
-LoginPageController --> Constants
-LoginPageController --> DatabaseConnector
-LoginPageController --> PageManagerUtils
-
-MainPageController ..|> UserDataReceiver
-
-ManagerPageController ..|> UserDataReceiver
-ManagerPageController --> AlertUtils
-ManagerPageController --> Constants
-ManagerPageController --> PageManagerUtils
-
-MechanicPageController ..|> UserDataReceiver
-MechanicPageController --> AlertUtils
-MechanicPageController --> Constants
-MechanicPageController --> PageManagerUtils
-
-OrdersController --> OrderDAO
-OrdersController --> CustomerDAO
-OrdersController --> CarDAO
-OrdersController --> EmployeeDAO
-OrdersController --> PartsDAO
-OrdersController --> ServiceDAO
-OrdersController --> Order
-OrdersController --> Customer
-OrdersController --> VehicleDisplay
-OrdersController --> Employee
-OrdersController --> Service
-OrdersController --> Parts
-OrdersController --> AlertUtils
-
-ReceptionistPageController ..|> UserDataReceiver
-
-ServicesController --> Service
-ServicesController --> ServiceDAO
-ServicesController --> AlertUtils
-
-WarehousemanPageController ..|> UserDataReceiver
-WarehousemanPageController --> AlertUtils
-WarehousemanPageController --> Constants
-WarehousemanPageController --> PageManagerUtils
-
-' Utils
-PageManagerUtils ..> UserDataReceiver
-
-' Główna aplikacja
-Main -|> javafx.application.Application
-Main ..> Constants
-Main ..> PageManagerUtils
-Main ..> AlertUtils
 
 @enduml
